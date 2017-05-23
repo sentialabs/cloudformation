@@ -1,5 +1,5 @@
 ---
-timestamp: 2017-05-05 16:26:46.119533000 +02:00
+timestamp: 2017-05-23 12:03:01.381674000 +02:00
 resources:
   AWS::ApiGateway::Account:
     description: |-
@@ -2356,9 +2356,9 @@ resources:
     examples: {}
   AWS::CloudFormation::Stack:
     description: |-
-      The AWS::CloudFormation::Stack type nests a stack as a resource in a top-level template.
+      The `AWS::CloudFormation::Stack` type nests a stack as a resource in a top-level template.
 
-      You can add output values from a nested stack within the containing template. You use the [GetAtt](intrinsic-function-reference-getatt.html) function with the nested stack's logical name and the name of the output value in the nested stack in the format Outputs._`NestedStackOutputName`_.
+      You can add output values from a nested stack within the containing template. You use the [GetAtt](intrinsic-function-reference-getatt.html) function with the nested stack's logical name and the name of the output value in the nested stack in the format `Outputs.NestedStackOutputName`.
 
       When you apply template changes to update a top-level stack, AWS CloudFormation updates the top-level stack and initiates an update to its nested stacks. AWS CloudFormation updates the resources of modified nested stacks, but does not update the resources of unmodified nested stacks. For more information, see [AWS CloudFormation Stacks Updates](using-cfn-updating-stacks.html).
 
@@ -2385,16 +2385,16 @@ resources:
 
           Note
 
-          If you use the `ref` function to pass a parameter value to a nested stack, comma-delimited list parameters must be of type `String`. In other words, you cannot pass values that are of type `CommaDelimitedList` to nested stacks.
+          If you use the `Ref` function to pass a parameter value to a nested stack, comma-delimited list parameters must be of type `String`. In other words, you cannot pass values that are of type `CommaDelimitedList` to nested stacks.
 
           _Required_: Conditional (required if the nested stack requires input parameters).
 
-          _Type_: [CloudFormation Stack Parameters Property Type](aws-properties-stack-parameters.html)
+          _Type_: [AWS CloudFormation Stack Parameters](aws-properties-stack-parameters.html)
 
-          _Update requires_: Whether an update causes interruptions depends on the resources that are being update. An update never causes a nested stack to be replaced.
+          _Update requires_: Whether an update causes interruptions depends on the resources that are being updated. An update never causes a nested stack to be replaced.
 
         required: conditional
-        type: CloudFormation Stack Parameters Property Type
+        type: AWS CloudFormation Stack Parameters
         update_requires: 
       Tags:
         description: |+
@@ -2438,9 +2438,9 @@ resources:
     return_values:
       Ref:
         description: |-
-          For AWS::CloudFormation::Stack, `Ref` returns the Stack ID. For example:
+          For `AWS::CloudFormation::Stack`, `Ref` returns the Stack ID. For example:
 
-          Copyarn:aws:cloudformation:us-east-1:123456789012:stack/mystack-mynestedstack-sggfrhxhum7w/f449b250-b969-11e0-a185-5081d0136786
+          `arn:aws:cloudformation:us-east-1:123456789012:stack/mystack-mynestedstack-sggfrhxhum7w/f449b250-b969-11e0-a185-5081d0136786`
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Outputs.NestedStackOutputName:
@@ -2827,19 +2827,6 @@ resources:
         required: 'no'
         type: List<Metric Dimension>
         update_requires: no_interruption
-      EvaluateLowSampleCountPercentile:
-        description: |+
-          Used only for alarms based on percentiles. Specifies whether to evaluate the data and potentially change the alarm state if there are too few data points to be statistically significant.
-
-          _Required_: No
-
-          _Type_: String
-
-          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
-
-        required: 'no'
-        type: String
-        update_requires: no_interruption
       EvaluationPeriods:
         description: |+
           The number of periods over which data is compared to the specified threshold.
@@ -2945,19 +2932,6 @@ resources:
 
         required: 'yes'
         type: Double
-        update_requires: no_interruption
-      TreatMissingData:
-        description: |+
-          Sets how the alarm will treat missing data points.
-
-          _Required_: No
-
-          _Type_: String
-
-          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
-
-        required: 'no'
-        type: String
         update_requires: no_interruption
       Unit:
         description: |+
@@ -8089,14 +8063,14 @@ resources:
 
           _Required_: No
 
-          _Type_: [Amazon EC2 Container Service Service PlacementStategies](aws-properties-ecs-service-placementstrategies-placementstrategy.html)
+          _Type_: [Amazon EC2 Container Service Service PlacementStrategies](aws-properties-ecs-service-placementstrategies-placementstrategy.html)
 
           _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 
         required: 'no'
         type: |-
           Amazon EC2 Container Service Service
-                                              PlacementStategies
+                                              PlacementStrategies
         update_requires: replacement
       DesiredCount:
         description: |+
@@ -8190,13 +8164,13 @@ resources:
         description: |+
           A list of volume definitions in JSON format for the volumes that you can use in your container definitions.
 
-          _Required_: Yes
+          _Required_: No
 
           _Type_: List of [Amazon EC2 Container Service TaskDefinition Volumes](aws-properties-ecs-taskdefinition-volumes.html)
 
           _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 
-        required: 'yes'
+        required: 'no'
         type: List<Amazon EC2 Container Service TaskDefinition>
         update_requires: replacement
       Family:
@@ -10064,7 +10038,7 @@ resources:
 
           Note
 
-          A target group can have only one rule with a given priority.
+          A listener can have only one rule with a given priority.
 
           For valid values, see the `Priority` parameter for the [CreateRule](http://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateRule.html) action in the _Elastic Load Balancing API Reference version 2015-12-01_.
 
@@ -12842,12 +12816,12 @@ resources:
 
           _Required_: No
 
-          _Type_: [AWS Lambda Function VPCConfig](aws-properties-lambda-function-vpcconfig.html)
+          _Type_: [AWS Lambda Function VpcConfig](aws-properties-lambda-function-vpcconfig.html)
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
         required: 'no'
-        type: AWS Lambda Function VPCConfig
+        type: AWS Lambda Function VpcConfig
         update_requires: no_interruption
       Tags:
         description: |+
@@ -17884,18 +17858,6 @@ resources:
         required: 
         type: 
         update_requires: 
-      c-ip:
-        description: "If the viewer did not use an HTTP proxy or a load balancer to
-          send the request\n\n"
-        required: 
-        type: 
-        update_requires: 
-      x-forwarded-for:
-        description: "If the viewer did use an HTTP proxy or a load balancer to send
-          the request\n\n"
-        required: 
-        type: 
-        update_requires: 
     return_values:
       Ref:
         description: |-
@@ -18131,6 +18093,357 @@ resources:
 
         required: 'no'
         type: List<AWS WAF XssMatchSet XssMatchTuple>
+        update_requires: no_interruption
+    return_values:
+      Ref:
+        description: |-
+          When the logical ID of this resource is provided to the `Ref` intrinsic function, `Ref` returns the resource physical ID, such as `1234a1a-a1b1-12a1-abcd-a123b123456`.
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+    examples: {}
+  AWS::WAFRegional::ByteMatchSet:
+    description: The `AWS::WAFRegional::ByteMatchSet` resource creates an AWS WAF
+      Regional `ByteMatchSet` that identifies a part of a web request that you want
+      to inspect. For more information, see [CreateByteMatchSet](http://docs.aws.amazon.com/waf/latest/APIReference/API_regional_CreateByteMatchSet.html)
+      in the _AWS WAF Regional API Reference_.
+    properties:
+      ByteMatchTuples:
+        description: |+
+          Settings for the `ByteMatchSet`, such as the bytes (typically a string that corresponds with ASCII characters) that you want AWS WAF to search for in web requests.
+
+          _Required_: No
+
+          _Type_: List of [AWS WAF Regional ByteMatchSet ByteMatchTuples](aws-properties-wafregional-bytematchset-bytematchtuples.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: List<AWS WAF Regional ByteMatchSet>
+        update_requires: no_interruption
+      Name:
+        description: |+
+          A friendly name or description of the `ByteMatchSet`.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'yes'
+        type: String
+        update_requires: replacement
+    return_values:
+      Ref:
+        description: |-
+          When the logical ID of this resource is provided to the `Ref` intrinsic function, `Ref` returns the resource physical ID, such as `1234a1a-a1b1-12a1-abcd-a123b123456`.
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+    examples: {}
+  AWS::WAFRegional::IPSet:
+    description: The `AWS::WAFRegional::IPSet` resource creates an AWS WAF Regional
+      `IPSet` that specifies which web requests to permit or block based on the IP
+      addresses from which the requests originate. For more information, see [CreateIPSet](http://docs.aws.amazon.com/waf/latest/APIReference/API_regional_CreateIPSet.html)
+      in the _AWS WAF Regional API Reference_.
+    properties:
+      IPSetDescriptors:
+        description: |+
+          The IP address type and IP address range (in CIDR notation) from which web requests originate. If you associate the `IPSet` with a [web ACL](aws-resource-wafregional-webacl.html) that is associated with a Amazon CloudFront (CloudFront) distribution, this descriptor is the value of one of the following fields in the CloudFront access logs:
+
+          `c-ip`
+
+          If the viewer did not use an HTTP proxy or a load balancer to send the request
+
+          `x-forwarded-for`
+
+          If the viewer did use an HTTP proxy or a load balancer to send the request
+
+          _Required_: No
+
+          _Type_: List of [AWS WAF Regional IPSet IPSetDescriptors](aws-properties-wafregional-ipset-ipsetdescriptors.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: List<AWS WAF Regional IPSet IPSetDescriptors>
+        update_requires: no_interruption
+      Name:
+        description: "If the viewer did not use an HTTP proxy or a load balancer to
+          send the request\n\n"
+        required: 
+        type: 
+        update_requires: 
+    return_values:
+      Ref:
+        description: |-
+          When the logical ID of this resource is provided to the `Ref` intrinsic function, `Ref` returns the resource physical ID, such as `1234a1a-a1b1-12a1-abcd-a123b123456`.
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+    examples: {}
+  AWS::WAFRegional::Rule:
+    description: |-
+      The `AWS::WAFRegional::Rule` resource creates an AWS WAF Regional rule that specifies a combination of `IPSet`, `ByteMatchSet`, and `SqlInjectionMatchSet` objects that identify the web requests to allow, block, or count. To implement rules, you must associate them with a [web ACL](aws-resource-wafregional-webacl.html).
+
+      For more information, see [CreateRule](http://docs.aws.amazon.com/waf/latest/APIReference/API_regional_CreateRule.html) in the _AWS WAF Regional API Reference_.
+    properties:
+      MetricName:
+        description: |+
+          A friendly name or description for the metrics of the rule. For valid values, see the `MetricName` parameter for the [`CreateRule`](http://docs.aws.amazon.com/waf/latest/APIReference/API_regional_CreateRule.html) action in the _AWS WAF Regional API Reference_.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'yes'
+        type: String
+        update_requires: replacement
+      Name:
+        description: |+
+          A friendly name or description of the rule.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'yes'
+        type: String
+        update_requires: replacement
+      Predicates:
+        description: |+
+          The `ByteMatchSet`, `IPSet`, `SizeConstraintSet`, `SqlInjectionMatchSet`, or `XssMatchSet` objects to include in a rule. If you add more than one predicate to a rule, a request must match all conditions in order to be allowed or blocked.
+
+          _Required_: No
+
+          _Type_: List of [AWS WAF Regional Rule Predicates](aws-properties-wafregional-rule-predicates.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: List<AWS WAF Regional Rule Predicates>
+        update_requires: no_interruption
+    return_values:
+      Ref:
+        description: |-
+          When the logical ID of this resource is provided to the `Ref` intrinsic function, `Ref` returns the resource physical ID, such as `1234a1a-a1b1-12a1-abcd-a123b123456`.
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+    examples: {}
+  AWS::WAFRegional::SizeConstraintSet:
+    description: The `AWS::WAFRegional::SizeConstraintSet` resource specifies a size
+      constraint that AWS WAF uses to check the size of a web request and which parts
+      of the request to check. For more information, see [CreateSizeConstraintSet](http://docs.aws.amazon.com/waf/latest/APIReference/API_regional_CreateSizeConstraintSet.html)
+      in the _AWS WAF Regional API Reference_.
+    properties:
+      Name:
+        description: |+
+          A friendly name or description for the `SizeConstraintSet`.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'yes'
+        type: String
+        update_requires: replacement
+      SizeConstraints:
+        description: |+
+          The size constraint and the part of the web request to check.
+
+          _Required_: Yes
+
+          _Type_: List of [AWS WAF Regional SizeConstraintSet SizeConstraint](aws-properties-wafregional-sizeconstraintset-sizeconstraint.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'yes'
+        type: List<AWS WAF Regional SizeConstraintSet SizeConstraint>
+        update_requires: no_interruption
+    return_values:
+      Ref:
+        description: |-
+          When the logical ID of this resource is provided to the `Ref` intrinsic function, `Ref` returns the resource physical ID, such as `1234a1a-a1b1-12a1-abcd-a123b123456`.
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+    examples: {}
+  AWS::WAFRegional::SqlInjectionMatchSet:
+    description: The `AWS::WAFRegional::SqlInjectionMatchSet` resource creates an
+      AWS WAF Regional `SqlInjectionMatchSet`, which you use to allow, block, or count
+      requests that contain malicious SQL code in a specific part of web requests.
+      For more information, see [CreateSqlInjectionMatchSet](http://docs.aws.amazon.com/waf/latest/APIReference/API_regional_CreateSqlInjectionMatchSet.html)
+      in the _AWS WAF Regional API Reference_.
+    properties:
+      Name:
+        description: |+
+          A friendly name or description of the `SqlInjectionMatchSet`.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'yes'
+        type: String
+        update_requires: replacement
+      SqlInjectionMatchTuples:
+        description: |+
+          The parts of web requests that you want AWS WAF to inspect for malicious SQL code and, if you want AWS WAF to inspect a header, the name of the header.
+
+          _Required_: No
+
+          _Type_: List of [AWS WAF Regional SqlInjectionMatchSet SqlInjectionMatchTuples](aws-properties-wafregional-sqlinjectionmatchset-sqlinjectionmatchtuples.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: List<AWS WAF Regional>
+        update_requires: no_interruption
+    return_values:
+      Ref:
+        description: |-
+          When the logical ID of this resource is provided to the `Ref` intrinsic function, `Ref` returns the resource physical ID, such as `1234a1a-a1b1-12a1-abcd-a123b123456`.
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+    examples: {}
+  AWS::WAFRegional::WebACL:
+    description: The `AWS::WAFRegional::WebACL` resource creates an AWS WAF Regional
+      web access control group (ACL) containing the rules that identify the Amazon
+      CloudFront (CloudFront) web requests that you want to allow, block, or count.
+      For more information, see [CreateWebACL](http://docs.aws.amazon.com/waf/latest/APIReference/API_regional_CreateWebACL.html)
+      in the _AWS WAF Regional API Reference_.
+    properties:
+      DefaultAction:
+        description: |+
+          The action that you want AWS WAF to take when a request doesn't match the criteria in any of the rules that are associated with the web ACL.
+
+          _Required_: Yes
+
+          _Type_: [AWS WAF Regional WebACL Action](aws-properties-wafregional-webacl-action.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'yes'
+        type: AWS WAF Regional WebACL Action
+        update_requires: no_interruption
+      MetricName:
+        description: |+
+          A friendly name or description for the Amazon CloudWatch metric of this web ACL. For valid values, see the `MetricName` parameter of the [CreateWebACL](http://docs.aws.amazon.com/waf/latest/APIReference/API_regional_CreateWebACL.html) action in the _AWS WAF Regional API Reference_.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'yes'
+        type: String
+        update_requires: replacement
+      Name:
+        description: |+
+          A friendly name or description of the web ACL.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'yes'
+        type: String
+        update_requires: replacement
+      Rules:
+        description: |+
+          The rules to associate with the web ACL and the settings for each rule.
+
+          _Required_: No
+
+          _Type_: List of [AWS WAF Regional WebACL Rules](aws-properties-wafregional-webacl-rules.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: List<AWS WAF Regional WebACL Rules>
+        update_requires: no_interruption
+    return_values:
+      Ref:
+        description: |-
+          When the logical ID of this resource is provided to the `Ref` intrinsic function, `Ref` returns the resource name, such as `1234a1a-a1b1-12a1-abcd-a123b123456`.
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+    examples: {}
+  AWS::WAFRegional::WebACLAssociation:
+    description: The `AWS::WAFRegional::WebACLAssociation` resource associates an
+      AWS WAF Regional web access control group (ACL) with a resource. For more information,
+      see [AssociateWebACL](http://docs.aws.amazon.com/waf/latest/APIReference/API_regional_AssociateWebACL.html)
+      in the _AWS WAF Regional API Reference_.
+    properties:
+      ResourceArn:
+        description: |+
+          The Amazon Resource Name (ARN) of the resource to protect with the web ACL.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'yes'
+        type: String
+        update_requires: replacement
+      WebACLId:
+        description: |+
+          A unique identifier (ID) for the web ACL.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'yes'
+        type: String
+        update_requires: replacement
+    return_values:
+      Ref:
+        description: ''
+    examples: {}
+  AWS::WAFRegional::XssMatchSet:
+    description: The `AWS::WAFRegional::XssMatchSet` resource specifies the parts
+      of web requests that you want AWS WAF to inspect for cross-site scripting attacks
+      and the name of the header to inspect. For more information, see [XssMatchSet](http://docs.aws.amazon.com/waf/latest/APIReference/API_regional_XssMatchSet.html)
+      in the _AWS WAF Regional API Reference_.
+    properties:
+      Name:
+        description: |+
+          A friendly name or description for the `XssMatchSet`.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'yes'
+        type: String
+        update_requires: replacement
+      XssMatchTuples:
+        description: |+
+          The parts of web requests that you want to inspect for cross-site scripting attacks.
+
+          _Required_: No
+
+          _Type_: List of [AWS WAF Regional XssMatchSet XssMatchTuple](aws-properties-wafregional-xssmatchset-xssmatchtuple.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: List<AWS WAF Regional XssMatchSet XssMatchTuple>
         update_requires: no_interruption
     return_values:
       Ref:
