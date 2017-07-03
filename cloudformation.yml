@@ -1,5 +1,5 @@
 ---
-timestamp: 2017-06-08 15:19:17.063924000 +02:00
+timestamp: 2017-07-03 13:41:32.135625000 +02:00
 resources:
   AWS::ApiGateway::Account:
     description: |-
@@ -654,7 +654,7 @@ resources:
 
       Note
 
-      On January 1, 2016, the Swagger Specification was donated to the OpenAPI initiative, becoming the foundation of the OpenAPI Specification.
+      On January 1, 2016, the Swagger Specification was donated to the [OpenAPI initiative](https://www.openapis.org/), becoming the foundation of the OpenAPI Specification.
     properties:
       Body:
         description: |+
@@ -1054,7 +1054,7 @@ resources:
         update_requires: no_interruption
       ResourceId:
         description: |+
-          The unique resource identifier to associate with this scalable target. For more information, see the `ResourceId` parameter for the [RegisterScalableTarget](http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html) action in the _Application Auto Scaling API Reference_.
+          The resource identifier to associate with this scalable target. This string consists of the resource type and unique identifier. For more information, see the `ResourceId` parameter for the [RegisterScalableTarget](http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html) action in the _Application Auto Scaling API Reference_, or see the [`ScalableTarget` examples](aws-resource-applicationautoscaling-scalabletarget.html#aws-resource-applicationautoscaling-scalabletarget-examples).
 
           _Required_: Yes
 
@@ -2970,7 +2970,9 @@ resources:
         update_requires: no_interruption
       TreatMissingData:
         description: |+
-          Specifies how the alarm treats missing data points.
+          Sets how this alarm is to handle missing data points. If `TreatMissingData` is omitted, the default behavior of `missing` is used. For more information, see [PutMetricAlarm](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html) in the _Amazon CloudWatch API Reference_ and [Configuring How CloudWatch Alarms Treats Missing Data](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data) in the _Amazon CloudWatch User Guide_.
+
+          _Valid values_: `breaching`, `notBreaching`, `ignore`, `missing`
 
           _Required_: No
 
@@ -4519,11 +4521,13 @@ resources:
     description: |-
       The `AWS::Config::ConfigurationRecorder` resource describes the AWS resource types for which AWS Config records configuration changes. The configuration recorder stores the configurations of the supported resources in your account as configuration items.
 
-      AWS CloudFormation starts the recorder as soon as the delivery channel becomes available. To stop the recorder, delete the configuration recorder from your stack.
-
       Note
 
-      If you create this resource, you must also create or have an `AWS::Config::DeliveryChannel` resource already running in your account. These two interdependent resources must be present to successfully create both resources.
+      To enable AWS Config, you must create a configuration recorder and a delivery channel. AWS Config uses the delivery channel to deliver the configuration changes to your Amazon S3 bucket or Amazon SNS topic. For more information, see [AWS::Config::DeliveryChannel](aws-resource-config-deliverychannel.html).
+
+      AWS CloudFormation starts the recorder as soon as the delivery channel is available. To stop the recorder, delete the configuration recorder from your stack.
+
+      For more information, see [Configuration Recorder](http://docs.aws.amazon.com/config/latest/developerguide/config-concepts.html#config-recorder) in the _AWS Config Developer Guide_.
     properties:
       Name:
         description: |+
@@ -4531,7 +4535,7 @@ resources:
 
           Note
 
-          After you create a configuration recorder, you cannot rename it. If you don't want a AWS CloudFormation-generated name, specify a value for this property.
+          After you create a configuration recorder, you cannot rename it. If you don't want a name that AWS CloudFormation generates, specify a value for this property.
 
           _Required_: No
 
@@ -4559,7 +4563,7 @@ resources:
         update_requires: no_interruption
       RoleARN:
         description: |+
-          The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that is used to make read or write requests to the delivery channel that you specify and to get configuration details for supported AWS resources. For more information, see [Permissions for the AWS Config IAM Role](http://docs.aws.amazon.com/config/latest/developerguide/iamrole-permissions.html) in the _AWS Config Developer Guide_.
+          The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that is used to make read or write requests to the delivery channel that you specify and to get configuration details for supported AWS resources. For more information, see [Permissions for the IAM Role Assigned to AWS Config](http://docs.aws.amazon.com/config/latest/developerguide/iamrole-permissions.html) in the _AWS Config Developer Guide_.
 
           _Required_: Yes
 
@@ -4578,12 +4582,23 @@ resources:
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
     examples: {}
   AWS::Config::DeliveryChannel:
-    description: |-
-      The `AWS::Config::DeliveryChannel` resource describes where AWS Config stores configuration changes to an AWS resource.
-
-      Note
-
-      If you create this resource, you must also create or have an `AWS::Config::ConfigurationRecorder` resource already running in your account. These two interdependent resources must be present to successfully create both resources.
+    description: "The `AWS::Config::DeliveryChannel` resource describes where AWS
+      Config sends notifications and updated configuration states for AWS resources.\n\nWhen
+      you create the delivery channel, you can specify the following:\n\n- \n\nHow
+      often AWS Config delivers configuration snapshots to your Amazon S3 bucket (for
+      example, 24 hours)\n\n- \n\nThe S3 bucket to which AWS Config sends configuration
+      snapshots and configuration history files\n\n- \n\nThe Amazon SNS topic to which
+      AWS Config sends notifications about configuration changes, such as updated
+      resources, AWS Config rule evaluations, and when AWS Config delivers the configuration
+      snapshot to your S3 bucket.\n\nFor more information, see [Deliver Configuration
+      Items](http://docs.aws.amazon.com/config/latest/developerguide/how-does-config-work.html#delivery-channel)
+      in the _AWS Config Developer Guide_.\n\nNote\n\nTo enable AWS Config, you must
+      create a configuration recorder and a delivery channel. If you want to create
+      the resources separately, you must create a configuration recorder before you
+      can create a delivery channel. AWS Config uses the configuration recorder to
+      capture configuration changes to your resources. For more information, see [AWS::Config::ConfigurationRecorder](aws-resource-config-configurationrecorder.html).\n\nFor
+      more information, see [Managing the Delivery Channel](http://docs.aws.amazon.com/config/latest/developerguide/manage-delivery-channel.html)
+      in the _AWS Config Developer Guide_."
     properties:
       ConfigSnapshotDeliveryProperties:
         description: |+
@@ -4608,7 +4623,7 @@ resources:
 
           _Type_: String
 
-          _Update requires_: Updates are not supported.. To change the name, you must run two separate updates. Delete this resource in the first update and then recreate it with a new name in the second update.
+          _Update requires_: Updates are not supported. To change the name, you must run two separate updates. In the first update, delete this resource, and then recreate it with a new name in the second update.
 
         required: 'no'
         type: String
@@ -5690,11 +5705,11 @@ resources:
 
           _Type_: String
 
-          _Update requires_: Updates are not supported.
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 
         required: 'yes'
         type: String
-        update_requires: 
+        update_requires: replacement
       InstanceInitiatedShutdownBehavior:
         description: |+
           Indicates whether an instance stops or terminates when you shut down the instance from the instance's operating system shutdown command. You can specify `stop` or `terminate`. For more information, see the [RunInstances](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-RunInstances.html) command in the _Amazon EC2 API Reference_.
@@ -11213,7 +11228,7 @@ resources:
         update_requires: no_interruption
       Targets:
         description: |+
-          The resources, such as Lambda functions or Amazon Kinesis streams, that CloudWatch Events routes events to and invokes when the rule is triggered. For information about valid targets, see the [PutTargets](http://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_PutTargets.html) action in the _Amazon CloudWatch Events API Reference_.
+          The resources, such as Lambda functions or Kinesis streams, that CloudWatch Events routes events to and invokes when the rule is triggered. For information about valid targets, see the [PutTargets](http://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_PutTargets.html) action in the _Amazon CloudWatch Events API Reference_.
 
           Note
 
@@ -11882,7 +11897,7 @@ resources:
         update_requires: no_interruption
       Roles:
         description: |+
-          The names of [AWS::IAM::Role](aws-resource-iam-role.html)s to attach to this policy.
+          The names of [AWS::IAM::Role](aws-resource-iam-role.html)s to which this policy will be attached.
 
           Note
 
@@ -11925,7 +11940,7 @@ resources:
     properties:
       AssumeRolePolicyDocument:
         description: |+
-          The trust policy that is associated with this role.
+          The trust policy that is associated with this role. You can associate only one assume role policy with a role. For an example of an assume role policy, see [Template Examples](aws-resource-iam-role.html#cfn-iam-role-templateexamples). For more information about the elements that you can use in an IAM policy, see [IAM Policy Elements Reference](http://docs.aws.amazon.com//IAM/latest/UserGuide/reference_policies_elements.html) in the _IAM User Guide_.
 
           _Required_: Yes
 
@@ -11936,10 +11951,6 @@ resources:
           AWS Identity and Access Management (IAM) requires that policies be in JSON format. However, for templates formatted in YAML, you can create an IAM policy in either JSON or YAML format. AWS CloudFormation always converts a policy to JSON format before submitting it to IAM.
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
-
-          Note
-
-          You can associate only one assume role policy with a role. For an example of an assume role policy, see [Template Examples](aws-resource-iam-role.html#cfn-iam-role-templateexamples).
 
         required: 'yes'
         type: A JSON policy document
@@ -12313,17 +12324,16 @@ resources:
     properties:
       AttributePayload:
         description: |+
-          A string that contains up to three key-value pairs, for example: `{
-                                              "Attributes": { "string1":"string2" } }`.
+          The attribute payload.
 
           _Required_: No
 
-          _Type:_ String to string map
+          _Type_: [AWS IoT Thing AttributePayload](aws-properties-iot-thing-attributepayload.html)
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
         required: 'no'
-        type: String to string map
+        type: AWS IoT Thing AttributePayload
         update_requires: no_interruption
       ThingName:
         description: |+
@@ -12433,14 +12443,14 @@ resources:
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
     examples: {}
   AWS::Kinesis::Stream:
-    description: Creates an Amazon Kinesis stream that captures and transports data
-      records that are emitted from data sources. For information about creating streams,
+    description: Creates an Kinesis stream that captures and transports data records
+      that are emitted from data sources. For information about creating streams,
       see [CreateStream](http://docs.aws.amazon.com/kinesis/latest/APIReference/API_CreateStream.html)
       in the _Amazon Kinesis API Reference_.
     properties:
       Name:
         description: |+
-          The name of the Amazon Kinesis stream. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the stream name. For more information, see [Name Type](aws-properties-name.html).
+          The name of the Kinesis stream. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the stream name. For more information, see [Name Type](aws-properties-name.html).
 
           Important
 
@@ -12455,19 +12465,6 @@ resources:
         required: 'no'
         type: String
         update_requires: replacement
-      RetentionPeriodHours:
-        description: |+
-          The number of hours for the data records that are stored in shards to remain accessible. The default value is 24. For more information about the stream retention period, see [Changing the Data Retention Period](http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-extended-retention.html) in the _Amazon Kinesis Developer Guide_.
-
-          _Required_: No
-
-          _Type_: Integer
-
-          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
-
-        required: 'no'
-        type: Number
-        update_requires: no_interruption
       ShardCount:
         description: |+
           The number of shards that the stream uses. For greater provisioned throughput, increase the number of shards.
@@ -12483,7 +12480,7 @@ resources:
         update_requires: no_interruption
       Tags:
         description: |+
-          An arbitrary set of tags (key–value pairs) to associate with the Amazon Kinesis stream. For information about constraints for this property, see [Tag Restrictions](http://docs.aws.amazon.com/kinesis/latest/dev/tagging.html#tagging-restrictions) in the _Amazon Kinesis Developer Guide_.
+          An arbitrary set of tags (key–value pairs) to associate with the Kinesis stream. For information about constraints for this property, see [Tag Restrictions](http://docs.aws.amazon.com/kinesis/latest/dev/tagging.html#tagging-restrictions) in the _Amazon Kinesis Developer Guide_.
 
           _Required_: No
 
@@ -12502,15 +12499,15 @@ resources:
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
         description: |+
-          The Amazon resource name (ARN) of the Amazon Kinesis stream, such as `arn:aws:kinesis:us-east-1:123456789012:stream/mystream`.
+          The Amazon resource name (ARN) of the Kinesis stream, such as `arn:aws:kinesis:us-east-1:123456789012:stream/mystream`.
 
     examples: {}
   AWS::KinesisFirehose::DeliveryStream:
     description: The `AWS::KinesisFirehose::DeliveryStream` resource creates an Amazon
-      Kinesis Firehose (Firehose) delivery stream that delivers real-time streaming
-      data to an Amazon Simple Storage Service (Amazon S3), Amazon Redshift, or Amazon
-      Elasticsearch Service (Amazon ES) destination. For more information, see [Creating
-      an Amazon Kinesis Firehose Delivery Stream](http://docs.aws.amazon.com/firehose/latest/dev/basic-create.html)
+      Kinesis Firehose (Kinesis Firehose) delivery stream that delivers real-time
+      streaming data to an Amazon Simple Storage Service (Amazon S3), Amazon Redshift,
+      or Amazon Elasticsearch Service (Amazon ES) destination. For more information,
+      see [Creating an Amazon Kinesis Firehose Delivery Stream](http://docs.aws.amazon.com/firehose/latest/dev/basic-create.html)
       in the _Amazon Kinesis Firehose Developer Guide_.
     properties:
       DeliveryStreamName:
@@ -12687,9 +12684,8 @@ resources:
   AWS::Lambda::EventSourceMapping:
     description: The `AWS::Lambda::EventSourceMapping` resource specifies a stream
       as an event source for an AWS Lambda (Lambda) function. The stream can be an
-      Amazon Kinesis stream or an Amazon DynamoDB (DynamoDB) stream. Lambda invokes
-      the associated function when records are posted to the stream. For more information,
-      see [CreateEventSourceMapping](http://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html)
+      Kinesis stream or an Amazon DynamoDB (DynamoDB) stream. Lambda invokes the associated
+      function when records are posted to the stream. For more information, see [CreateEventSourceMapping](http://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html)
       in the _AWS Lambda Developer Guide_.
     properties:
       BatchSize:
@@ -12720,7 +12716,7 @@ resources:
         update_requires: no_interruption
       EventSourceArn:
         description: |+
-          The Amazon Resource Name (ARN) of the Amazon Kinesis or DynamoDB stream that is the source of events. Any record added to this stream can invoke the Lambda function. For more information, see [CreateEventSourceMapping](http://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html) in the _AWS Lambda Developer Guide_.
+          The Amazon Resource Name (ARN) of the Kinesis or DynamoDB stream that is the source of events. Any record added to this stream can invoke the Lambda function. For more information, see [CreateEventSourceMapping](http://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html) in the _AWS Lambda Developer Guide_.
 
           _Required_: Yes
 
@@ -13200,9 +13196,9 @@ resources:
   AWS::Logs::Destination:
     description: The `AWS::Logs::Destination` resource creates an Amazon CloudWatch
       Logs (CloudWatch Logs) destination, which enables you to specify a physical
-      resource (such as an Amazon Kinesis stream) that subscribes to CloudWatch Logs
-      log events from another AWS account. For more information, see [Cross-Account
-      Log Data Sharing with Subscriptions](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CrossAccountSubscriptions.html)
+      resource (such as an Kinesis stream) that subscribes to CloudWatch Logs log
+      events from another AWS account. For more information, see [Cross-Account Log
+      Data Sharing with Subscriptions](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CrossAccountSubscriptions.html)
       in the _Amazon CloudWatch User Guide_.
     properties:
       DestinationName:
@@ -13246,7 +13242,7 @@ resources:
         update_requires: no_interruption
       TargetArn:
         description: |+
-          The ARN of the AWS resource that receives log events. Currently, you can specify only an Amazon Kinesis stream.
+          The ARN of the AWS resource that receives log events. Currently, you can specify only an Kinesis stream.
 
           _Required_: Yes
 
@@ -13409,12 +13405,12 @@ resources:
   AWS::Logs::SubscriptionFilter:
     description: The `AWS::Logs::SubscriptionFilter` resource creates an Amazon CloudWatch
       Logs (CloudWatch Logs) subscription filter that defines which log events are
-      delivered to your Amazon Kinesis stream or AWS Lambda (Lambda) function and
-      where to send them.
+      delivered to your Kinesis stream or AWS Lambda (Lambda) function and where to
+      send them.
     properties:
       DestinationArn:
         description: |+
-          The Amazon Resource Name (ARN) of the Amazon Kinesis stream or Lambda function that you want to use as the subscription feed destination.
+          The Amazon Resource Name (ARN) of the Kinesis stream or Lambda function that you want to use as the subscription feed destination.
 
           _Required_: Yes
 
@@ -13453,7 +13449,7 @@ resources:
         update_requires: replacement
       RoleArn:
         description: |+
-          An IAM role that grants CloudWatch Logs permission to put data into the specified Amazon Kinesis stream. For Lambda and CloudWatch Logs destinations, don't specify this property because CloudWatch Logs gets the necessary permissions from the destination resource.
+          An IAM role that grants CloudWatch Logs permission to put data into the specified Kinesis stream. For Lambda and CloudWatch Logs destinations, don't specify this property because CloudWatch Logs gets the necessary permissions from the destination resource.
 
           _Required_: No
 
@@ -17008,7 +17004,7 @@ resources:
         update_requires: 
       ResourceRecords:
         description: |+
-          List of resource records to add. Each record should be in the format appropriate for the record type specified by the `Type` property. For information about different record types and their record formats, see [Appendix: Domain Name Format](http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html) in the _Amazon Route&nbsp;53 Developer Guide_.
+          List of resource records to add. Each record should be in the format appropriate for the record type specified by the `Type` property. For information about different record types and their record formats, see [Values for Basic Resource Record Sets](http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-values-basic.html) and [Appendix: Domain Name Format](http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html) in the _Amazon Route&nbsp;53 Developer Guide_.
 
           _Required_: Conditional. If you don't specify the `AliasTarget` property, you must specify this property. If you are creating an alias resource record set, do not specify this property.
 
@@ -17561,12 +17557,12 @@ resources:
 
           _Required_: Yes
 
-          _Type_: JSON object
+          JSON or YAML
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
         required: 'yes'
-        type: JSON
+        type: 
         update_requires: no_interruption
       Topics:
         description: |+
@@ -18742,8 +18738,11 @@ resources:
     examples: {}
   AWS::WorkSpaces::Workspace:
     description: The `AWS::WorkSpaces::Workspace` resource creates an Amazon WorkSpaces
-      workspace, which is a cloud-based desktop experience for end users. For more
-      information, see the [_Amazon WorkSpaces Administration Guide_](http://docs.aws.amazon.com/workspaces/latest/adminguide/).
+      workspace, which is a cloud-based desktop experience for end users. Before creating
+      a Workspace in CloudFormation, you must register a Directory Service directory
+      with Workspaces. This process is documented at [Register a Directory with Amazon
+      WorkSpaces](http://docs.aws.amazon.com/workspaces/latest/adminguide/register-deregister-directory.html).
+      For more information, see the [_Amazon WorkSpaces Administration Guide_](http://docs.aws.amazon.com/workspaces/latest/adminguide/).
     properties:
       BundleId:
         description: |+
