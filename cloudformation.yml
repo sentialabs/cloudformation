@@ -1,5 +1,5 @@
 ---
-timestamp: 2017-07-03 13:41:32.135625000 +02:00
+timestamp: 2017-07-06 16:54:38.919868000 +02:00
 resources:
   AWS::ApiGateway::Account:
     description: |-
@@ -376,6 +376,51 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
     examples: {}
+  AWS::ApiGateway::DomainName:
+    description: |-
+      The `AWS::ApiGateway::DomainName` resource specifies a custom domain name for your API in Amazon API Gateway (API Gateway).
+
+      You can use a custom domain name to provide a URL that's more intuitive and easier to recall. For more information about using custom domain names, see [Use Custom Domain Name as API Gateway API Host Name](http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html) data type in the _API Gateway Developer Guide_.
+    properties:
+      CertificateArn:
+        description: |+
+          The Amazon Resource Name (ARN) of an AWS-managed certificate stored in AWS Certificate Manager. For requirements and additional information about setting up certificates, see [Get Certificates Ready in AWS Certificate Manager](http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html#how-to-custom-domains-prerequisites) in the _API Gateway Developer Guide_.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'yes'
+        type: String
+        update_requires: no_interruption
+      DomainName:
+        description: |+
+          The custom domain name for your API in Amazon API Gateway.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'yes'
+        type: String
+        update_requires: replacement
+    return_values:
+      Ref:
+        description: |-
+          When the logical ID of this resource is provided to the `Ref` intrinsic function, `Ref` returns the domain name.
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+      DistributionDomainName:
+        description: |+
+          The Amazon CloudFront distribution domain name that is mapped to the custom domain name.
+
+          Example: `d111111abcdef8.cloudfront.net`
+
+    examples: {}
   AWS::ApiGateway::Method:
     description: The `AWS::ApiGateway::Method` resource creates Amazon API Gateway
       (API Gateway) methods that define the parameters and body that clients must
@@ -650,15 +695,28 @@ resources:
     examples: {}
   AWS::ApiGateway::RestApi:
     description: |-
-      The `AWS::ApiGateway::RestApi` resource contains a collection of Amazon API Gateway (API Gateway) resources and methods that can be invoked through HTTPS endpoints.
+      The `AWS::ApiGateway::RestApi` resource contains a collection of Amazon API Gateway resources and methods that can be invoked through HTTPS endpoints. For more information, see [restapi:create](http://docs.aws.amazon.com//apigateway/api-reference/link-relation/restapi-create/) in the _Amazon API Gateway REST API Reference_.
 
       Note
 
       On January 1, 2016, the Swagger Specification was donated to the [OpenAPI initiative](https://www.openapis.org/), becoming the foundation of the OpenAPI Specification.
     properties:
+      BinaryMediaTypes:
+        description: |+
+          The list of binary media types supported by the `RestApi` resource, such as `image/png` or `application/octet-stream`. By default, `RestApi` supports only UTF-8-encoded text payloads. For more information, see [Enable Support for Binary Payloads in API Gateway](http://docs.aws.amazon.com//apigateway/latest/developerguide/api-gateway-payload-encodings.html) in the _API Gateway Developer Guide_. Duplicates are not allowed.
+
+          _Required_: No
+
+          _Type_: List of strings
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: List<String>
+        update_requires: no_interruption
       Body:
         description: |+
-          An OpenAPI specification that defines a set of RESTful APIs in the JSON format. For YAML templates, you can also specify the specification in the YAML format.
+          An OpenAPI specification that defines a set of RESTful APIs in the JSON format. For YAML templates, you can also provide the specification in the YAML format.
 
           _Required_: No
 
@@ -1209,10 +1267,25 @@ resources:
         required: 'no'
         type: Application Auto Scaling ScalingPolicy StepScalingPolicyConfiguration
         update_requires: no_interruption
+      TargetTrackingScalingPolicyConfiguration:
+        description: |+
+          Configures a target tracking scaling policy.
+
+          This parameter is required if you are creating a new policy and the policy type is `TargetTrackingScaling`.
+
+          _Required_: No
+
+          _Type_: [Application Auto Scaling ScalingPolicy TargetTrackingScalingPolicyConfiguration](aws-properties-applicationautoscaling-scalingpolicy-targettrackingscalingpolicyconfiguration.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: Application Auto Scaling ScalingPolicy TargetTrackingScalingPolicyConfiguration
+        update_requires: no_interruption
     return_values:
       Ref:
         description: |-
-          When the logical ID of this resource is provided to the `Ref` intrinsic function, `Ref` returns the Application Auto Scaling scaling policy Amazon Resource Name (ARN), such as `arn:aws:autoscaling:us-east-1:123456789012:scalingPolicy:12ab3c4d-56789-0ef1-2345-6ghi7jk8lm90:resource/ecs/service/ecsStack-MyECSCluster-AB12CDE3F4GH/ecsStack-MyECSService-AB12CDE3F4GH:policyName/MyStepPolicy`.
+          When the logical ID of this resource is provided to the `Ref` intrinsic function, `Ref` returns the Application Auto Scaling scaling policy Amazon Resource Name (ARN), such as `arn:aws:autoscaling:us-east-2:123456789012:scalingPolicy:12ab3c4d-56789-0ef1-2345-6ghi7jk8lm90:resource/ecs/service/ecsStack-MyECSCluster-AB12CDE3F4GH/ecsStack-MyECSService-AB12CDE3F4GH:policyName/MyStepPolicy`.
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
     examples: {}
@@ -2446,7 +2519,7 @@ resources:
         description: |-
           For `AWS::CloudFormation::Stack`, `Ref` returns the Stack ID. For example:
 
-          `arn:aws:cloudformation:us-east-1:123456789012:stack/mystack-mynestedstack-sggfrhxhum7w/f449b250-b969-11e0-a185-5081d0136786`
+          `arn:aws:cloudformation:us-east-2:123456789012:stack/mystack-mynestedstack-sggfrhxhum7w/f449b250-b969-11e0-a185-5081d0136786`
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Outputs.NestedStackOutputName:
@@ -2586,9 +2659,9 @@ resources:
 
     examples: {}
   AWS::CloudTrail::Trail:
-    description: The `AWS::CloudTrail::Trail` resource creates a trail and specifies
+    description: Use the `AWS::CloudTrail::Trail` resource to create a trail and specify
       where logs are published. An AWS CloudTrail (CloudTrail) trail can capture AWS
-      API calls made by your AWS account and publishes the logs to an Amazon S3 bucket.
+      API calls made by your AWS account and publish the logs to an Amazon S3 bucket.
       For more information, see [What is AWS CloudTrail?](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html)
       in the _AWS CloudTrail User Guide_.
     properties:
@@ -2735,6 +2808,19 @@ resources:
         required: 'no'
         type: AWS CloudFormation Resource Tags
         update_requires: no_interruption
+      TrailName:
+        description: |+
+          The name of the trail. For constraint information, see [CreateTrail](http://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_CreateTrail.html) in the _AWS CloudTrail API Reference_.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: String
+        update_requires: replacement
     return_values:
       Ref:
         description: |-
@@ -3002,6 +3088,45 @@ resources:
       Ref:
         description: |-
           When you specify an `AWS::CloudWatch::Alarm` type as an argument to the `Ref` function, AWS CloudFormation returns the value of the `AlarmName`.
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+    examples: {}
+  AWS::CloudWatch::Dashboard:
+    description: |-
+      The `AWS::CloudWatch::Dashboard` resource creates an Amazon CloudWatch dashboard. A dashboard is a customizable home page in the CloudWatch console that you can use to monitor your AWS resources in a single view. Each metric, graph, alarm, or text block on a dashboard is called a widget.
+
+      This resource supports updates. For more information about updating this resource, see [PutDashboard](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutDashboard.html) in the _Amazon CloudWatch API Reference_. For more information about updating stacks, see [AWS CloudFormation Stacks Updates](using-cfn-updating-stacks.html).
+    properties:
+      DashboardName:
+        description: |+
+          A name for the dashboard. The name must be between 1 and 255 characters. If you do not specify a name, one will be generated autoamtically.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: String
+        update_requires: replacement
+      DashboardBody:
+        description: |+
+          A JSON string that defines the widgets contained in the dashboard and their location. For information about how to format this string, see [Dashboard Body Structure and Syntax](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html).
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'yes'
+        type: String
+        update_requires: no_interruption
+    return_values:
+      Ref:
+        description: |-
+          When you specify an `AWS::CloudWatch::Dashboard` resource as an argument to the `Ref` function, AWS CloudFormation returns the value of the `Name`.
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
     examples: {}
@@ -3282,8 +3407,22 @@ resources:
   AWS::CodeDeploy::DeploymentGroup:
     description: The `AWS::CodeDeploy::DeploymentGroup` resource creates an AWS CodeDeploy
       deployment group that details which application revision to use and which instances
-      your application revisions are deployed to.
+      your application revisions are deployed to. For more information, see [CreateDeploymentGroup](http://docs.aws.amazon.com//codedeploy/latest/APIReference/API_CreateDeploymentGroup.html)
+      in the _AWS CodeDeploy API Reference_.
     properties:
+      AlarmConfiguration:
+        description: |+
+          Information about the alarms that are associated with the deployment group.
+
+          _Required_: No
+
+          _Type_: [AWS CodeDeploy DeploymentGroup AlarmConfiguration](aws-properties-codedeploy-deploymentgroup-alarmconfiguration.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: AWS CodeDeploy DeploymentGroup AlarmConfiguration
+        update_requires: no_interruption
       ApplicationName:
         description: |+
           The name of an AWS CodeDeploy application for this deployment group.
@@ -3299,7 +3438,7 @@ resources:
         update_requires: replacement
       AutoScalingGroups:
         description: |+
-          A list of associated Auto Scaling groups that AWS CodeDeploy automatically deploys revisions to when new instances are created.
+          A list of associated Auto Scaling groups that AWS CodeDeploy automatically deploys revisions to when new instances are created. Duplicates are not allowed.
 
           _Required_: No
 
@@ -3312,7 +3451,7 @@ resources:
         update_requires: no_interruption
       Deployment:
         description: |+
-          The application revision that will be deployed to this deployment group.
+          The application revision to deploy to this deployment group.
 
           _Required_: No
 
@@ -3357,33 +3496,29 @@ resources:
         update_requires: replacement
       Ec2TagFilters:
         description: |+
-          The Amazon EC2 tags to filter on. AWS CodeDeploy includes all instances that match the tag filter with this deployment group.
+          The EC2 tags to filter on. AWS CodeDeploy includes all instances that match the tag filter with this deployment group. Duplicates are not allowed.
 
           _Required_: No
 
-          _Type_: [AWS CodeDeploy DeploymentGroup Ec2TagFilters](aws-properties-codedeploy-deploymentgroup-ec2tagfilters.html)
+          _Type_: List of [AWS CodeDeploy DeploymentGroup Ec2TagFilters](aws-properties-codedeploy-deploymentgroup-ec2tagfilters.html)
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
         required: 'no'
-        type: |-
-          AWS CodeDeploy DeploymentGroup
-                                              Ec2TagFilters
+        type: List<AWS CodeDeploy DeploymentGroup>
         update_requires: no_interruption
       OnPremisesInstanceTagFilters:
         description: |+
-          The on-premises instance tags to filter on. AWS CodeDeploy includes all on-premises instances that match the tag filter with this deployment group. To register on-premises instances with AWS CodeDeploy, see [Configure Existing On-Premises Instances by Using AWS CodeDeploy](http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-configure-on-premises-host.html) in the _AWS CodeDeploy User Guide_.
+          The on-premises instance tags to filter on. AWS CodeDeploy includes all on-premises instances that match the tag filter with this deployment group. To register on-premises instances with AWS CodeDeploy, see [Configure Existing On-Premises Instances by Using AWS CodeDeploy](http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-configure-on-premises-host.html) in the _AWS CodeDeploy User Guide_. Duplicates are not allowed.
 
           _Required_: No
 
-          _Type_: [AWS CodeDeploy DeploymentGroup OnPremisesInstanceTagFilters](aws-properties-codedeploy-deploymentgroup-onpremisesinstancetagfilters.html)
+          _Type_: List of [AWS CodeDeploy DeploymentGroup OnPremisesInstanceTagFilters](aws-properties-codedeploy-deploymentgroup-onpremisesinstancetagfilters.html)
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
         required: 'no'
-        type: |-
-          AWS CodeDeploy
-                                              DeploymentGroup OnPremisesInstanceTagFilters
+        type: List<AWS CodeDeploy>
         update_requires: no_interruption
       ServiceRoleArn:
         description: |+
@@ -3401,6 +3536,19 @@ resources:
 
         required: 'yes'
         type: String
+        update_requires: no_interruption
+      TriggerConfigurations:
+        description: |+
+          Information about the notification triggers for the deployment group. Duplicates are not allowed.
+
+          _Required_: No
+
+          _Type_: List of [AWS CodeDeploy DeploymentGroup TriggerConfig](aws-properties-codedeploy-deploymentgroup-triggerconfig.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: List<AWS CodeDeploy DeploymentGroup TriggerConfig>
         update_requires: no_interruption
     return_values:
       Ref:
@@ -3671,10 +3819,12 @@ resources:
 
           _Required_: No
 
+          _Type_: String to string map
+
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
         required: 'no'
-        type: 
+        type: String to string map
         update_requires: no_interruption
       CognitoIdentityProviders:
         description: |+
@@ -3839,7 +3989,7 @@ resources:
 
           _Required_: No
 
-          _Type_: List of Strings
+          _Type_: List of strings
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
@@ -3852,7 +4002,7 @@ resources:
 
           _Required_: No
 
-          _Type_: List of Strings
+          _Type_: List of strings
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
@@ -3975,12 +4125,12 @@ resources:
 
           _Required_: No
 
-          _Type_: List of [SchemaAttribute](aws-properties-cognito-userpool-schemaattribute.html) objects.
+          _Type_: List of [SchemaAttribute](aws-properties-cognito-userpool-schemaattribute.html)
 
           _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 
         required: 'no'
-        type: List<SchemaAttribute objects.>
+        type: List<SchemaAttribute>
         update_requires: replacement
       SmsAuthenticationMessage:
         description: |+
@@ -4023,16 +4173,16 @@ resources:
         update_requires: no_interruption
       UserPoolTags:
         description: |+
-          The cost allocation tags for the user pool. For more information, see [Adding Cost Allocation Tags to Your User Pool](http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html) in the _Amazon Cognito Developer Guide_.
+          The cost allocation tags for the user pool. For more information, see [Adding Cost Allocation Tags to Your User Pool](http://docs.aws.amazon.com//cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html) in the _Amazon Cognito Developer Guide_.
 
           _Required_: No
 
-          _Type_: String to String map
+          _Type_: String to string map
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
         required: 'no'
-        type: String to String map
+        type: String to string map
         update_requires: no_interruption
     return_values:
       Ref:
@@ -4050,7 +4200,7 @@ resources:
 
       Arn:
         description: |+
-          The Amazon Resource Name (ARN) of the user pool, such as `arn:aws:cognito-idp:us-east-1:123412341234:userpool/us-east-1 _123412341`.
+          The Amazon Resource Name (ARN) of the user pool, such as `arn:aws:cognito-idp:us-east-2:123412341234:userpool/us-east-1 _123412341`.
 
     examples: {}
   AWS::Cognito::UserPoolClient:
@@ -5032,11 +5182,11 @@ resources:
     examples: {}
   AWS::DynamoDB::Table:
     description: |-
-      Creates a DynamoDB table.
+      The `AWS::DynamoDB::Table` resource creates a DynamoDB table.
 
       Note
 
-      AWS CloudFormation typically creates DynamoDB tables in parallel. However, if your template includes multiple DynamoDB tables with indexes, you must declare dependencies so that the tables are created sequentially. DynamoDB limits the number of tables with secondary indexes that are in the creating state. If you create multiple tables with indexes at the same time, DynamoDB returns an error and the stack operation fails. For a sample snippet, see [DynamoDB Table with a DependsOn Attribute](aws-resource-dynamodb-table.html#cfn-dynamodb-table-examples-dependson).
+      AWS CloudFormation typically creates DynamoDB tables in parallel. However, if your template includes multiple DynamoDB tables with indexes, you must declare dependencies so that the tables are created sequentially. Amazon DynamoDB limits the number of tables with secondary indexes that are in the creating state. If you create multiple tables with indexes at the same time, DynamoDB returns an error and the stack operation fails. For an example, see [DynamoDB Table with a DependsOn Attribute](aws-resource-dynamodb-table.html#cfn-dynamodb-table-examples-dependson).
     properties:
       AttributeDefinitions:
         description: |+
@@ -5146,6 +5296,32 @@ resources:
         required: 'no'
         type: String
         update_requires: replacement
+      Tags:
+        description: |+
+          Specifies an arbitrary set of tags (key–value pairs) to associate with this table. Use tags to manage your resources.
+
+          _Required_: No
+
+          _Type_: [AWS CloudFormation Resource Tags](aws-properties-resource-tags.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: AWS CloudFormation Resource Tags
+        update_requires: no_interruption
+      TimeToLiveSpecification:
+        description: |+
+          Specifies the Time to Live (TTL) settings for the table.
+
+          _Required_: No
+
+          _Type_: [DynamoDB Table TimeToLiveSpecification](aws-properties-dynamodb-table-timetolivespecification.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: DynamoDB Table TimeToLiveSpecification
+        update_requires: no_interruption
     return_values:
       Ref:
         description: |-
@@ -5330,6 +5506,33 @@ resources:
       Ref:
         description: |-
           When the logical ID of this resource is provided to the `Ref` intrinsic function, `Ref` returns the resource name.
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+    examples: {}
+  AWS::EC2::EgressOnlyInternetGateway:
+    description: The `AWS::EC2::EgressOnlyInternetGateway` resource creates an egress-only
+      Internet gateway for your VPC (over IPv6 only). An egress-only Internet gateway
+      enables outbound communication over IPv6 from instances in your VPC to the Internet.
+      It also prevents hosts outside of your VPC from initiating an IPv6 connection
+      with your instance.
+    properties:
+      VpcId:
+        description: |+
+          The ID of the VPC for which to create the egress-only Internet gateway.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'yes'
+        type: String
+        update_requires: replacement
+    return_values:
+      Ref:
+        description: |-
+          When the logical ID of this resource is provided to the `Ref` intrinsic function, `Ref` returns the ID of the egress-only Internet gateway (the physical resource ID).
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
     examples: {}
@@ -5692,11 +5895,11 @@ resources:
 
           _Type_: String
 
-          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
         required: 'no'
         type: String
-        update_requires: replacement
+        update_requires: no_interruption
       ImageId:
         description: |+
           Provides the unique ID of the Amazon Machine Image (AMI) that was assigned during registration.
@@ -6035,7 +6238,7 @@ resources:
 
           _Type_: [AWS CloudFormation Resource Tags](aws-properties-resource-tags.html)
 
-          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt).
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
         required: 'no'
         type: AWS CloudFormation Resource Tags
@@ -6292,7 +6495,7 @@ resources:
         update_requires: no_interruption
       Ipv6AddressCount:
         description: |+
-          The number of IPv6 addresses to associate with the network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. To specify specific IPv6 addresses, use the `Ipv6Addresses` property and don't specify this property.
+          The number of IPv6 addresses to associate with the network interface. EC2 automatically selects the IPv6 addresses from the subnet range. To specify specific IPv6 addresses, use the `Ipv6Addresses` property and don't specify this property.
 
           _Required_: No
 
@@ -6331,7 +6534,7 @@ resources:
         update_requires: replacement
       PrivateIpAddresses:
         description: |+
-          Assigns a list of private IP addresses to the network interface. You can specify a primary private IP address by setting the value of the `Primary` property to `true` in the `PrivateIpAddressSpecification` property. If you want Amazon EC2 to automatically assign private IP addresses, use the `SecondaryPrivateIpAddressCount` property and do not specify this property.
+          Assigns a list of private IP addresses to the network interface. You can specify a primary private IP address by setting the value of the `Primary` property to `true` in the `PrivateIpAddressSpecification` property. If you want EC2 to automatically assign private IP addresses, use the `SecondaryPrivateIpAddressCount` property and do not specify this property.
 
           For information about the maximum number of private IP addresses, see [Private IP Addresses Per ENI Per Instance Type](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI) in the _Amazon EC2 User Guide for Linux Instances_.
 
@@ -6346,7 +6549,7 @@ resources:
         update_requires: replacement
       SecondaryPrivateIpAddressCount:
         description: |+
-          The number of secondary private IP addresses that Amazon EC2 automatically assigns to the network interface. Amazon EC2 uses the value of the `PrivateIpAddress` property as the primary private IP address. If you don't specify that property, Amazon EC2 automatically assigns both the primary and secondary private IP addresses.
+          The number of secondary private IP addresses that EC2 automatically assigns to the network interface. EC2 uses the value of the `PrivateIpAddress` property as the primary private IP address. If you don't specify that property, EC2 automatically assigns both the primary and secondary private IP addresses.
 
           If you want to specify your own list of private IP addresses, use the `PrivateIpAddresses` property and do not specify this property.
 
@@ -6506,8 +6709,9 @@ resources:
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
     examples: {}
   AWS::EC2::Route:
-    description: Creates a new route in a route table within a VPC. The route's target
-      can be either a gateway attached to the VPC or a NAT instance in the VPC.
+    description: The `AWS::EC2::Route` resource creates a new route in a route table
+      within a VPC. The route's target can be either a gateway attached to the VPC
+      or a NAT instance in the VPC.
     properties:
       DestinationCidrBlock:
         description: |+
@@ -6537,7 +6741,7 @@ resources:
         update_requires: replacement
       GatewayId:
         description: |+
-          The ID of an Internet gateway or virtual private gateway that is attached to your VPC. For example: `igw-eaad4883`.
+          The ID of an Internet gateway, egress-only Internet gateway, or virtual private gateway that is attached to your VPC. For example: `igw-eaad4883`.
 
           For route entries that specify a gateway, you must specify a dependency on the gateway attachment resource. For more information, see [DependsOn Attribute](aws-attribute-dependson.html).
 
@@ -7361,7 +7565,7 @@ resources:
         update_requires: no_interruption
       KmsKeyId:
         description: |+
-          The Amazon Resource Name (ARN) of the AWS Key Management Service master key that is used to create the encrypted volume, such as `arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef`. If you create an encrypted volume and don't specify this property, AWS CloudFormation uses the default master key.
+          The Amazon Resource Name (ARN) of the AWS Key Management Service master key that is used to create the encrypted volume, such as `arn:aws:kms:us-east-2:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef`. If you create an encrypted volume and don't specify this property, AWS CloudFormation uses the default master key.
 
           _Required_: No
 
@@ -7376,7 +7580,7 @@ resources:
         description: |+
           The size of the volume, in gibibytes (GiBs). For more information about the valid sizes for each volume type, see the `Size` parameter for the [`CreateVolume`](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVolume.html) action in the _Amazon EC2 API Reference_.
 
-          If you specify the `SnapshotId` property, specify a size that is equal to or greater than the size of the snapshot. If you don't specify a size, Amazon EC2 uses the size of the snapshot as the volume size.
+          If you specify the `SnapshotId` property, specify a size that is equal to or greater than the size of the snapshot. If you don't specify a size, EC2 uses the size of the snapshot as the volume size.
 
           _Required_: Conditional. If you don't specify a value for the `SnapshotId` property, you must specify this property.
 
@@ -9720,7 +9924,7 @@ resources:
 
           Example:
 
-          awseb-myst-myen-132MQC4KRLAMD-1371280482.us-east-1.elb.amazonaws.com
+          awseb-myst-myen-132MQC4KRLAMD-1371280482.us-east-2.elb.amazonaws.com
 
     examples: {}
   AWS::ElasticLoadBalancing::LoadBalancer:
@@ -9975,7 +10179,7 @@ resources:
 
           If you specify `internal` for the Elastic Load Balancing scheme, use `DNSName` instead. For an `internal` scheme, the load balancer doesn't have a `CanonicalHostedZoneName` value.
 
-          Example: `mystack-myelb-15HMABG9ZCN57-1013119603.us-east-1.elb.amazonaws.com`
+          Example: `mystack-myelb-15HMABG9ZCN57-1013119603.us-east-2.elb.amazonaws.com`
 
       CanonicalHostedZoneNameID:
         description: |+
@@ -9987,7 +10191,7 @@ resources:
         description: |+
           The DNS name for the load balancer.
 
-          Example: `mystack-myelb-15HMABG9ZCN57-1013119603.us-east-1.elb.amazonaws.com`
+          Example: `mystack-myelb-15HMABG9ZCN57-1013119603.us-east-2.elb.amazonaws.com`
 
       SourceSecurityGroup.GroupName:
         description: |+
@@ -10891,6 +11095,109 @@ resources:
           The public DNS name of the master node (instance), such as `ec2-12-123-123-123.us-west-2.compute.amazonaws.com`.
 
     examples: {}
+  AWS::EMR::InstanceFleetConfig:
+    description: |-
+      Use the `AWS::EMR::InstanceFleetConfig` resource to configure a Spot Instance fleet for an Amazon EMR cluster. For more information, see [Configure Instance Fleets](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-instance-fleet.html) in the _Amazon EMR Management Guide_.
+
+      Note
+
+      The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.
+    properties:
+      ClusterId:
+        description: |+
+          The ID of the target cluster.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'yes'
+        type: String
+        update_requires: replacement
+      InstanceFleetType:
+        description: |+
+          The node type that the instance fleet hosts. Valid values are `MASTER`, `CORE`, and `TASK`.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'yes'
+        type: String
+        update_requires: replacement
+      InstanceTypeConfigs:
+        description: |+
+          The instance type configurations that define the EC2 instances in the instance fleet. Duplicates not allowed.
+
+          _Required_: No
+
+          _Type_: List of [Amazon EMR InstanceFleetConfig InstanceTypeConfig](aws-properties-elasticmapreduce-instancefleetconfig-instancetypeconfig.html)
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: List<Amazon EMR InstanceFleetConfig InstanceTypeConfig>
+        update_requires: replacement
+      LaunchSpecifications:
+        description: |+
+          The launch specification for the instance fleet.
+
+          _Required_: No
+
+          _Type_: [Amazon EMR InstanceFleetConfig InstanceFleetProvisioningSpecifications](aws-properties-elasticmapreduce-instancefleetconfig-instancefleetprovisioningspecifications.html)
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: Amazon EMR InstanceFleetConfig InstanceFleetProvisioningSpecifications
+        update_requires: replacement
+      Name:
+        description: |+
+          The friendly name of the instance fleet. For constraints, see [InstanceFleetConfig](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_InstanceFleetConfig.html) in the _Amazon EMR API Reference_.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: String
+        update_requires: replacement
+      TargetOnDemandCapacity:
+        description: |+
+          The target capacity of On-Demand units for the instance fleet. This determines how many On-Demand Instances to provision. For more information, see [InstanceFleetConfig](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_InstanceFleetConfig.html) in the _Amazon EMR API Reference_.
+
+          _Required_: No
+
+          _Type_: Integer
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: Number
+        update_requires: no_interruption
+      TargetSpotCapacity:
+        description: |+
+          The target capacity of Spot units for the instance fleet. This determines how many Spot Instances to provision. For more information, see [InstanceFleetConfig](http://docs.aws.amazon.com/ElasticMapReduce/latest/API/API_InstanceFleetConfig.html) in the _Amazon EMR API Reference_.
+
+          _Required_: No
+
+          _Type_: Integer
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: Number
+        update_requires: no_interruption
+    return_values:
+      Ref:
+        description: ''
+    examples: {}
   AWS::EMR::InstanceGroupConfig:
     description: |-
       The `AWS::EMR::InstanceGroupConfig` resource configures a task instance group for an Amazon EMR cluster.
@@ -11251,7 +11558,7 @@ resources:
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
         description: |+
-          The event rule Amazon Resource Name (ARN), such as `arn:aws:events:us-east-1:123456789012:rule/example`.
+          The event rule Amazon Resource Name (ARN), such as `arn:aws:events:us-east-2:123456789012:rule/example`.
 
     examples: {}
   AWS::GameLift::Alias:
@@ -12465,6 +12772,19 @@ resources:
         required: 'no'
         type: String
         update_requires: replacement
+      RetentionPeriodHours:
+        description: |+
+          The number of hours for the data records that are stored in shards to remain accessible. The default value is 24. For more information about the stream retention period, see [Changing the Data Retention Period](http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-extended-retention.html) in the _Amazon Kinesis Developer Guide_.
+
+          _Required_: No
+
+          _Type_: Integer
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: Number
+        update_requires: no_interruption
       ShardCount:
         description: |+
           The number of shards that the stream uses. For greater provisioned throughput, increase the number of shards.
@@ -12499,7 +12819,7 @@ resources:
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
         description: |+
-          The Amazon resource name (ARN) of the Kinesis stream, such as `arn:aws:kinesis:us-east-1:123456789012:stream/mystream`.
+          The Amazon resource name (ARN) of the Kinesis stream, such as `arn:aws:kinesis:us-east-2:123456789012:stream/mystream`.
 
     examples: {}
   AWS::KinesisFirehose::DeliveryStream:
@@ -14903,6 +15223,19 @@ resources:
         required: 'no'
         type: String
         update_requires: some_interruptions
+      ReplicationSourceIdentifier:
+        description: |+
+          The Amazon Resource Name (ARN) of the source Amazon RDS MySQL DB instance or DB cluster, if this DB cluster is created as a Read Replica.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
       SnapshotIdentifier:
         description: |+
           The identifier for the DB cluster snapshot from which you want to restore.
@@ -14965,7 +15298,7 @@ resources:
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Endpoint.Address:
         description: |+
-          The connection endpoint for the DB cluster. For example: `mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-1.rds.amazonaws.com`.
+          The connection endpoint for the DB cluster. For example: `mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`.
 
       Endpoint.Port:
         description: |+
@@ -14973,7 +15306,7 @@ resources:
 
       ReadEndpoint.Address:
         description: |+
-          The reader endpoint for the DB cluster. For example: `mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.us-east-1.rds.amazonaws.com`.
+          The reader endpoint for the DB cluster. For example: `mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`.
 
     examples: {}
   AWS::RDS::DBClusterParameterGroup:
@@ -15674,7 +16007,7 @@ resources:
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Endpoint.Address:
         description: "- \n\n**Endpoint.Address**\n\nThe connection endpoint for the
-          database. For example: `mystack-mydb-1apw1j4phylrk.cg034hpkmmjt.us-east-1.rds.amazonaws.com`.\n\n"
+          database. For example: `mystack-mydb-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`.\n\n"
       Endpoint.Port:
         description: "- \n\n**Endpoint.Port**\n\nThe port number on which the database
           accepts connections. For example: `3306`.\n\n"
@@ -16128,7 +16461,7 @@ resources:
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
     examples: {}
   AWS::Redshift::Cluster:
-    description: The `AWS::Redshift::Cluster` resource creates an Amazon Redshift
+    description: Use the `AWS::Redshift::Cluster` resource to create an Amazon Redshift
       cluster. A _cluster_ is a fully managed data warehouse that consists of a set
       of compute nodes. For more information about default and valid values, see [CreateCluster](http://docs.aws.amazon.com/redshift/latest/APIReference/API_CreateCluster.html)
       in the _Amazon Redshift API Reference_.
@@ -16239,7 +16572,7 @@ resources:
         update_requires: no_interruption
       DBName:
         description: |+
-          The name of the first database that is created when the cluster is created.
+          The name of the first database that will be created when the cluster is created.
 
           _Required_: Yes
 
@@ -16328,6 +16661,19 @@ resources:
         required: 'no'
         type: String
         update_requires: replacement
+      LoggingProperties:
+        description: |+
+          Configures Amazon Redshift to create audit log files, containing logging information such as queries and connection attempts, for this cluster.
+
+          _Required_: No
+
+          _Type_: [Amazon Redshift LoggingProperties](aws-properties-redshift-cluster-loggingproperties.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: Amazon Redshift LoggingProperties
+        update_requires: no_interruption
       MasterUsername:
         description: |+
           The user name that is associated with the master user account for this cluster.
@@ -16442,7 +16788,7 @@ resources:
 
           _Required_: No
 
-          _Required_: Conditional. This property is required if your IAM policy includes a restriction on the cluster name, where the resource element specifies anything other than the wildcard character (`*`) for the cluster name.
+          _Required_: Conditional. This property is required if your IAM policy includes a restriction on the cluster name and the resource element specifies anything other than the wildcard character (`*`) for the cluster name.
 
           _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 
@@ -17346,7 +17692,7 @@ resources:
           Returns the IPv6 DNS name of the specified bucket.
 
           Example:`
-                                              mystack-mybucket-kdwwxmddtr2g.s3.dualstack.us-east-1.amazonaws.com/`
+                                              mystack-mybucket-kdwwxmddtr2g.s3.dualstack.us-east-2.amazonaws.com/`
 
           For more information about dual-stack endpoints, see [Using Amazon S3 Dual-Stack Endpoints](https://docs.aws.amazon.com/AmazonS3/latest/dev/dual-stack-endpoints.html).
 
@@ -17354,9 +17700,9 @@ resources:
         description: |+
           Returns the Amazon S3 website endpoint for the specified bucket.
 
-          Example (IPv4): `http://mystack-mybucket-kdwwxmddtr2g.s3-website-us-east-1.amazonaws.com/`
+          Example (IPv4): `http://mystack-mybucket-kdwwxmddtr2g.s3-website-us-east-2.amazonaws.com/`
 
-          Example (IPv6): `http://mystack-mybucket-kdwwxmddtr2g.s3.dualstack.us-east-1.amazonaws.com/`
+          Example (IPv6): `http://mystack-mybucket-kdwwxmddtr2g.s3.dualstack.us-east-2.amazonaws.com/`
 
     examples: {}
   AWS::S3::BucketPolicy:
@@ -17717,12 +18063,12 @@ resources:
     return_values:
       Ref:
         description: |-
-          The `AWS::SQS::Queue` type returns the queue URL, for example: `https://sqs.us-east-1.amazonaws.com/123456789012/aa4-MyQueue-Z5NOSZO2PZE9`.
+          The `AWS::SQS::Queue` type returns the queue URL, for example: `https://sqs.us-east-2.amazonaws.com/123456789012/aa4-MyQueue-Z5NOSZO2PZE9`.
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
         description: |+
-          Returns the Amazon Resource Name (ARN) of the queue. For example: `arn:aws:sqs:us-east-1:123456789012:mystack-myqueue-15PG5C2FC1CW8`.
+          Returns the Amazon Resource Name (ARN) of the queue. For example: `arn:aws:sqs:us-east-2:123456789012:mystack-myqueue-15PG5C2FC1CW8`.
 
       QueueName:
         description: |+
