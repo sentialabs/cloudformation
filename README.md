@@ -25,6 +25,9 @@ resources:                       Hash
     description:                 String containing a Markdown version of the
                                  resource documentation
 
+    url:                         String containing the URL of the resource
+                                 documentation that was parsed
+
     properties:                  Hash
 
       <PropertyName>:            Hash

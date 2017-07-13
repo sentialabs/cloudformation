@@ -1,5 +1,5 @@
 ---
-timestamp: 2017-07-06 16:54:38.919868000 +02:00
+timestamp: 2017-07-12 17:09:01.629860000 +02:00
 resources:
   AWS::ApiGateway::Account:
     description: |-
@@ -10,6 +10,7 @@ resources:
       If an API Gateway resource has never been created in your AWS account, you must add a dependency on another API Gateway resource, such as an [AWS::ApiGateway::RestApi](aws-resource-apigateway-restapi.html) or [AWS::ApiGateway::ApiKey](aws-resource-apigateway-apikey.html) resource.
 
       If an API Gateway resource has been created in your AWS account, no dependency is required (even if the resource was deleted).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-account.html
     properties:
       CloudWatchRoleArn:
         description: |+
@@ -37,6 +38,7 @@ resources:
       `Method` resources that require an API key. To specify which API key clients
       must use, map the API key with the `RestApi` and `Stage` resources that include
       the methods requiring a key.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-apikey.html
     properties:
       Description:
         description: |+
@@ -106,6 +108,7 @@ resources:
       layer that Amazon API Gateway (API Gateway) activates for methods that have
       authorization enabled. API Gateway activates the authorizer when a client calls
       those methods.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-authorizer.html
     properties:
       AuthorizerCredentials:
         description: |+
@@ -230,6 +233,7 @@ resources:
     description: The `AWS::ApiGateway::BasePathMapping` resource creates a base path
       that clients who call your Amazon API Gateway API must use in the invocation
       URL.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-basepathmapping.html
     properties:
       BasePath:
         description: |+
@@ -291,6 +295,7 @@ resources:
     description: The `AWS::ApiGateway::ClientCertificate` resource creates a client
       certificate that Amazon API Gateway (API Gateway) uses to configure client-side
       SSL authentication for sending requests to the integration endpoint.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-clientcertificate.html
     properties:
       Description:
         description: |+
@@ -316,6 +321,7 @@ resources:
     description: The `AWS::ApiGateway::Deployment` resource deploys an Amazon API
       Gateway (API Gateway) `RestApi` resource to a stage so that clients can call
       the API over the Internet. The stage acts as an environment.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-deployment.html
     properties:
       Description:
         description: |+
@@ -381,6 +387,7 @@ resources:
       The `AWS::ApiGateway::DomainName` resource specifies a custom domain name for your API in Amazon API Gateway (API Gateway).
 
       You can use a custom domain name to provide a URL that's more intuitive and easier to recall. For more information about using custom domain names, see [Use Custom Domain Name as API Gateway API Host Name](http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html) data type in the _API Gateway Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainname.html
     properties:
       CertificateArn:
         description: |+
@@ -425,6 +432,7 @@ resources:
     description: The `AWS::ApiGateway::Method` resource creates Amazon API Gateway
       (API Gateway) methods that define the parameters and body that clients must
       send in their requests.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-method.html
     properties:
       ApiKeyRequired:
         description: |+
@@ -566,6 +574,7 @@ resources:
   AWS::ApiGateway::Model:
     description: The `AWS::ApiGateway::Model` resource defines the structure of a
       request or response payload for an Amazon API Gateway (API Gateway) method.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-model.html
     properties:
       ContentType:
         description: |+
@@ -646,6 +655,7 @@ resources:
   AWS::ApiGateway::Resource:
     description: The `AWS::ApiGateway::Resource` resource creates a resource in an
       Amazon API Gateway (API Gateway) API.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-resource.html
     properties:
       ParentId:
         description: |+
@@ -700,6 +710,7 @@ resources:
       Note
 
       On January 1, 2016, the Swagger Specification was donated to the [OpenAPI initiative](https://www.openapis.org/), becoming the foundation of the OpenAPI Specification.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-restapi.html
     properties:
       BinaryMediaTypes:
         description: |+
@@ -819,6 +830,7 @@ resources:
   AWS::ApiGateway::Stage:
     description: The `AWS::ApiGateway::Stage` resource creates a stage for an Amazon
       API Gateway (API Gateway) deployment.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html
     properties:
       CacheClusterEnabled:
         description: |+
@@ -950,6 +962,7 @@ resources:
       and quota limits on individual client API keys. For more information, see [Creating
       and Using API Usage Plans in Amazon API Gateway](http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
       in the _API Gateway Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html
     properties:
       ApiStages:
         description: |+
@@ -1027,6 +1040,7 @@ resources:
     description: The `AWS::ApiGateway::UsagePlanKey` resource associates an Amazon
       API Gateway API key with an API Gateway usage plan. This association determines
       which users the usage plan is applied to.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplankey.html
     properties:
       KeyId:
         description: |+
@@ -1083,6 +1097,7 @@ resources:
       a resource that Application Auto Scaling can scale up or down. For more information,
       see the [RegisterScalableTarget](http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_RegisterScalableTarget.html)
       action in the _Application Auto Scaling API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalabletarget.html
     properties:
       MaxCapacity:
         description: |+
@@ -1175,6 +1190,7 @@ resources:
     description: The `AWS::ApplicationAutoScaling::ScalingPolicy` resource defines
       an Application Auto Scaling scaling policy that Application Auto Scaling uses
       to adjust your application resources.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html
     properties:
       PolicyName:
         description: |+
@@ -1294,6 +1310,7 @@ resources:
       The `AWS::AutoScaling::AutoScalingGroup` type creates an Auto Scaling group.
 
       You can add an [UpdatePolicy](aws-attribute-updatepolicy.html) attribute to your Auto Scaling group to control how rolling updates are performed when a change has been made to the Auto Scaling group's [launch configuration](aws-properties-as-launchconfig.html) or [subnet group membership](aws-properties-as-group.html#cfn-as-group-vpczoneidentifier).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html
     properties:
       AvailabilityZones:
         description: |+
@@ -1555,6 +1572,7 @@ resources:
       When you update a property of the `LaunchConfiguration` resource, AWS CloudFormation deletes that resource and creates a new launch configuration with the updated properties and a new name. This update action does not deploy any change across the running Amazon EC2 instances in the auto scaling group. In other words, an update simply replaces the `LaunchConfiguration` so that when the auto scaling group launches new instances, they will get the updated configuration, but existing instances continue to run with the configuration that they were originally launched with. This works the same way as if you made similar changes manually to an auto scaling group.
 
       If you want to update existing instances when you update the `LaunchConfiguration` resource, you must specify an update policy attribute for the `AWS::AutoScaling::AutoScalingGroup` resource. For more information, see [UpdatePolicy](aws-attribute-updatepolicy.html).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig.html
     properties:
       AssociatePublicIpAddress:
         description: |+
@@ -1809,6 +1827,7 @@ resources:
       is terminated (before it is fully terminated). For more information, see [Examples
       of How to Use Lifecycle Hooks](http://docs.aws.amazon.com/autoscaling/latest/userguide/lifecycle-hooks.html)
       in the _Auto Scaling User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-as-lifecyclehook.html
     properties:
       AutoScalingGroupName:
         description: |+
@@ -1912,6 +1931,7 @@ resources:
       You can use a scaling policy together with a CloudWatch alarm. A CloudWatch alarm can automatically initiate actions on your behalf, based on parameters you specify. A scaling policy is one type of action that an alarm can initiate. For a snippet showing how to create an Auto Scaling policy that is triggered by a CloudWatch alarm, see [Auto Scaling Policy Triggered by CloudWatch Alarm](quickref-autoscaling.html#scenario-as-policy). Note that you can only associate one scaling policy with an alarm.
 
       This type supports updates. For more information about updating this resource, see [PutScalingPolicy](http://docs.aws.amazon.com/AutoScaling/latest/APIReference/API_PutScalingPolicy.html).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-policy.html
     properties:
       AdjustmentType:
         description: |+
@@ -2057,6 +2077,7 @@ resources:
       attribute](aws-attribute-updatepolicy.html) to prevent AWS CloudFormation from
       changing the min size, max size, or desired capacity property values during
       a stack update unless you modified the individual values in your template."
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-as-scheduledaction.html
     properties:
       AutoScalingGroupName:
         description: |+
@@ -2162,6 +2183,7 @@ resources:
       Important
 
       When you use the `AWS::CertificateManager::Certificate` resource in an AWS CloudFormation stack, the stack will remain in the `CREATE_IN_PROGRESS` state and any further stack operations will be delayed until you act upon the instructions in the certificate validation email.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html
     properties:
       DomainName:
         description: |+
@@ -2242,6 +2264,7 @@ resources:
       resource.\n\nFor sources, AWS CloudFormation looks for authentication information
       in the `uris` or `buckets` property of the AWS::CloudFormation::Authentication
       resource."
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-authentication.html
     properties:
       accessKeyId:
         description: |+
@@ -2352,6 +2375,7 @@ resources:
       Note
 
       If you use the [VPC endpoint](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-endpoints.html) feature, custom resources in the VPC must have access to AWS CloudFormation-specific Amazon Simple Storage Service (Amazon S3) buckets. Custom resources must send responses to a pre-signed Amazon S3 URL. If they can't send responses to Amazon S3, AWS CloudFormation won't receive a response and the stack operation fails. For more information, see [AWS CloudFormation and VPC Endpoints](cfn-vpce-bucketnames.html).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cfn-customresource.html
     properties:
       ServiceToken:
         description: |+
@@ -2379,6 +2403,7 @@ resources:
       For an example of using AWS::CloudFormation::Init and the cfn-init helper script, see [Deploying Applications on Amazon EC2 with AWS CloudFormation](deploying.applications.html).
 
       For an example that shows how to use cfn-init to create a Windows stack, see [Bootstrapping AWS CloudFormation Windows Stacks](cfn-windows-stacks-bootstrapping.html).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-init.html
     properties: {}
     return_values:
       Ref:
@@ -2394,6 +2419,7 @@ resources:
       Note
 
       Only the AWS CloudFormation console uses the `AWS::CloudFormation::Interface` metadata key. AWS CloudFormation CLI and API calls do not use this key.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudformation-interface.html
     properties:
       ParameterGroups:
         description: |+
@@ -2444,6 +2470,7 @@ resources:
       Note
 
       You must acknowledge IAM capabilities for nested stacks that contain IAM resources. Also, verify that you have cancel update stack permissions, which is required if an update rolls back. For more information about IAM and AWS CloudFormation, see [Controlling Access with AWS Identity and Access Management](using-iam-template.html).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-stack.html
     properties:
       NotificationARNs:
         description: |+
@@ -2547,6 +2574,7 @@ resources:
       If they can't send responses to Amazon S3, AWS CloudFormation won't receive
       a response and the stack operation fails. For more information, see [AWS CloudFormation
       and VPC Endpoints](cfn-vpce-bucketnames.html)."
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waitcondition.html
     properties:
       Count:
         description: |+
@@ -2622,6 +2650,7 @@ resources:
       Note
 
       Updates are not supported for this resource.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waitconditionhandle.html
     properties: {}
     return_values:
       Ref:
@@ -2633,6 +2662,7 @@ resources:
       in the _Amazon CloudFront Developer Guide_. For specific information about creating
       CloudFront web distributions, see [CreateDistribution](http://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CreateDistribution.html)
       in the _Amazon CloudFront API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution.html
     properties:
       DistributionConfig:
         description: |+
@@ -2664,6 +2694,7 @@ resources:
       API calls made by your AWS account and publish the logs to an Amazon S3 bucket.
       For more information, see [What is AWS CloudTrail?](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html)
       in the _AWS CloudTrail User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html
     properties:
       CloudWatchLogsLogGroupArn:
         description: |+
@@ -2833,6 +2864,7 @@ resources:
       The `AWS::CloudWatch::Alarm` type creates a CloudWatch alarm.
 
       This type supports updates. For more information about updating this resource, see [PutMetricAlarm](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html). For more information about updating stacks, see [AWS CloudFormation Stacks Updates](using-cfn-updating-stacks.html).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html
     properties:
       ActionsEnabled:
         description: |+
@@ -3096,6 +3128,7 @@ resources:
       The `AWS::CloudWatch::Dashboard` resource creates an Amazon CloudWatch dashboard. A dashboard is a customizable home page in the CloudWatch console that you can use to monitor your AWS resources in a single view. Each metric, graph, alarm, or text block on a dashboard is called a widget.
 
       This resource supports updates. For more information about updating this resource, see [PutDashboard](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutDashboard.html) in the _Amazon CloudWatch API Reference_. For more information about updating stacks, see [AWS CloudFormation Stacks Updates](using-cfn-updating-stacks.html).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-dashboard.html
     properties:
       DashboardName:
         description: |+
@@ -3134,6 +3167,7 @@ resources:
     description: The `AWS::CodeBuild::Project` resource configures how AWS CodeBuild
       builds your source code. For example, it tells AWS CodeBuild where to get the
       source code and which build environment to use.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codebuild-project.html
     properties:
       Artifacts:
         description: |+
@@ -3268,6 +3302,7 @@ resources:
       repository that is hosted by Amazon Web Services. For more information, see
       [Create an AWS CodeCommit Repository](http://docs.aws.amazon.com/codecommit/latest/userguide/how-to-create-repository.html)
       in the _AWS CodeCommit User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codecommit-repository.html
     properties:
       RepositoryDescription:
         description: |+
@@ -3337,6 +3372,7 @@ resources:
       associate the application with an AWS CodeDeploy deployment group. For more
       information, see [AWS CodeDeploy Deployments](http://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-steps.html)
       in the _AWS CodeDeploy User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-application.html
     properties:
       ApplicationName:
         description: |+
@@ -3362,6 +3398,7 @@ resources:
     description: The `AWS::CodeDeploy::DeploymentConfig` resource creates a set of
       deployment rules, deployment success conditions, and deployment failure conditions
       that AWS CodeDeploy uses during a deployment.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-deploymentconfig.html
     properties:
       DeploymentConfigName:
         description: |+
@@ -3409,6 +3446,7 @@ resources:
       deployment group that details which application revision to use and which instances
       your application revisions are deployed to. For more information, see [CreateDeploymentGroup](http://docs.aws.amazon.com//codedeploy/latest/APIReference/API_CreateDeploymentGroup.html)
       in the _AWS CodeDeploy API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-deploymentgroup.html
     properties:
       AlarmConfiguration:
         description: |+
@@ -3564,6 +3602,7 @@ resources:
       use these custom actions in the stage of a [pipeline](aws-resource-codepipeline-pipeline.html).
       For more information, see [Create and Add a Custom Action in AWS CodePipeline](http://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html)
       in the _AWS CodePipeline User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-customactiontype.html
     properties:
       Category:
         description: |+
@@ -3674,6 +3713,7 @@ resources:
       pipeline that describes how software changes go through a release process. For
       more information, see [What Is AWS CodePipeline?](http://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html)
       in the _AWS CodePipeline User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-pipeline.html
     properties:
       ArtifactStore:
         description: |+
@@ -3765,6 +3805,7 @@ resources:
   AWS::Cognito::IdentityPool:
     description: The `AWS::Cognito::IdentityPool` resource creates an Amazon Cognito
       identity pool.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-identitypool.html
     properties:
       IdentityPoolName:
         description: |+
@@ -3918,6 +3959,7 @@ resources:
   AWS::Cognito::IdentityPoolRoleAttachment:
     description: The `AWS::Cognito::IdentityPoolRoleAttachment` resource manages the
       role configuration for an Amazon Cognito identity pool.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-identitypoolroleattachment.html
     properties:
       IdentityPoolId:
         description: |+
@@ -3969,6 +4011,7 @@ resources:
   AWS::Cognito::UserPool:
     description: The `AWS::Cognito::UserPool` resource creates an Amazon Cognito user
       pool.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpool.html
     properties:
       AdminCreateUserConfig:
         description: |+
@@ -4206,6 +4249,7 @@ resources:
   AWS::Cognito::UserPoolClient:
     description: The `AWS::Cognito::UserPoolClient` resource creates an Amazon Cognito
       user pool client.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolclient.html
     properties:
       ClientName:
         description: |+
@@ -4320,6 +4364,7 @@ resources:
   AWS::Cognito::UserPoolGroup:
     description: The `AWS::Cognito::UserPoolGroup` resource creates a user group in
       an Amazon Cognito user pool.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolgroup.html
     properties:
       Description:
         description: |+
@@ -4402,6 +4447,7 @@ resources:
   AWS::Cognito::UserPoolUser:
     description: The `AWS::Cognito::UserPoolUser` resource creates an Amazon Cognito
       user pool user.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpooluser.html
     properties:
       DesiredDeliveryMediums:
         description: |+
@@ -4512,6 +4558,7 @@ resources:
   AWS::Cognito::UserPoolUserToGroupAttachment:
     description: The `AWS::Cognito::UserPoolUserToGroupAttachment` resource attaches
       a user to an Amazon Cognito user pool user group.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolusertogroupattachment.html
     properties:
       GroupName:
         description: |+
@@ -4567,6 +4614,7 @@ resources:
       this function evaluates must be in the recording group. For more information,
       see [Evaluating AWS Resource Configurations with AWS Config](http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html)
       in the _AWS Config Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configrule.html
     properties:
       ConfigRuleName:
         description: |+
@@ -4678,6 +4726,7 @@ resources:
       AWS CloudFormation starts the recorder as soon as the delivery channel is available. To stop the recorder, delete the configuration recorder from your stack.
 
       For more information, see [Configuration Recorder](http://docs.aws.amazon.com/config/latest/developerguide/config-concepts.html#config-recorder) in the _AWS Config Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html
     properties:
       Name:
         description: |+
@@ -4749,6 +4798,7 @@ resources:
       capture configuration changes to your resources. For more information, see [AWS::Config::ConfigurationRecorder](aws-resource-config-configurationrecorder.html).\n\nFor
       more information, see [Managing the Delivery Channel](http://docs.aws.amazon.com/config/latest/developerguide/manage-delivery-channel.html)
       in the _AWS Config Developer Guide_."
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-deliverychannel.html
     properties:
       ConfigSnapshotDeliveryProperties:
         description: |+
@@ -4830,6 +4880,7 @@ resources:
       as activities, schedules, data nodes, and resources. For information about pipeline
       objects and components that you can use, see [Pipeline Object Reference](http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-pipeline-objects.html)
       in the _AWS Data Pipeline Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-datapipeline-pipeline.html
     properties:
       Activate:
         description: |+
@@ -4945,6 +4996,7 @@ resources:
       AWS Management Console and AWS applications using their existing credentials.
       For more information, see [What Is AWS Directory Service?](http://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html)
       in the _AWS Directory Service Administration Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-directoryservice-microsoftad.html
     properties:
       CreateAlias:
         description: |+
@@ -5053,6 +5105,7 @@ resources:
       their existing credentials. Simple AD is a Microsoft Active Directory–compatible
       directory. For more information, see [What Is AWS Directory Service?](http://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html)
       in the _AWS Directory Service Administration Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-directoryservice-simplead.html
     properties:
       CreateAlias:
         description: |+
@@ -5187,6 +5240,7 @@ resources:
       Note
 
       AWS CloudFormation typically creates DynamoDB tables in parallel. However, if your template includes multiple DynamoDB tables with indexes, you must declare dependencies so that the tables are created sequentially. Amazon DynamoDB limits the number of tables with secondary indexes that are in the creating state. If you create multiple tables with indexes at the same time, DynamoDB returns an error and the stack operation fails. For an example, see [DynamoDB Table with a DependsOn Attribute](aws-resource-dynamodb-table.html#cfn-dynamodb-table-examples-dependson).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html
     properties:
       AttributeDefinitions:
         description: |+
@@ -5343,6 +5397,7 @@ resources:
     examples: {}
   AWS::EC2::CustomerGateway:
     description: Provides information to AWS about your VPN customer gateway device.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-customer-gateway.html
     properties:
       BgpAsn:
         description: |+
@@ -5407,6 +5462,7 @@ resources:
       Creates a set of DHCP options for your VPC.
 
       For more information, see [CreateDhcpOptions](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateDhcpOptions.html) in the _Amazon EC2 API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-dhcp-options.html
     properties:
       DomainName:
         description: |+
@@ -5515,6 +5571,7 @@ resources:
       enables outbound communication over IPv6 from instances in your VPC to the Internet.
       It also prevents hosts outside of your VPC from initiating an IPv6 connection
       with your instance.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-egressonlyinternetgateway.html
     properties:
       VpcId:
         description: |+
@@ -5539,6 +5596,7 @@ resources:
   AWS::EC2::EIP:
     description: The AWS::EC2::EIP resource allocates an Elastic IP (EIP) address
       and can, optionally, associate it with an Amazon EC2 instance.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-eip.html
     properties:
       InstanceId:
         description: |+
@@ -5588,6 +5646,7 @@ resources:
       The AWS::EC2::EIPAssociation resource type associates an Elastic IP address with an Amazon EC2 instance. The Elastic IP address can be an existing Elastic IP address or an Elastic IP address allocated through an [AWS::EC2::EIP resource](aws-properties-ec2-eip.html).
 
       For more information EC2-Classic and EC2-VPC, see [AssociateAddress](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateAddress.html) in the _Amazon EC2 API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-eip-association.html
     properties:
       AllocationId:
         description: |+
@@ -5670,6 +5729,7 @@ resources:
       which can help you diagnose overly restrictive security group rules. For more
       information, see [VPC Flow Logs](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/flow-logs.html)
       in the _Amazon VPC User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-flowlog.html
     properties:
       DeliverLogsPermissionArn:
         description: |+
@@ -5750,6 +5810,7 @@ resources:
       allowing you to use your existing server-bound software licenses. For more information,
       see [Dedicated Hosts](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html)
       in the _Amazon EC2 User Guide for Linux Instances_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-host.html
     properties:
       AutoPlacement:
         description: |+
@@ -5802,6 +5863,7 @@ resources:
       The `AWS::EC2::Instance` resource creates an EC2 instance.
 
       If an Elastic IP address is attached to your instance, AWS CloudFormation reattaches the Elastic IP address after it updates the instance. For more information about updating stacks, see [AWS CloudFormation Stacks Updates](using-cfn-updating-stacks.html).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
     properties:
       Affinity:
         description: |+
@@ -6229,6 +6291,7 @@ resources:
   AWS::EC2::InternetGateway:
     description: Creates a new Internet gateway in your AWS account. After creating
       the Internet gateway, you then attach it to a VPC.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-internet-gateway.html
     properties:
       Tags:
         description: |+
@@ -6257,6 +6320,7 @@ resources:
       Note
 
       If you add a default route (`AWS::EC2::Route` resource) that points to a NAT gateway, specify NAT gateway's ID for the route's `NatGatewayId` property.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-natgateway.html
     properties:
       AllocationId:
         description: |+
@@ -6293,6 +6357,7 @@ resources:
     examples: {}
   AWS::EC2::NetworkAcl:
     description: Creates a new network ACL in a VPC.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl.html
     properties:
       Tags:
         description: |+
@@ -6331,6 +6396,7 @@ resources:
     description: Creates an entry (i.e., a rule) in a network ACL with a rule number
       you specify. Each network ACL has a set of numbered ingress rules and a separate
       set of numbered egress rules.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html
     properties:
       CidrBlock:
         description: |+
@@ -6466,6 +6532,7 @@ resources:
     description: Describes a network interface in an Elastic Compute Cloud (EC2) instance
       for AWS CloudFormation. This is provided in a list in the `NetworkInterfaces`
       property of [AWS::EC2::Instance](aws-properties-ec2-instance.html).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-interface.html
     properties:
       Description:
         description: |+
@@ -6622,6 +6689,7 @@ resources:
     description: Attaches an elastic network interface (ENI) to an Amazon EC2 instance.
       You can use this resource type to attach additional network interfaces to an
       instances without interruption.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-interface-attachment.html
     properties:
       DeleteOnTermination:
         description: |+
@@ -6687,6 +6755,7 @@ resources:
       instances within a single Availability Zone (AZ) that enables applications to
       participate in a low-latency, 10 Gbps network. You create a placement group
       first, and then you can launch instances in the placement group.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-placementgroup.html
     properties:
       Strategy:
         description: |+
@@ -6712,6 +6781,7 @@ resources:
     description: The `AWS::EC2::Route` resource creates a new route in a route table
       within a VPC. The route's target can be either a gateway attached to the VPC
       or a NAT instance in the VPC.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-route.html
     properties:
       DestinationCidrBlock:
         description: |+
@@ -6829,6 +6899,7 @@ resources:
   AWS::EC2::RouteTable:
     description: Creates a new route table within a VPC. After you create a new route
       table, you can add routes and associate the table with a subnet.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-route-table.html
     properties:
       VpcId:
         description: |+
@@ -6874,6 +6945,7 @@ resources:
       Important
 
       If you want to cross-reference two security groups in the ingress and egress rules of those security groups, use the [AWS::EC2::SecurityGroupEgress](aws-resource-ec2-security-group-egress.html) and [AWS::EC2::SecurityGroupIngress](aws-properties-ec2-security-group-ingress.html) resources to define your rules. Do not use the embedded ingress and egress rules in the `AWS::EC2::SecurityGroup`. Doing so creates a circular dependency, which AWS CloudFormation doesn't allow.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html
     properties:
       GroupName:
         description: |+
@@ -6984,6 +7056,7 @@ resources:
       Important
 
       Use `AWS::EC2::SecurityGroupIngress` and `AWS::EC2::SecurityGroupEgress` only when necessary, typically to allow security groups to reference each other in ingress and egress rules. Otherwise, use the embedded ingress and egress rules of [AWS::EC2::SecurityGroup](aws-properties-ec2-security-group.html). For more information, see [Amazon EC2 Security Groups](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-security-group-egress.html
     properties:
       CidrIp:
         description: |+
@@ -7103,6 +7176,7 @@ resources:
       Important
 
       Use `AWS::EC2::SecurityGroupIngress` and `AWS::EC2::SecurityGroupEgress` only when necessary, typically to allow security groups to reference each other in ingress and egress rules. Otherwise, use the embedded ingress and egress rules of [AWS::EC2::SecurityGroup](aws-properties-ec2-security-group.html). For more information, see [Amazon EC2 Security Groups](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html
     properties:
       CidrIp:
         description: |+
@@ -7246,6 +7320,7 @@ resources:
       to meet the target capacity that you specified. For more information, see [Spot
       Instances](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html)
       in the _Amazon EC2 User Guide for Linux Instances_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-spotfleet.html
     properties:
       SpotFleetRequestConfigData:
         description: |+
@@ -7271,6 +7346,7 @@ resources:
     examples: {}
   AWS::EC2::Subnet:
     description: Creates a subnet in an existing VPC.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-subnet.html
     properties:
       AvailabilityZone:
         description: |+
@@ -7373,6 +7449,7 @@ resources:
   AWS::EC2::SubnetCidrBlock:
     description: The `AWS::EC2::SubnetCidrBlock` resource associates a single IPv6
       CIDR block with an Amazon VPC subnet.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-subnetcidrblock.html
     properties:
       Ipv6CidrBlock:
         description: |+
@@ -7413,6 +7490,7 @@ resources:
       Note
 
       The EC2 API Reference refers to the `SubnetId` parameter as the `AssociationId`.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-subnet-network-acl-assoc.html
     properties:
       SubnetId:
         description: |+
@@ -7453,6 +7531,7 @@ resources:
     examples: {}
   AWS::EC2::SubnetRouteTableAssociation:
     description: Associates a subnet with a route table.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-subnet-route-table-assoc.html
     properties:
       RouteTableId:
         description: |+
@@ -7510,6 +7589,7 @@ resources:
       included in the snapshot.\n\nImportant\n\nAmazon EBS does not support sizing
       down an Amazon EBS volume. AWS CloudFormation will not attempt to modify an
       Amazon EBS volume to a smaller size on rollback."
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volume.html
     properties:
       AutoEnableIO:
         description: |+
@@ -7648,6 +7728,7 @@ resources:
       If an Amazon EBS volume is the root device of an instance, it cannot be detached while the instance is in the "running" state. To detach the root volume, stop the instance first.
 
       If the root volume is detached from an instance with an AWS Marketplace product code, then the AWS Marketplace product codes from that volume are no longer associated with the instance.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volumeattachment.html
     properties:
       Device:
         description: |+
@@ -7696,6 +7777,7 @@ resources:
     description: Creates a Virtual Private Cloud (VPC) with the CIDR block that you
       specify. To name a VPC resource, use the `Tags` property and specify a value
       for the `Name` key.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc.html
     properties:
       CidrBlock:
         description: |+
@@ -7786,6 +7868,7 @@ resources:
   AWS::EC2::VPCCidrBlock:
     description: The `AWS::EC2::VPCCidrBlock` resource associates a single Amazon-provided
       IPv6 CIDR block with an Amazon VPC VPC.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpccidrblock.html
     properties:
       AmazonProvidedIpv6CidrBlock:
         description: |+
@@ -7820,6 +7903,7 @@ resources:
   AWS::EC2::VPCDHCPOptionsAssociation:
     description: Associates a set of DHCP options (that you've previously created)
       with the specified VPC.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc-dhcp-options-assoc.html
     properties:
       DhcpOptionsId:
         description: |+
@@ -7859,6 +7943,7 @@ resources:
       you can use to establish a private connection between your VPC and another AWS
       service without requiring access over the Internet, a VPN connection, or AWS
       Direct Connect.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpcendpoint.html
     properties:
       PolicyDocument:
         description: |+
@@ -7921,6 +8006,7 @@ resources:
     examples: {}
   AWS::EC2::VPCGatewayAttachment:
     description: Attaches a gateway to a VPC.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc-gateway-attachment.html
     properties:
       InternetGatewayId:
         description: |+
@@ -7975,6 +8061,7 @@ resources:
       Note
 
       You can create a peering connection with another AWS account. For a detailed walkthrough, see [Walkthrough: Peer with an Amazon VPC in Another AWS Account](peer-with-vpc-in-another-account.html).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpcpeeringconnection.html
     properties:
       PeerVpcId:
         description: |+
@@ -8053,6 +8140,7 @@ resources:
       Creates a new VPN connection between an existing virtual private gateway and a VPN customer gateway.
 
       For more information, go to [CreateVpnConnection](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnConnection.html) in the _Amazon EC2 API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpn-connection.html
     properties:
       Type:
         description: |+
@@ -8128,6 +8216,7 @@ resources:
       existing virtual private gateway and a VPN customer gateway. The static route
       allows traffic to be routed from the virtual private gateway to the VPN customer
       gateway.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpn-connection-route.html
     properties:
       DestinationCidrBlock:
         description: |+
@@ -8165,6 +8254,7 @@ resources:
   AWS::EC2::VPNGateway:
     description: Creates a virtual private gateway. A virtual private gateway is the
       VPC-side endpoint for your VPN connection.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpn-gateway.html
     properties:
       Type:
         description: |+
@@ -8203,6 +8293,7 @@ resources:
       Note
 
       If you reference a VPN gateway that is in the same template as your VPN gateway route propagation, you must explicitly declare a dependency on the VPN gateway attachment. The `AWS::EC2::VPNGatewayRoutePropagation` resource cannot use the VPN gateway until it has successfully attached to the VPC. Add a [DependsOn](aws-attribute-dependson.html) attribute in the `AWS::EC2::VPNGatewayRoutePropagation` resource to explicitly declare a dependency on the VPN gateway attachment.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpn-gatewayrouteprop.html
     properties:
       RouteTableIds:
         description: |+
@@ -8239,6 +8330,7 @@ resources:
       Registry (Amazon ECR) repository, where users can push and pull Docker images.
       For more information, see [Amazon ECR Repositories](http://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html)
       in the _Amazon EC2 Container Registry User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html
     properties:
       RepositoryName:
         description: |+
@@ -8283,6 +8375,7 @@ resources:
       ECS container agent to connect to the cluster. For more information, see [Amazon
       ECS Container Agent](http://docs.aws.amazon.com/AmazonECS/latest/developerguide//ECS_agent.html)
       in the _Amazon EC2 Container Service Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-cluster.html
     properties:
       ClusterName:
         description: |+
@@ -8316,6 +8409,7 @@ resources:
     description: The `AWS::ECS::Service` resource creates an Amazon EC2 Container
       Service (Amazon ECS) service that runs and maintains the requested number of
       tasks and associated load balancers.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html
     properties:
       Cluster:
         description: |+
@@ -8464,6 +8558,7 @@ resources:
       volume definitions of an Amazon EC2 Container Service (Amazon ECS) task. You
       can specify which Docker images to use, the required resources, and other configurations
       related to launching the task definition through an Amazon ECS service or task.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html
     properties:
       Volumes:
         description: |+
@@ -8566,6 +8661,7 @@ resources:
       to mount your Amazon EFS file system on an Amazon Elastic Compute Cloud (Amazon
       EC2) instance. For more information, see the [CreateFileSystem](http://docs.aws.amazon.com/efs/latest/ug/API_CreateFileSystem.html)
       API in the _Amazon Elastic File System User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html
     properties:
       FileSystemTags:
         description: |+
@@ -8613,6 +8709,7 @@ resources:
       Note
 
       EC2 instances and the mount target that they connect to must be in a VPC with DNS enabled.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-mounttarget.html
     properties:
       FileSystemId:
         description: |+
@@ -8686,6 +8783,7 @@ resources:
   AWS::ElastiCache::CacheCluster:
     description: The AWS::ElastiCache::CacheCluster type creates an Amazon ElastiCache
       cache cluster.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-cache-cluster.html
     properties:
       AutoMinorVersionUpgrade:
         description: |+
@@ -9005,6 +9103,7 @@ resources:
   AWS::ElastiCache::ParameterGroup:
     description: The AWS::ElastiCache::ParameterGroup type creates a new cache parameter
       group. Cache parameter groups control the parameters for a cache cluster.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-parameter-group.html
     properties:
       CacheParameterGroupFamily:
         description: |+
@@ -9065,6 +9164,7 @@ resources:
       ElastiCache Redis replication group. A _replication group_ is a collection of
       cache clusters, where one of the clusters is a primary read-write cluster and
       the others are read-only replicas.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html
     properties:
       AutomaticFailoverEnabled:
         description: "Indicates whether Multi-AZ is enabled. When Multi-AZ is enabled,
@@ -9460,6 +9560,7 @@ resources:
       The `AWS::ElastiCache::SecurityGroup` resource creates a cache security group. For more information about cache security groups, go to [Cache Security Groups](http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheSecurityGroup.html) in the _Amazon ElastiCache User Guide_ or go to [CreateCacheSecurityGroup](http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSecurityGroup.html) in the _Amazon ElastiCache API Reference Guide_.
 
       To create an ElastiCache cluster in a VPC, use the [AWS::EC2::SecurityGroup](aws-properties-ec2-security-group.html) resource. For more information, see the `VpcSecurityGroupIds` property in the [AWS::ElastiCache::CacheCluster](aws-properties-elasticache-cache-cluster.html) resource.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-security-group.html
     properties:
       Description:
         description: |+
@@ -9486,6 +9587,7 @@ resources:
       to a cache security group from hosts in specified Amazon EC2 security groups.
       For more information about ElastiCache security group ingress, go to [AuthorizeCacheSecurityGroupIngress](http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_AuthorizeCacheSecurityGroupIngress.html)
       in the _Amazon ElastiCache API Reference Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-security-group-ingress.html
     properties:
       CacheSecurityGroupName:
         description: |+
@@ -9535,6 +9637,7 @@ resources:
       groups, go to [Cache Subnet Groups](http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheSubnetGroups.html)
       in the _Amazon ElastiCache User Guide_ or go to [CreateCacheSubnetGroup](http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSubnetGroup.html)
       in the _Amazon ElastiCache API Reference Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-subnetgroup.html
     properties:
       CacheSubnetGroupName:
         description: |+
@@ -9588,6 +9691,7 @@ resources:
     examples: {}
   AWS::ElasticBeanstalk::Application:
     description: Creates an Elastic Beanstalk application.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk.html
     properties:
       ApplicationName:
         description: |+
@@ -9629,6 +9733,7 @@ resources:
   AWS::ElasticBeanstalk::ApplicationVersion:
     description: Creates an application version, an iteration of deployable code,
       for an Elastic Beanstalk application.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-version.html
     properties:
       ApplicationName:
         description: |+
@@ -9680,6 +9785,7 @@ resources:
     description: Creates a configuration template for an Elastic Beanstalk application.
       You can use configuration templates to deploy different versions of an application
       by using the configuration settings that you define in the configuration template.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-beanstalk-configurationtemplate.html
     properties:
       ApplicationName:
         description: |+
@@ -9775,6 +9881,7 @@ resources:
     examples: {}
   AWS::ElasticBeanstalk::Environment:
     description: Creates or updates an AWS Elastic Beanstalk environment.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-environment.html
     properties:
       ApplicationName:
         description: |+
@@ -9934,6 +10041,7 @@ resources:
       Note
 
       If this resource has a public IP address and is also in a VPC that is defined in the same template, you must use the `DependsOn` attribute to declare a dependency on the VPC-gateway attachment. For more information, see [DependsOn Attribute](aws-attribute-dependson.html).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html
     properties:
       AccessLoggingPolicy:
         description: |+
@@ -10212,6 +10320,7 @@ resources:
       for connection requests and forwards them to one or more target groups. For
       more information, see the [Listeners for Your Application Load Balancers](http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html)
       in the _Application Load Balancers Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html
     properties:
       Certificates:
         description: |+
@@ -10308,6 +10417,7 @@ resources:
       that it takes. For more information, see the [Listeners for Your Application
       Load Balancers](http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html)
       in the _Application Load Balancers Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenerrule.html
     properties:
       Actions:
         description: |+
@@ -10383,6 +10493,7 @@ resources:
       AWS CloudFormation does not automatically create tags (key–value pairs) for an Elastic Load Balancing Application load balancer. You must use the [`Tags`](aws-resource-elasticloadbalancingv2-loadbalancer.html#cfn-elasticloadbalancingv2-loadbalancer-tags) property to create tags to associate with the load balancer.
 
       [Elastic Load Balancing API Reference version 2015-12-01](http://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/)
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html
     properties:
       LoadBalancerAttributes:
         description: |+
@@ -10512,6 +10623,7 @@ resources:
       targets, such as EC2 instances. For more information, see the [Target Groups
       for Your Application Load Balancers](http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html)
       in the _Application Load Balancers Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html
     properties:
       HealthCheckIntervalSeconds:
         description: |+
@@ -10740,6 +10852,7 @@ resources:
       Service (Amazon ES) domain that encapsulates the Amazon ES engine instances.
       For more information, see [CreateElasticsearchDomain](http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-configuration-api.html#es-configuration-api-actions-createelasticsearchdomain)
       in the _Amazon Elasticsearch Service Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html
     properties:
       AccessPolicies:
         description: |+
@@ -10884,6 +10997,7 @@ resources:
       process and analyze vast amounts of data. For more information, see [Plan an
       Amazon EMR Cluster](http://docs.aws.amazon.com//ElasticMapReduce/latest/ManagementGuide/emr-plan.html)
       in the _Amazon EMR Management Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-cluster.html
     properties:
       AdditionalInfo:
         description: |+
@@ -11102,6 +11216,7 @@ resources:
       Note
 
       The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-instancefleetconfig.html
     properties:
       ClusterId:
         description: |+
@@ -11205,6 +11320,7 @@ resources:
       Note
 
       You can't delete an instance group. If you remove an instance group, AWS CloudFormation sets the instance count to zero (`0`).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-instancegroupconfig.html
     properties:
       AutoScalingPolicy:
         description: |+
@@ -11355,6 +11471,7 @@ resources:
       the security configuration when creating a cluster. For more information, see
       [Configure Security Groups](http://docs.aws.amazon.com//emr/latest/ManagementGuide/emr-security-groups.html)
       in the _Amazon EMR Management Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-securityconfiguration.html
     properties:
       Name:
         description: |+
@@ -11396,6 +11513,7 @@ resources:
       Note
 
       You can't delete work flow steps. During a stack update, if you remove a step, AWS CloudFormation takes no action.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-step.html
     properties:
       ActionOnFailure:
         description: |+
@@ -11463,6 +11581,7 @@ resources:
       Amazon CloudWatch Events (CloudWatch Events) events and routes them to one or
       more targets for processing. For more information, see [Using CloudWatch Events](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchEvents.html)
       in the _Amazon CloudWatch User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html
     properties:
       Description:
         description: |+
@@ -11567,6 +11686,7 @@ resources:
       reference the alias instead of a specific fleet when you create game sessions.
       For more information, see the [CreateAlias](http://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateAlias.html)
       action in the _Amazon GameLift API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-gamelift-alias.html
     properties:
       Description:
         description: |+
@@ -11620,6 +11740,7 @@ resources:
     description: The `AWS::GameLift::Build` resource creates a build that includes
       all of the components to run your game server in an Amazon GameLift (GameLift)
       fleet.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-gamelift-build.html
     properties:
       Name:
         description: |+
@@ -11674,6 +11795,7 @@ resources:
       fleet to host game servers. A fleet is a set of EC2 instances, each of which
       is a host in the fleet. For more information, see the [CreateFleet](http://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateFleet.html)
       action in the _Amazon GameLift API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-gamelift-fleet.html
     properties:
       BuildId:
         description: |+
@@ -11831,6 +11953,7 @@ resources:
       The AWS::IAM::AccessKey resource type generates a secret access key and assigns it to an IAM user or AWS account.
 
       This type supports updates. For more information about updating stacks, see [AWS CloudFormation Stacks Updates](using-cfn-updating-stacks.html).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
     properties:
       Serial:
         description: |+
@@ -11889,6 +12012,7 @@ resources:
       The `AWS::IAM::Group` resource creates an AWS Identity and Access Management (IAM) group.
 
       This type supports updates. For more information about updating stacks, see [AWS CloudFormation Stacks Updates](using-cfn-updating-stacks.html).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
     properties:
       GroupName:
         description: |+
@@ -11968,6 +12092,7 @@ resources:
       The `AWS::IAM::InstanceProfile` resource creates an AWS Identity and Access Management (IAM) instance profile that can be used with IAM roles for EC2 instances.
 
       For more information about IAM roles, see [Working with Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html) in the _AWS Identity and Access Management User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
     properties:
       Path:
         description: |+
@@ -12036,6 +12161,7 @@ resources:
       to IAM users, groups, and roles. For more information about managed policies,
       see [Managed Policies and Inline Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/policies_managed-vs-inline.html)
       in the _IAM User Guide_ guide."
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-managedpolicy.html
     properties:
       Description:
         description: |+
@@ -12158,6 +12284,7 @@ resources:
       users, roles, or groups. For more information about IAM policies, see [Overview
       of IAM Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html)
       in the _IAM User Guide_ guide.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
     properties:
       Groups:
         description: |+
@@ -12244,6 +12371,7 @@ resources:
       Creates an AWS Identity and Access Management (IAM) role. Use an IAM role to enable applications running on an EC2 instance to securely access your AWS resources.
 
       For more information about IAM roles, see [Working with Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html) in the _AWS Identity and Access Management User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
     properties:
       AssumeRolePolicyDocument:
         description: |+
@@ -12353,6 +12481,7 @@ resources:
     examples: {}
   AWS::IAM::User:
     description: The `AWS::IAM::User` type creates a user.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
     properties:
       Groups:
         description: |+
@@ -12462,6 +12591,7 @@ resources:
       The `AWS::IAM::UserToGroupAddition` type adds AWS Identity and Access Management (IAM) users to a group.
 
       This type supports updates. For more information about updating stacks, see [AWS CloudFormation Stacks Updates](using-cfn-updating-stacks.html).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
     properties:
       GroupName:
         description: |+
@@ -12496,6 +12626,7 @@ resources:
       Use the `AWS::IoT::Certificate` resource to declare an X.509 certificate.
 
       For information about working with X.509 certificates, see [Authentication in AWS IoT](http://docs.aws.amazon.com/iot/latest/developerguide/identity-in-iot.html) in the _AWS IoT Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-certificate.html
     properties:
       CertificateSigningRequest:
         description: |+
@@ -12551,6 +12682,7 @@ resources:
       Use the `AWS::IoT::Policy` resource to declare an AWS IoT policy.
 
       For information about working with AWS IoT policies, see [Authorization](http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html) in the _AWS IoT Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-policy.html
     properties:
       PolicyDocument:
         description: |+
@@ -12592,6 +12724,7 @@ resources:
       Use the `AWS::IoT::PolicyPrincipalAttachment` resource to attach an AWS IoT policy to a principal (an X.509 certificate or other credential).
 
       For information about working with AWS IoT policies and principals, see [Authorization](http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html) in the _AWS IoT Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-policyprincipalattachment.html
     properties:
       PolicyName:
         description: |+
@@ -12628,6 +12761,7 @@ resources:
       Use the `AWS::IoT::Thing` resource to declare an AWS IoT thing.
 
       For information about working with things, see [How AWS IoT Works](http://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html) and [Device Registry for AWS IoT](http://docs.aws.amazon.com/iot/latest/developerguide/thing-registry.html) in the _AWS IoT Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-thing.html
     properties:
       AttributePayload:
         description: |+
@@ -12673,6 +12807,7 @@ resources:
       Use the `AWS::IoT::ThingPrincipalAttachment` resource to attach a principal (an X.509 certificate or another credential) to a thing.
 
       For information about working with AWS IoT things and principals, see [Authorization](http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html) in the _AWS IoT Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-thingprincipalattachment.html
     properties:
       Principal:
         description: |+
@@ -12709,6 +12844,7 @@ resources:
       Use the `AWS::IoT::TopicRule` resource to declare an AWS IoT rule.
 
       For information about working with AWS IoT rules, see [Rules for AWS IoT](http://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html) in the _AWS IoT Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-topicrule.html
     properties:
       RuleName:
         description: |+
@@ -12754,6 +12890,7 @@ resources:
       that are emitted from data sources. For information about creating streams,
       see [CreateStream](http://docs.aws.amazon.com/kinesis/latest/APIReference/API_CreateStream.html)
       in the _Amazon Kinesis API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesis-stream.html
     properties:
       Name:
         description: |+
@@ -12829,6 +12966,7 @@ resources:
       or Amazon Elasticsearch Service (Amazon ES) destination. For more information,
       see [Creating an Amazon Kinesis Firehose Delivery Stream](http://docs.aws.amazon.com/firehose/latest/dev/basic-create.html)
       in the _Amazon Kinesis Firehose Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisfirehose-deliverystream.html
     properties:
       DeliveryStreamName:
         description: |+
@@ -12896,6 +13034,7 @@ resources:
       keys, you can just update the alias mapping instead of tracking and changing
       key IDs. For more information, see [Working with Aliases](http://docs.aws.amazon.com/kms/latest/developerguide/programming-aliases.html)
       in the _AWS Key Management Service Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-alias.html
     properties:
       AliasName:
         description: |+
@@ -12937,6 +13076,7 @@ resources:
       KMS or within their applications. For more information, see [What is the AWS
       Key Management Service?](http://docs.aws.amazon.com/kms/latest/developerguide/)
       in the _AWS Key Management Service Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html
     properties:
       Description:
         description: |+
@@ -13007,6 +13147,7 @@ resources:
       Kinesis stream or an Amazon DynamoDB (DynamoDB) stream. Lambda invokes the associated
       function when records are posted to the stream. For more information, see [CreateEventSourceMapping](http://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html)
       in the _AWS Lambda Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html
     properties:
       BatchSize:
         description: |+
@@ -13088,6 +13229,7 @@ resources:
       they don't need to be updated whenever you release a new version of your function.
       For more information, see [Introduction to AWS Lambda Aliases](http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html)
       in the _AWS Lambda Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-alias.html
     properties:
       Description:
         description: |+
@@ -13152,6 +13294,7 @@ resources:
     description: The `AWS::Lambda::Function` resource creates an AWS Lambda (Lambda)
       function that can run code in response to events. For more information, see
       `CreateFunction` in the _AWS Lambda Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html
     properties:
       Code:
         description: |+
@@ -13378,6 +13521,7 @@ resources:
       grants a specific AWS service or application permission to invoke the function.
       For more information, see [AddPermission](http://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html)
       in the _AWS Lambda Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html
     properties:
       Action:
         description: |+
@@ -13462,6 +13606,7 @@ resources:
       Lambda copies the latest version of your function. For more information, see
       [Introduction to AWS Lambda Versioning](http://docs.aws.amazon.com/lambda/latest/dg/versioning-intro.html)
       in the _AWS Lambda Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-version.html
     properties:
       CodeSha256:
         description: |+
@@ -13520,6 +13665,7 @@ resources:
       events from another AWS account. For more information, see [Cross-Account Log
       Data Sharing with Subscriptions](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CrossAccountSubscriptions.html)
       in the _Amazon CloudWatch User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-destination.html
     properties:
       DestinationName:
         description: |+
@@ -13584,6 +13730,7 @@ resources:
     description: The `AWS::Logs::LogGroup` resource creates an Amazon CloudWatch Logs
       log group that defines common properties for log streams, such as their retention
       and access control rules. Each log stream must belong to one log group.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html
     properties:
       LogGroupName:
         description: |+
@@ -13632,6 +13779,7 @@ resources:
       coming from an application instance or resource that you are monitoring. For
       more information, see [Monitoring Log Files](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html)
       in the _Amazon CloudWatch User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-logstream.html
     properties:
       LogGroupName:
         description: |+
@@ -13672,6 +13820,7 @@ resources:
       specify and transforms it into Amazon CloudWatch metrics. If you have multiple
       metric filters that are associated with a log group, all the filters are applied
       to the log streams in that group.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-metricfilter.html
     properties:
       FilterPattern:
         description: |+
@@ -13727,6 +13876,7 @@ resources:
       Logs (CloudWatch Logs) subscription filter that defines which log events are
       delivered to your Kinesis stream or AWS Lambda (Lambda) function and where to
       send them.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-subscriptionfilter.html
     properties:
       DestinationArn:
         description: |+
@@ -13790,6 +13940,7 @@ resources:
   AWS::OpsWorks::App:
     description: Defines an AWS OpsWorks app for an AWS OpsWorks stack. The app specifies
       the code that you want to run on an application server.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-app.html
     properties:
       AppSource:
         description: |+
@@ -13963,6 +14114,7 @@ resources:
   AWS::OpsWorks::ElasticLoadBalancerAttachment:
     description: Attaches an Elastic Load Balancing load balancer to an AWS OpsWorks
       layer that you specify.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-elbattachment.html
     properties:
       ElasticLoadBalancerName:
         description: |+
@@ -13998,6 +14150,7 @@ resources:
     description: Creates an Amazon Elastic Compute Cloud (Amazon EC2) instance for
       an AWS OpsWorks stack. Instances for AWS OpsWorks stacks handle the work of
       serving applications and balancing traffic, for example.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-instance.html
     properties:
       AgentVersion:
         description: |+
@@ -14311,6 +14464,7 @@ resources:
   AWS::OpsWorks::Layer:
     description: Creates an AWS OpsWorks layer. A layer defines, for example, which
       packages and applications are installed and how they are configured.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-layer.html
     properties:
       Attributes:
         description: |+
@@ -14562,6 +14716,7 @@ resources:
     description: Creates an AWS OpsWorks stack. An AWS OpsWorks stack represents a
       set of instances that you want to manage collectively, typically because they
       have a common purpose such as serving PHP applications.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-stack.html
     properties:
       AgentVersion:
         description: |+
@@ -14913,6 +15068,7 @@ resources:
   AWS::OpsWorks::UserProfile:
     description: The `AWS::OpsWorks::UserProfile` resource configures SSH access for
       users who require access to instances in an AWS OpsWorks stack.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-userprofile.html
     properties:
       AllowSelfManagement:
         description: |+
@@ -14978,6 +15134,7 @@ resources:
   AWS::OpsWorks::Volume:
     description: The `AWS::OpsWorks::Volume` resource registers an Amazon Elastic
       Block Store (Amazon EBS) volume with an AWS OpsWorks stack.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-volume.html
     properties:
       Ec2VolumeId:
         description: |+
@@ -15045,6 +15202,7 @@ resources:
       Note
 
       Currently, you can create this resource only in regions in which Amazon Aurora is supported.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html
     properties:
       AvailabilityZones:
         description: |+
@@ -15316,6 +15474,7 @@ resources:
       Note
 
       Applying a parameter group to a DB cluster might require instances to reboot, resulting in a database outage while the instances reboot.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbclusterparametergroup.html
     properties:
       Description:
         description: |+
@@ -15393,6 +15552,7 @@ resources:
       Important
 
       If a DB instance is deleted or replaced during an update, AWS CloudFormation deletes all automated snapshots. However, it retains manual DB snapshots. During an update that requires replacement, you can apply a stack policy to prevent DB instances from being replaced. For more information, see [Prevent Updates to Stack Resources](protect-stack-resources.html).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html
     properties:
       AllocatedStorage:
         description: |+
@@ -16021,6 +16181,7 @@ resources:
       Note
 
       Applying a ParameterGroup to a DBInstance may require the instance to reboot, resulting in a database outage for the duration of the reboot.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbparametergroup.html
     properties:
       Description:
         description: |+
@@ -16103,6 +16264,7 @@ resources:
       If you use DB security groups, the settings that you can specify for your DB instances are limited. For more information, see the [DBSecurityGroups](aws-properties-rds-database-instance.html#cfn-rds-dbinstance-dbsecuritygroups) property.
 
       When you specify an AWS::RDS::DBSecurityGroup as an argument to the `Ref` function, AWS CloudFormation returns the value of the `DBSecurityGroupName`.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-security-group.html
     properties:
       EC2VpcId:
         description: |+
@@ -16167,6 +16329,7 @@ resources:
       This type supports updates. For more information about updating stacks, see [AWS CloudFormation Stacks Updates](using-cfn-updating-stacks.html).
 
       For details about the settings for DB security group ingress, see [AuthorizeDBSecurityGroupIngress](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_AuthorizeDBSecurityGroupIngress.html).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-security-group-ingress.html
     properties:
       CIDRIP:
         description: |+
@@ -16250,6 +16413,7 @@ resources:
     description: The AWS::RDS::DBSubnetGroup type creates an RDS database subnet group.
       Subnet groups must contain at least two subnet in two different Availability
       Zones in the same region.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbsubnet-group.html
     properties:
       DBSubnetGroupDescription:
         description: |+
@@ -16304,6 +16468,7 @@ resources:
       for Amazon Relational Database Service events through the Amazon Simple Notification
       Service. For more information, see [Using Amazon RDS Event Notification](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html)
       in the _Amazon Relational Database Service User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-eventsubscription.html
     properties:
       Enabled:
         description: |+
@@ -16381,6 +16546,7 @@ resources:
       that can make managing data and databases easier. For more information about
       option groups, see [Working with Option Groups](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithOptionGroups.html)
       in the _Amazon Relational Database Service User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-optiongroup.html
     properties:
       EngineName:
         description: |+
@@ -16465,6 +16631,7 @@ resources:
       cluster. A _cluster_ is a fully managed data warehouse that consists of a set
       of compute nodes. For more information about default and valid values, see [CreateCluster](http://docs.aws.amazon.com/redshift/latest/APIReference/API_CreateCluster.html)
       in the _Amazon Redshift API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html
     properties:
       AllowVersionUpgrade:
         description: |+
@@ -16857,6 +17024,7 @@ resources:
     description: Creates an Amazon Redshift parameter group that you can associate
       with an Amazon Redshift cluster. The parameters in the group apply to all the
       databases that you create in the cluster.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html
     properties:
       Description:
         description: |+
@@ -16926,6 +17094,7 @@ resources:
   AWS::Redshift::ClusterSecurityGroup:
     description: Creates an Amazon Redshift security group. You use security groups
       to control access to Amazon Redshift clusters that are not in a VPC.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clustersecuritygroup.html
     properties:
       Description:
         description: |+
@@ -16967,6 +17136,7 @@ resources:
   AWS::Redshift::ClusterSecurityGroupIngress:
     description: Specifies inbound (ingress) rules for an Amazon Redshift security
       group.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clustersecuritygroupingress.html
     properties:
       ClusterSecurityGroupName:
         description: |+
@@ -17028,6 +17198,7 @@ resources:
     description: Creates an Amazon Redshift subnet group. You must provide a list
       of one or more subnets in your existing Amazon VPC when creating an Amazon Redshift
       subnet group.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clustersubnetgroup.html
     properties:
       Description:
         description: |+
@@ -17084,6 +17255,7 @@ resources:
       of your resources before Amazon Route&nbsp;53 responds to a DNS query. For more
       information, see [How Health Checks Work in Simple Amazon Route&nbsp;53 Configurations](http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-simple-configs.html)
       in the _Amazon Route&nbsp;53 Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-healthcheck.html
     properties:
       HealthCheckConfig:
         description: |+
@@ -17128,6 +17300,7 @@ resources:
       zone for a top-level domain (TLD). For more information, see [POST CreateHostedZone](http://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateHostedZone.html)
       or [POST CreateHostedZone (Private)](http://docs.aws.amazon.com/Route53/latest/APIReference/API-create-hosted-zone-private.html)
       in the _Amazon Route&nbsp;53 API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-hostedzone.html
     properties:
       HostedZoneConfig:
         description: |+
@@ -17203,6 +17376,7 @@ resources:
       The `AWS::Route53::RecordSet` type can be used as a standalone resource or as an embedded property in the [AWS::Route53::RecordSetGroup](aws-properties-route53-recordsetgroup.html) type. Note that some `AWS::Route53::RecordSet` properties are valid only when used within `AWS::Route53::RecordSetGroup`.
 
       For more information about constraints and values for each property, see [POST CreateHostedZone](http://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateHostedZone.html) for hosted zones and [POST ChangeResourceRecordSet](http://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html) for resource record sets.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset.html
     properties:
       AliasTarget:
         description: |+
@@ -17393,7 +17567,9 @@ resources:
         update_requires: no_interruption
       Type:
         description: |+
-          The type of records to add. For valid values, see the [Type](http://docs.aws.amazon.com/Route53/latest/APIReference/API_ResourceRecordSet.html#Route53-Type-ResourceRecordSet-Type) content in the _Amazon Route&nbsp;53 API Reference_. In AWS CloudFormation, you can't create records of type `NS` or `SOA`.
+          The type of records to add. For valid values, see the [Type](http://docs.aws.amazon.com/Route53/latest/APIReference/API_ResourceRecordSet.html#Route53-Type-ResourceRecordSet-Type) content in the _Amazon Route&nbsp;53 API Reference_.
+
+          In AWS CloudFormation, you cannot modify the NS and SOA records for a hosted zone created automatically by Amazon Route&nbsp;53. Specifically, you can't create or delete NS or SOA records for the root domain of your hosted zone, but you can create them for subdomains to delegate. For example, for hosted zone `mydomain.net`, you cannot create an NS record for `mydomain.net` but you can create an NS record for `nnnn.mydomain.net` for delegation.
 
           _Required_: Yes
 
@@ -17429,6 +17605,7 @@ resources:
       see [POST CreateHostedZone](http://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateHostedZone.html)
       for hosted zones and [POST ChangeResourceRecordSet](http://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html)
       for resource record sets.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordsetgroup.html
     properties:
       Comment:
         description: |+
@@ -17518,6 +17695,7 @@ resources:
       Important
 
       You can delete only empty buckets. Deletion will fail for buckets that have contents.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html
     properties:
       AccessControl:
         description: |+
@@ -17710,6 +17888,7 @@ resources:
       The AWS::S3::BucketPolicy type applies an Amazon S3 bucket policy to an Amazon S3 bucket.
 
       AWS::S3::BucketPolicy Snippet: [Declaring an Amazon S3 Bucket Policy](quickref-iam.html#scenario-bucket-policy)
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html
     properties:
       Bucket:
         description: |+
@@ -17769,6 +17948,7 @@ resources:
       Important
 
       The `AWS::SDB::Domain` resource does not allow any updates, including metadata updates.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-simpledb.html
     properties:
       Description:
         description: |+
@@ -17791,6 +17971,7 @@ resources:
     description: The `AWS::SNS::Subscription` resource subscribes an endpoint to an
       Amazon Simple Notification Service (Amazon SNS) topic. The owner of the endpoint
       must confirm the subscription before Amazon SNS creates the subscription.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html
     properties:
       Endpoint:
         description: |+
@@ -17838,6 +18019,7 @@ resources:
   AWS::SNS::Topic:
     description: The `AWS::SNS::Topic` type creates an Amazon Simple Notification
       Service (Amazon SNS) topic.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html
     properties:
       DisplayName:
         description: |+
@@ -17896,6 +18078,7 @@ resources:
   AWS::SNS::TopicPolicy:
     description: The `AWS::SNS::TopicPolicy` resource associates Amazon SNS topics
       with a policy.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html
     properties:
       PolicyDocument:
         description: |+
@@ -17932,6 +18115,7 @@ resources:
       The `AWS::SQS::Queue` resource creates an Amazon Simple Queue Service (Amazon SQS) queue.
 
       For more information about creating FIFO (first-in-first-out) queues, see the tutorial [Create a queue using AWS CloudFormation](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-create-queue.html#create-queue-cloudformation) in the _Amazon Simple Queue Service Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html
     properties:
       ContentBasedDeduplication:
         description: |+
@@ -18082,6 +18266,7 @@ resources:
       The AWS::SQS::QueuePolicy type applies a policy to Amazon SQS queues.
 
       AWS::SQS::QueuePolicy Snippet: [Declaring an Amazon SQS Policy](quickref-iam.html#scenario-sqs-policy)
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html
     properties:
       PolicyDocument:
         description: |+
@@ -18117,6 +18302,7 @@ resources:
     description: The `AWS::SSM::Association` resource associates an Amazon EC2 Systems
       Manager (SSM) document with EC2 instances that contain a configuration agent
       to process the document.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-association.html
     properties:
       DocumentVersion:
         description: |+
@@ -18204,6 +18390,7 @@ resources:
     description: The `AWS::SSM::Document` resource creates an Amazon EC2 Systems Manager
       (SSM) document that describes an instance configuration, which you can use to
       set up and run commands on your instances.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-document.html
     properties:
       Content:
         description: |+
@@ -18245,6 +18432,7 @@ resources:
   AWS::SSM::Parameter:
     description: The `AWS::SSM::Parameter` resource creates an Amazon EC2 Systems
       Manager (SSM) parameter in Parameter Store.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-parameter.html
     properties:
       Name:
         description: |+
@@ -18318,6 +18506,7 @@ resources:
       Use the `AWS::StepFunctions::Activity` resource to create an AWS Step Functions activity.
 
       For information about creating an activity and creating a state machine with an activity, see [Tutorial: An Activity State Machine](http://docs.aws.amazon.com/step-functions/latest/dg/activity-tutorial.html) in the _AWS Step Functions Developer Guide_ and `CreateActivity` in the _AWS Step Functions API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-activity.html
     properties:
       Name:
         description: |+
@@ -18364,6 +18553,7 @@ resources:
       AWS CloudFormation automatically generates a name for your state machine. If you change the contents of the `DefinitionString` or `RoleArn` properties and update the stack, AWS CloudFormation generates a new state machine name and deletes the old state machine.
 
       For information about creating state machines, see [Tutorial: A Lambda State Machine](http://docs.aws.amazon.com/step-functions/latest/dg/hello-lambda.html) in the _AWS Step Functions Developer Guide_ and `CreateStateMachine` in the _AWS Step Functions API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html
     properties:
       DefinitionString:
         description: |+
@@ -18419,6 +18609,7 @@ resources:
       that identifies a part of a web request that you want to inspect. For more information,
       see [CreateByteMatchSet](http://docs.aws.amazon.com/waf/latest/APIReference/API_CreateByteMatchSet.html)
       in the _AWS WAF API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-bytematchset.html
     properties:
       ByteMatchTuples:
         description: |+
@@ -18458,6 +18649,7 @@ resources:
       which web requests to permit or block based on the IP addresses from which the
       requests originate. For more information, see [CreateIPSet](http://docs.aws.amazon.com/waf/latest/APIReference/API_CreateIPSet.html)
       in the _AWS WAF API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-ipset.html
     properties:
       IPSetDescriptors:
         description: |+
@@ -18499,6 +18691,7 @@ resources:
       The `AWS::WAF::Rule` resource creates an AWS WAF rule that specifies a combination of `IPSet`, `ByteMatchSet`, and `SqlInjectionMatchSet` objects that identify the web requests to allow, block, or count. To implement rules, you must associate them with a [web ACL](aws-resource-waf-webacl.html).
 
       For more information, see [CreateRule](http://docs.aws.amazon.com/waf/latest/APIReference/API_CreateRule.html) in the _AWS WAF API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-rule.html
     properties:
       MetricName:
         description: |+
@@ -18551,6 +18744,7 @@ resources:
       that AWS WAF uses to check the size of a web request and which parts of the
       request to check. For more information, see [CreateSizeConstraintSet](http://docs.aws.amazon.com/waf/latest/APIReference/API_CreateSizeConstraintSet.html)
       in the _AWS WAF API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-sizeconstraintset.html
     properties:
       Name:
         description: |+
@@ -18591,6 +18785,7 @@ resources:
       contain malicious SQL code in a specific part of web requests. For more information,
       see [CreateSqlInjectionMatchSet](http://docs.aws.amazon.com/waf/latest/APIReference/API_CreateSqlInjectionMatchSet.html)
       in the _AWS WAF API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-sqlinjectionmatchset.html
     properties:
       Name:
         description: |+
@@ -18631,6 +18826,7 @@ resources:
       web requests that you want to allow, block, or count. For more information,
       see [CreateWebACL](http://docs.aws.amazon.com/waf/latest/APIReference/API_CreateWebACL.html)
       in the _AWS WAF API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-webacl.html
     properties:
       DefaultAction:
         description: |+
@@ -18696,6 +18892,7 @@ resources:
       that you want AWS WAF to inspect for cross-site scripting attacks and the name
       of the header to inspect. For more information, see [XssMatchSet](http://docs.aws.amazon.com/waf/latest/APIReference/API_XssMatchSet.html)
       in the _AWS WAF API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-xssmatchset.html
     properties:
       Name:
         description: |+
@@ -18735,6 +18932,7 @@ resources:
       Regional `ByteMatchSet` that identifies a part of a web request that you want
       to inspect. For more information, see [CreateByteMatchSet](http://docs.aws.amazon.com/waf/latest/APIReference/API_regional_CreateByteMatchSet.html)
       in the _AWS WAF Regional API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-bytematchset.html
     properties:
       ByteMatchTuples:
         description: |+
@@ -18774,6 +18972,7 @@ resources:
       `IPSet` that specifies which web requests to permit or block based on the IP
       addresses from which the requests originate. For more information, see [CreateIPSet](http://docs.aws.amazon.com/waf/latest/APIReference/API_regional_CreateIPSet.html)
       in the _AWS WAF Regional API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-ipset.html
     properties:
       IPSetDescriptors:
         description: |+
@@ -18815,6 +19014,7 @@ resources:
       The `AWS::WAFRegional::Rule` resource creates an AWS WAF Regional rule that specifies a combination of `IPSet`, `ByteMatchSet`, and `SqlInjectionMatchSet` objects that identify the web requests to allow, block, or count. To implement rules, you must associate them with a [web ACL](aws-resource-wafregional-webacl.html).
 
       For more information, see [CreateRule](http://docs.aws.amazon.com/waf/latest/APIReference/API_regional_CreateRule.html) in the _AWS WAF Regional API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-rule.html
     properties:
       MetricName:
         description: |+
@@ -18867,6 +19067,7 @@ resources:
       constraint that AWS WAF uses to check the size of a web request and which parts
       of the request to check. For more information, see [CreateSizeConstraintSet](http://docs.aws.amazon.com/waf/latest/APIReference/API_regional_CreateSizeConstraintSet.html)
       in the _AWS WAF Regional API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-sizeconstraintset.html
     properties:
       Name:
         description: |+
@@ -18907,6 +19108,7 @@ resources:
       requests that contain malicious SQL code in a specific part of web requests.
       For more information, see [CreateSqlInjectionMatchSet](http://docs.aws.amazon.com/waf/latest/APIReference/API_regional_CreateSqlInjectionMatchSet.html)
       in the _AWS WAF Regional API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-sqlinjectionmatchset.html
     properties:
       Name:
         description: |+
@@ -18947,6 +19149,7 @@ resources:
       CloudFront (CloudFront) web requests that you want to allow, block, or count.
       For more information, see [CreateWebACL](http://docs.aws.amazon.com/waf/latest/APIReference/API_regional_CreateWebACL.html)
       in the _AWS WAF Regional API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-webacl.html
     properties:
       DefaultAction:
         description: |+
@@ -19012,6 +19215,7 @@ resources:
       AWS WAF Regional web access control group (ACL) with a resource. For more information,
       see [AssociateWebACL](http://docs.aws.amazon.com/waf/latest/APIReference/API_regional_AssociateWebACL.html)
       in the _AWS WAF Regional API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-webaclassociation.html
     properties:
       ResourceArn:
         description: |+
@@ -19048,6 +19252,7 @@ resources:
       of web requests that you want AWS WAF to inspect for cross-site scripting attacks
       and the name of the header to inspect. For more information, see [XssMatchSet](http://docs.aws.amazon.com/waf/latest/APIReference/API_regional_XssMatchSet.html)
       in the _AWS WAF Regional API Reference_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-xssmatchset.html
     properties:
       Name:
         description: |+
@@ -19089,6 +19294,7 @@ resources:
       with Workspaces. This process is documented at [Register a Directory with Amazon
       WorkSpaces](http://docs.aws.amazon.com/workspaces/latest/adminguide/register-deregister-directory.html).
       For more information, see the [_Amazon WorkSpaces Administration Guide_](http://docs.aws.amazon.com/workspaces/latest/adminguide/).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-workspaces-workspace.html
     properties:
       BundleId:
         description: |+
