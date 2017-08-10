@@ -1,5 +1,5 @@
 ---
-timestamp: 2017-07-12 17:09:01.629860000 +02:00
+timestamp: 2017-08-10 13:05:13.954024000 +02:00
 resources:
   AWS::ApiGateway::Account:
     description: |-
@@ -243,11 +243,11 @@ resources:
 
           _Type_: String
 
-          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 
         required: 'no'
         type: String
-        update_requires: no_interruption
+        update_requires: replacement
       DomainName:
         description: |+
           The name of a `DomainName` resource.
@@ -256,11 +256,11 @@ resources:
 
           _Type_: String
 
-          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 
         required: 'yes'
         type: String
-        update_requires: no_interruption
+        update_requires: replacement
       RestApiId:
         description: |+
           The name of the API.
@@ -604,7 +604,7 @@ resources:
         update_requires: no_interruption
       Name:
         description: |+
-          A name for the mode. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the model name. For more information, see [Name Type](aws-properties-name.html).
+          A name for the model. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the model name. For more information, see [Name Type](aws-properties-name.html).
 
           Important
 
@@ -1301,7 +1301,7 @@ resources:
     return_values:
       Ref:
         description: |-
-          When the logical ID of this resource is provided to the `Ref` intrinsic function, `Ref` returns the Application Auto Scaling scaling policy Amazon Resource Name (ARN), such as `arn:aws:autoscaling:us-east-2:123456789012:scalingPolicy:12ab3c4d-56789-0ef1-2345-6ghi7jk8lm90:resource/ecs/service/ecsStack-MyECSCluster-AB12CDE3F4GH/ecsStack-MyECSService-AB12CDE3F4GH:policyName/MyStepPolicy`.
+          When the logical ID of this resource is provided to the `Ref` intrinsic function, `Ref` returns the Application Auto Scaling scaling policy Amazon Resource Name (ARN), such as `arn:aws:autoscaling:``us-east-2``:123456789012:scalingPolicy:12ab3c4d-56789-0ef1-2345-6ghi7jk8lm90:resource/ecs/service/ecsStack-MyECSCluster-AB12CDE3F4GH/ecsStack-MyECSService-AB12CDE3F4GH:policyName/MyStepPolicy`.
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
     examples: {}
@@ -2176,6 +2176,233 @@ resources:
       Ref:
         description: ''
     examples: {}
+  AWS::Batch::ComputeEnvironment:
+    description: The `AWS::Batch::ComputeEnvironment` resource to define your AWS
+      Batch compute environment. For more information, see [Compute Environments](http://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html)
+      in the _AWS Batch User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-computeenvironment.html
+    properties:
+      Type:
+        description: |+
+          The type of the compute environment.
+
+          _Required_: yes
+
+          _Type_: String
+
+          _Update requires_: Replacement
+
+        required: 'yes'
+        type: String
+        update_requires: replacement
+      ServiceRole:
+        description: |+
+          The service role associated with the compute environment that allows AWS Batch to make calls to AWS API operations on your behalf.
+
+          _Required_: yes
+
+          _Type_: String
+
+          _Update requires_: No Interruption
+
+        required: 'yes'
+        type: String
+        update_requires: no_interruption
+      ComputeEnvironmentName:
+        description: |+
+          The name of the compute environment.
+
+          _Required_: no
+
+          _Type_: String
+
+          _Update requires_: Replacement
+
+        required: 'no'
+        type: String
+        update_requires: replacement
+      ComputeResources:
+        description: |+
+          The compute resources defined for the compute environment.
+
+          _Required_: yes
+
+          _Type_: [AWS Batch ComputeEnvironment ComputeResources](aws-properties-batch-computeenvironment-computeresources.html)
+
+          _Update requires_: No Interruption
+
+        required: 'yes'
+        type: |-
+          AWS Batch
+                                              ComputeEnvironment ComputeResources
+        update_requires: no_interruption
+      State:
+        description: |+
+          The state of the compute environment. The valid values are `ENABLED` or `DISABLED`. An `ENABLED` state indicates that you can register instances with the compute environment and that the associated instances can accept jobs.
+
+          _Required_: no
+
+          _Type_: String
+
+          _Update requires_: No Interruption
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+    return_values:
+      Ref:
+        description: |-
+          When you pass the logical ID of an `AWS::Batch::ComputeEnvironment` resource to the intrinsic `Ref` function, the function returns the compute environment ARN, such as `arn:aws:batch:us-east-1:555555555555:compute-environment/M4OnDemand`.
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+    examples: {}
+  AWS::Batch::JobDefinition:
+    description: The `AWS::Batch::JobDefinition` resource specifies the parameters
+      for an AWS Batch job definition. For more information, see [Job Definitions](http://docs.aws.amazon.com/batch/latest/userguide/job_definitions.html)
+      in the _AWS Batch User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-jobdefinition.html
+    properties:
+      Type:
+        description: |+
+          The type of job definition.
+
+          _Required_: yes
+
+          _Type_: String
+
+          _Update requires_: No Interruption
+
+        required: 'yes'
+        type: String
+        update_requires: no_interruption
+      Parameters:
+        description: |+
+          Default parameters or parameter substitution placeholders that are set in the job definition. Parameters are specified as a key-value pair mapping.
+
+          _Required_: yes
+
+          _Type_: JSON object
+
+          _Update requires_: No Interruption
+
+        required: 'yes'
+        type: JSON
+        update_requires: no_interruption
+      JobDefinitionName:
+        description: |+
+          The name of the job definition.
+
+          _Required_: no
+
+          _Type_: String
+
+          _Update requires_: Replacement
+
+        required: 'no'
+        type: String
+        update_requires: replacement
+      ContainerProperties:
+        description: |+
+          An object with various properties specific to container-based jobs.
+
+          _Required_: yes
+
+          _Type_: [AWS Batch JobDefinition ContainerProperties](aws-properties-batch-jobdefinition-containerproperties.html)
+
+          _Update requires_: No Interruption
+
+        required: 'yes'
+        type: |-
+          AWS Batch
+                                              JobDefinition ContainerProperties
+        update_requires: no_interruption
+      RetryStrategy:
+        description: |+
+          The retry strategy to use for failed jobs that are submitted with this job definition.
+
+          _Required_: no
+
+          _Type_: [AWS Batch JobDefinition RetryStrategy](aws-properties-batch-jobdefinition-retrystrategy.html)
+
+          _Update requires_: No Interruption
+
+        required: 'no'
+        type: |-
+          AWS Batch JobDefinition
+                                              RetryStrategy
+        update_requires: no_interruption
+    return_values:
+      Ref:
+        description: |-
+          When you pass the logical ID of an `AWS::Batch::JobDefinition` resource to the intrinsic `Ref` function, the function returns the job definition ARN, such as `arn:aws:batch:us-east-1:111122223333:job-definition/test-gpu:2`.
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+    examples: {}
+  AWS::Batch::JobQueue:
+    description: The `AWS::Batch::JobQueue` resource defines your AWS Batch job queue.
+      For more information, see [Job Queues](http://docs.aws.amazon.com/batch/latest/userguide/job_queues.html)
+      in the _AWS Batch User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-jobqueue.html
+    properties:
+      ComputeEnvironmentOrder:
+        description: |+
+          The compute environments that are attached to the job queue and the order in which job placement is preferred. Compute environments are selected for job placement in ascending order.
+
+          _Required_: yes
+
+          _Type_: List of [AWS Batch JobQueue ComputeEnvironmentOrder](aws-properties-batch-jobqueue-computeenvironmentorder.html)
+
+          _Update requires_: No Interruption
+
+        required: 'yes'
+        type: List<AWS Batch JobQueue>
+        update_requires: no_interruption
+      State:
+        description: |+
+          The status of the job queue (for example, `CREATING` or `VALID`).
+
+          _Required_: no
+
+          _Type_: String
+
+          _Update requires_: No Interruption
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      Priority:
+        description: |+
+          The priority of the job queue.
+
+          _Required_: yes
+
+          _Type_: Integer
+
+          _Update requires_: No Interruption
+
+        required: 'yes'
+        type: Number
+        update_requires: no_interruption
+      JobQueueName:
+        description: |+
+          The name of the job queue.
+
+          _Required_: no
+
+          _Type_: String
+
+          _Update requires_: Replacement
+
+        required: 'no'
+        type: String
+        update_requires: replacement
+    return_values:
+      Ref:
+        description: |-
+          When you pass the logical ID of an `AWS::Batch::JobQueue` resource to the intrinsic `Ref` function, the function returns the job queue ARN, such as `arn:aws:batch:us-east-1:111122223333:job-queue/HighPriority`.
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+    examples: {}
   AWS::CertificateManager::Certificate:
     description: |-
       The `AWS::CertificateManager::Certificate` resource requests an AWS Certificate Manager (ACM) certificate that you can use with AWS services to enable secure connections. For example, you can deploy an ACM certificate to an Elastic Load Balancing load balancer to enable HTTPS support. For more information, see the `RequestCertificate` action in the _AWS Certificate Manager API Reference_.
@@ -2251,8 +2478,8 @@ resources:
       authentication credentials for files or sources that you specify with the [AWS::CloudFormation::Init](aws-resource-init.html)
       resource.\n\nTo include authentication information for a file or source that
       you specify with AWS::CloudFormation::Init, use the `uris` property if the source
-      is a URI or the buckets property if the source is an Amazon S3 bucket. For more
-      information about files, see [Files](aws-resource-init.html#aws-resource-init-files).
+      is a URI or the `buckets` property if the source is an Amazon S3 bucket. For
+      more information about files, see [Files](aws-resource-init.html#aws-resource-init-files).
       For more information about sources, see [Sources](aws-resource-init.html#aws-resource-init-sources).\n\nYou
       can also specify authentication information for files directly in the AWS::CloudFormation::Init
       resource. The files key of the resource contains a property named `authentication`.
@@ -2546,7 +2773,7 @@ resources:
         description: |-
           For `AWS::CloudFormation::Stack`, `Ref` returns the Stack ID. For example:
 
-          `arn:aws:cloudformation:us-east-2:123456789012:stack/mystack-mynestedstack-sggfrhxhum7w/f449b250-b969-11e0-a185-5081d0136786`
+          `arn:aws:cloudformation:``us-east-2``:123456789012:stack/mystack-mynestedstack-sggfrhxhum7w/f449b250-b969-11e0-a185-5081d0136786`
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Outputs.NestedStackOutputName:
@@ -2881,7 +3108,7 @@ resources:
         update_requires: no_interruption
       AlarmActions:
         description: |+
-          The list of actions to execute when this alarm transitions into an ALARM state from any other state. Specify each action as an Amazon Resource Number (ARN). For more information about creating alarms and the actions that you can specify, see [Creating Amazon CloudWatch Alarms](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/AlarmThatSendsEmail.html) in the _Amazon CloudWatch User Guide_.
+          The list of actions to execute when this alarm transitions into an ALARM state from any other state. Specify each action as an Amazon Resource Number (ARN). For more information about creating alarms and the actions that you can specify, see [PutMetricAlarm](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html) in the _Amazon CloudWatch API Reference_ and [Creating Amazon CloudWatch Alarms](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/AlarmThatSendsEmail.html) in the _Amazon CloudWatch User Guide_.
 
           Note
 
@@ -4243,7 +4470,7 @@ resources:
 
       Arn:
         description: |+
-          The Amazon Resource Name (ARN) of the user pool, such as `arn:aws:cognito-idp:us-east-2:123412341234:userpool/us-east-1 _123412341`.
+          The Amazon Resource Name (ARN) of the user pool, such as `arn:aws:cognito-idp:``us-east-2``:123412341234:userpool/us-east-1 _123412341`.
 
     examples: {}
   AWS::Cognito::UserPoolClient:
@@ -5233,6 +5460,783 @@ resources:
                                               "172.31.3.154", "172.31.63.203" ]`.
 
     examples: {}
+  AWS::DMS::Certificate:
+    description: The `AWS::DMS::Certificate` resource creates an SSL certificate that
+      encrypts connections between AWS DMS endpoints and the replication instance.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-certificate.html
+    properties:
+      CertificateIdentifier:
+        description: |+
+          The customer-assigned name of the certificate. Valid characters are `A-z` and `0-9`.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: String
+        update_requires: replacement
+      CertificatePem:
+        description: |+
+          The contents of the .pem X.509 certificate file for the certificate.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: String
+        update_requires: replacement
+      CertificateWallet:
+        description: |+
+          The location of the imported Oracle Wallet certificate for use with SSL.
+
+          _Required_: No
+
+          _Type:_ Base64-encoded binary data object
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: Base64-encoded binary data object
+        update_requires: replacement
+    return_values:
+      Ref:
+        description: |-
+          When you pass the certificate of an `AWS::DMS::Certificate` resource to the intrinsic `Ref` function, the function returns the Amazon Resource Name (ARN) of the certificate.
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+    examples: {}
+  AWS::DMS::Endpoint:
+    description: The `AWS::DMS::Endpoint` resource creates an AWS DMS endpoint.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-endpoint.html
+    properties:
+      CertificateArn:
+        description: |+
+          The Amazon Resource Number (ARN) for the certificate.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      DatabaseName:
+        description: |+
+          The name of the endpoint database.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      DynamoDbSettings:
+        description: |+
+          Settings in JSON format for the target DynamoDB endpoint. For more information about the available settings, see the **Using Object Mapping to Migrate Data to DynamoDB** section at [Using an Amazon DynamoDB Database as a Target for AWS Database Migration Service](http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html).
+
+          _Required_: No
+
+          _Type:_ [AWS DMS Endpoint DynamoDBSettings](aws-properties-dms-endpoint-dynamodbsettings.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: |-
+          AWS DMS
+                                              Endpoint DynamoDBSettings
+        update_requires: no_interruption
+      EndpointIdentifier:
+        description: |+
+          The database endpoint identifier. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      EndpointType:
+        description: |+
+          The type of endpoint. Valid values are `source` and `target`.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'yes'
+        type: String
+        update_requires: no_interruption
+      EngineName:
+        description: |+
+          The type of engine for the endpoint. Valid values depend on the `EndPointType` and include `MYSQL`, `ORACLE`, `POSTGRES`, `MARIADB`, `AURORA`, `REDSHIFT`, `S3`, `SYBASE`, `DYNAMODB`, `MONGODB`, and `SQLSERVER`.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'yes'
+        type: String
+        update_requires: no_interruption
+      ExtraConnectionAttributes:
+        description: |+
+          Additional attributes associated with the connection.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      KmsKeyId:
+        description: |+
+          The KMS key identifier that will be used to encrypt the connection parameters. If you do not specify a value for the `KmsKeyId` parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: String
+        update_requires: replacement
+      MongoDbSettings:
+        description: |+
+          Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the **Configuration Properties When Using MongoDB as a Source for AWS Database Migration Service** section at [Using Amazon S3 as a Target for AWS Database Migration Service](http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html).
+
+          _Required_: No
+
+          _Type:_ [AWS DMS Endpoint MongoDbSettings](aws-properties-dms-endpoint-mongodbsettings.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: |-
+          AWS DMS
+                                              Endpoint MongoDbSettings
+        update_requires: no_interruption
+      Password:
+        description: |+
+          The password to be used to login to the endpoint database. Do not use this parameter directly. Use `Password` as an input parameter with `noEcho` as shown in the [Parameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html). For best practices information, see [Do Not Embed Credentials in Your Templates](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/best-practices.html#creds).
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      Port:
+        description: |+
+          The port used by the endpoint database.
+
+          _Required_: No
+
+          _Type_: Integer
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: Number
+        update_requires: no_interruption
+      S3Settings:
+        description: |+
+          Settings in JSON format for the target Amazon S3 endpoint. For more information about the available settings, see the **Extra Connection Attributes** section at [Using Amazon S3 as a Target for AWS Database Migration Service](http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html) in the _AWS Database Migration Service User Guide_.
+
+          _Required_: No
+
+          _Type:_ [AWS DMS Endpoint S3Settings](aws-properties-dms-endpoint-s3settings.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: |-
+          AWS DMS
+                                              Endpoint S3Settings
+        update_requires: no_interruption
+      ServerName:
+        description: |+
+          The name of the server where the endpoint database resides.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      SslMode:
+        description: |+
+          The SSL mode to use for the SSL connection.
+
+          SSL mode can be one of four values: `none`, `require`, `verify-ca`, `verify-full`. The default value is `none`.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      Tags:
+        description: |+
+          The tags that you want to attach to the DMS endpoint.
+
+          _Required_: No
+
+          _Type_: List of [resource tags](aws-properties-resource-tags.html) in key-value format
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: List<resource tags in key-value>
+        update_requires: replacement
+      Username:
+        description: |+
+          The user name to be used to login to the endpoint database.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'yes'
+        type: String
+        update_requires: no_interruption
+    return_values:
+      Ref:
+        description: |-
+          When you pass the logical ID of an `AWS::DMS::Endpoint` resource to the intrinsic `Ref` function, the function returns the ARN of the endpoint.
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+    examples: {}
+  AWS::DMS::EventSubscription:
+    description: Use the `AWS::DMS::EventSubscription` resource to get notifications
+      for AWS Database Migration Service events through the Amazon Simple Notification
+      Service. For more information, see [Using AWS DMS Event Notification](http://docs.aws.amazon.com/dms/latest/userguide/USER_Events.html)
+      in the _AWS Database Migration Service User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-eventsubscription.html
+    properties:
+      Enabled:
+        description: |+
+          Indicates whether to activate the subscription. If you don't specify this property, AWS CloudFormation activates the subscription.
+
+          _Required_: No
+
+          _Type_: Boolean
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: Boolean
+        update_requires: no_interruption
+      EventCategories:
+        description: |+
+          A list of event categories that you want to subscribe to for a given source type. If you don't specify this property, you are notified about all event categories. For more information, see [Using AWS DMS Event Notification](http://docs.aws.amazon.com/dms/latest/userguide/USER_Events.html) in the _AWS Database Migration Service User Guide_.
+
+          _Required_: No
+
+          _Type_: List of strings
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: List<String>
+        update_requires: no_interruption
+      SnsTopicArn:
+        description: |+
+          The Amazon Resource Name (ARN) of an Amazon SNS topic that you want to send event notifications to.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'yes'
+        type: String
+        update_requires: no_interruption
+      SourceIds:
+        description: |+
+          A list of identifiers for which AWS DMS provides notification events.
+
+          If you don't specify a value, notifications are provided for all sources. If you specify multiple values, they must be of the same type. For example, if you specify a database instance ID, all other values must be database instance IDs.
+
+          _Required_: No
+
+          _Type_: List of strings
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: List<String>
+        update_requires: replacement
+      SourceType:
+        description: |+
+          The type of source for which AWS DMS provides notification events. For example, if you want to be notified of events generated by a database instance, set this parameter to `replication-instance`. If you don't specify a value, notifications are provided for all source types. For valid values, see the `SourceType` parameter for the [CreateEventSubscription](http://docs.aws.amazon.com/dms/latest/APIReference/API_CreateEventSubscription.html) action in the _AWS Database Migration Service API Reference_.
+
+          _Required_: Conditional. If you specify the `SourceIds` or `EventCategories` property, you must specify this property.
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: conditional
+        type: String
+        update_requires: no_interruption
+      SubscriptionName:
+        description: |+
+          The subscription name.
+
+          If you don't specify a value, we create a random value.
+
+          _Required_: No
+
+          _Type_: List of strings
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: List<String>
+        update_requires: replacement
+      Tags:
+        description: |+
+          The tags that you want to attach to the DMS event subscription.
+
+          _Required_: No
+
+          _Type_: List of [resource tags](aws-properties-resource-tags.html) in key-value format
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: List<resource tags in key-value>
+        update_requires: replacement
+    return_values:
+      Ref:
+        description: ''
+    examples: {}
+  AWS::DMS::ReplicationInstance:
+    description: The `AWS::DMS::ReplicationInstance` resource creates an AWS DMS replication
+      instance.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationinstance.html
+    properties:
+      AllocatedStorage:
+        description: |+
+          The amount of storage (in gigabytes) to be initially allocated for the replication instance.
+
+          _Required_: No
+
+          _Type_: Integer
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: Number
+        update_requires: no_interruption
+      AutoMinorVersionUpgrade:
+        description: |+
+          Indicates that minor engine upgrades will be applied automatically to the replication instance during the maintenance window.
+
+          _Required_: No
+
+          _Type_: Boolean
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: Boolean
+        update_requires: no_interruption
+      AvailabilityZone:
+        description: |+
+          The EC2 Availability Zone that the replication instance will be created in. The default value is a random, system-chosen Availability Zone in the endpoint's region.
+
+          _Example_: `us-east-1d`
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: String
+        update_requires: replacement
+      EngineVersion:
+        description: |+
+          The engine version number of the replication instance.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Some interruptions](using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: some_interruptions
+      KmsKeyId:
+        description: |+
+          The KMS key identifier that will be used to encrypt the content on the replication instance. If you do not specify a value for the `KmsKeyId` parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: String
+        update_requires: replacement
+      MultiAZ:
+        description: |+
+          Specifies if the replication instance is a Multi-AZ deployment. You cannot set the `AvailabilityZone` parameter if the `MultiAZ` parameter is set to `true` .
+
+          _Required_: No
+
+          _Type_: Boolean
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: Boolean
+        update_requires: no_interruption
+      PreferredMaintenanceWindow:
+        description: |+
+          The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
+
+          _Format_: `ddd:hh24:mi-ddd:hh24:mi`
+
+          _Default_: A 30-minute window selected at random from an 8-hour block of time per region, occurring on a random day of the week.
+
+          _Valid Values_: `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat`, `Sun`
+
+          _Constraints_: Minimum 30-minute window
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      PubliclyAccessible:
+        description: |+
+          Specifies the accessibility options for the replication instance. A value of `true` represents an instance with a public IP address. A value of `false` represents an instance with a private IP address. The default value is `true` .
+
+          _Required_: No
+
+          _Type_: Boolean
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: Boolean
+        update_requires: replacement
+      ReplicationInstanceClass:
+        description: |+
+          The compute and memory capacity of the replication instance as specified by the replication instance class.
+
+          _Valid Values_: `dms.t2.micro`, `dms.t2.small`, `dms.t2.medium` , `dms.t2.large`, `dms.c4.large`, `dms.c4.xlarge`, `dms.c4.2xlarge`, `dms.c4.4xlarge`
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [Some interruptions](using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt)
+
+        required: 'yes'
+        type: String
+        update_requires: some_interruptions
+      ReplicationInstanceIdentifier:
+        description: "A name for the replication instance. If you specify a name,
+          AWS CloudFormation converts it to lower case. If you don't specify a name,
+          AWS CloudFormation generates a unique physical ID and uses that ID for the
+          replication instance identifier. For more information, see [Name Type](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).\n\n_Constraints_:\n\n-
+          \n\nMust contain from 1 to 63 alphanumeric characters or hyphens.\n\n- \n\nFirst
+          character must be a letter.\n\n- \n\nCannot end with a hyphen or contain
+          two consecutive hyphens.\n\n_Example_: `myrepinstance`\n\n_Required_: No\n\n_Type_:
+          String\n\n_Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)\n\n"
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      ReplicationSubnetGroupIdentifier:
+        description: |+
+          A subnet group to associate with the replication instance.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: String
+        update_requires: replacement
+      Tags:
+        description: |+
+          The tags that you want to attach to the DMS endpoint.
+
+          _Required_: No
+
+          _Type_: List of [resource tags](aws-properties-resource-tags.html) in key-value format
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: List<resource tags in key-value>
+        update_requires: replacement
+      VpcSecurityGroupIds:
+        description: |+
+          Specifies the VPC security group to be used with the replication instance. The VPC security group must work with the VPC containing the replication instance.
+
+          _Required_: No
+
+          _Type_: List of strings
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: List<String>
+        update_requires: no_interruption
+    return_values:
+      Ref:
+        description: |-
+          When you pass the logical ID of an `AWS::DMS::ReplicationInstance` resource to the intrinsic `Ref` function, the function returns the replication instance ARN.
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+    examples: {}
+  AWS::DMS::ReplicationSubnetGroup:
+    description: |-
+      The `AWS::DMS::ReplicationSubnetGroup` resource creates an AWS DMS replication subnet group. Subnet groups must contain at least two subnets in two different Availability Zones in the same region.
+
+      Note
+
+      Resource creation will fail if the `dms-vpc-role` IAM role doesn't already exist. For more information, see [Creating the IAM Roles to Use With the AWS CLI and AWS DMS API](http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.APIRole.html) in the _AWS Database Migration Service User Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationsubnet-group.html
+    properties:
+      ReplicationSubnetGroupIdentifier:
+        description: |+
+          The identifier for the replication subnet group. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the identifier.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: String
+        update_requires: replacement
+      ReplicationSubnetGroupDescription:
+        description: |+
+          The description for the replication subnet group.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'yes'
+        type: String
+        update_requires: no_interruption
+      SubnetIds:
+        description: |+
+          The EC2 subnet IDs for the replication subnet group.
+
+          _Required_: Yes
+
+          _Type_: List of strings
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'yes'
+        type: List<String>
+        update_requires: no_interruption
+      Tags:
+        description: |+
+          The tags that you want to attach to the AWS DMS replication subnet group.
+
+          _Required_: No
+
+          _Type_: A list of [resource tags](aws-properties-resource-tags.html) in key-value format.
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: |-
+          A list of resource tags in key-value
+                                           format.
+        update_requires: replacement
+    return_values:
+      Ref:
+        description: |-
+          When you pass the logical ID of an `AWS::DMS::ReplicationSubnetGroup` resource to the intrinsic `Ref` function, the function returns the name of the replication subnet group, such as `mystack-myrepsubnetgroup-0a12bc456789de0fg`.
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+    examples: {}
+  AWS::DMS::ReplicationTask:
+    description: The `AWS::DMS::ReplicationTask` resource creates an AWS DMS replication
+      task.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationtask.html
+    properties:
+      CdcStartTime:
+        description: |+
+          The start time for the Change Data Capture (CDC) operation.
+
+          _Required_: No
+
+          _Type:_ Number, epic value in milliseconds
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: Number, epic value in milliseconds
+        update_requires: no_interruption
+      MigrationType:
+        description: |+
+          The migration type.
+
+          `Valid Values`: `full-load`, `cdc`, `full-load-and-cdc`
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'yes'
+        type: String
+        update_requires: no_interruption
+      ReplicationInstanceArn:
+        description: |+
+          The Amazon Resource Name (ARN) of the replication instance.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'yes'
+        type: String
+        update_requires: replacement
+      ReplicationTaskIdentifier:
+        description: |+
+          The ARN string that uniquely identifies the endpoint.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      ReplicationTaskSettings:
+        description: |+
+          Settings for the task, such as target metadata settings. For a complete list of task settings, see [Task Settings for AWS Database Migration Service Tasks](http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html) in the _AWS Database Migration Service User Guide_.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      SourceEndpointArn:
+        description: |+
+          The ARN string that uniquely identifies the endpoint.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'yes'
+        type: String
+        update_requires: replacement
+      TableMappings:
+        description: |+
+          The JSON that contains additional parameter values.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'yes'
+        type: String
+        update_requires: no_interruption
+      Tags:
+        description: |+
+          The tags that you want to attach to the migration task.
+
+          _Required_: No
+
+          _Type_: List of [resource tags](aws-properties-resource-tags.html) in key-value format
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: List<resource tags in key-value>
+        update_requires: replacement
+      TargetEndpointArn:
+        description: |+
+          The ARN string that uniquely identifies the endpoint.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'yes'
+        type: String
+        update_requires: replacement
+    return_values:
+      Ref:
+        description: |-
+          When you pass the logical ID of an `AWS::DMS::ReplicationInstance` resource to the intrinsic `Ref` function, the function returns the replication instance ARN.
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+    examples: {}
   AWS::DynamoDB::Table:
     description: |-
       The `AWS::DynamoDB::Table` resource creates a DynamoDB table.
@@ -5949,7 +6953,7 @@ resources:
         update_requires: no_interruption
       IamInstanceProfile:
         description: |+
-          The physical ID of an instance profile or a reference to an [AWS::IAM::InstanceProfile](aws-resource-iam-instanceprofile.html) resource.
+          The name of an instance profile or a reference to an [AWS::IAM::InstanceProfile](aws-resource-iam-instanceprofile.html) resource.
 
           For more information about IAM roles, see [Working with Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html) in the _AWS Identity and Access Management User Guide_.
 
@@ -6809,13 +7813,26 @@ resources:
         required: conditional
         type: String
         update_requires: replacement
+      EgressOnlyInternetGatewayId:
+        description: |+
+          The ID of an egress-only internet gateway that is attached to your VPC (over IPv6 only).
+
+          _Required_: Conditional. You must specify only one of the following properties: `EgressOnlyInternetGatewayId`, `GatewayId`, `InstanceId`, `NatGatewayId`, `NetworkInterfaceId`, or `VpcPeeringConnectionId`. For an example that uses this property, see [Amazon EC2 Route with Egress-Only Internet Gateway](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-ec2.html#quickref-ec2-route-egressonlyinternetgateway).
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: conditional
+        type: String
+        update_requires: no_interruption
       GatewayId:
         description: |+
-          The ID of an Internet gateway, egress-only Internet gateway, or virtual private gateway that is attached to your VPC. For example: `igw-eaad4883`.
+          The ID of an internet gateway or virtual private gateway that is attached to your VPC. For example: `igw-eaad4883`.
 
           For route entries that specify a gateway, you must specify a dependency on the gateway attachment resource. For more information, see [DependsOn Attribute](aws-attribute-dependson.html).
 
-          _Required_: Conditional. You must specify only one of the following properties: `GatewayId`, `InstanceId`, `NatGatewayId`, `NetworkInterfaceId`, or `VpcPeeringConnectionId`.
+          _Required_: Conditional. You must specify only one of the following properties: `EgressOnlyInternetGatewayId`, `GatewayId`, `InstanceId`, `NatGatewayId`, `NetworkInterfaceId`, or `VpcPeeringConnectionId`.
 
           _Type_: String
 
@@ -6828,7 +7845,7 @@ resources:
         description: |+
           The ID of a NAT instance in your VPC. For example, `i-1a2b3c4d`.
 
-          _Required_: Conditional. You must specify only one of the following properties: `GatewayId`, `InstanceId`, `NatGatewayId`, `NetworkInterfaceId`, or `VpcPeeringConnectionId`.
+          _Required_: Conditional. You must specify only one of the following properties: `EgressOnlyInternetGatewayId`, `GatewayId`, `InstanceId`, `NatGatewayId`, `NetworkInterfaceId`, or `VpcPeeringConnectionId`.
 
           _Type_: String
 
@@ -6841,7 +7858,7 @@ resources:
         description: |+
           The ID of a NAT gateway. For example, `nat-0a12bc456789de0fg`.
 
-          _Required_: Conditional. You must specify only one of the following properties: `GatewayId`, `InstanceId`, `NatGatewayId`, `NetworkInterfaceId`, or `VpcPeeringConnectionId`.
+          _Required_: Conditional. You must specify only one of the following properties: `EgressOnlyInternetGatewayId`, `GatewayId`, `InstanceId`, `NatGatewayId`, `NetworkInterfaceId`, or `VpcPeeringConnectionId`.
 
           _Type_: String
 
@@ -6854,7 +7871,7 @@ resources:
         description: |+
           Allows the routing of network interface IDs.
 
-          _Required_: Conditional. You must specify only one of the following properties: `GatewayId`, `InstanceId`, `NatGatewayId`, `NetworkInterfaceId`, or `VpcPeeringConnectionId`.
+          _Required_: Conditional. You must specify only one of the following properties: `EgressOnlyInternetGatewayId`, `GatewayId`, `InstanceId`, `NatGatewayId`, `NetworkInterfaceId`, or `VpcPeeringConnectionId`.
 
           _Type_: String
 
@@ -6880,7 +7897,7 @@ resources:
         description: |+
           The ID of a VPC peering connection.
 
-          _Required_: Conditional. You must specify only one of the following properties: `GatewayId`, `InstanceId`, `NatGatewayId`, `NetworkInterfaceId`, or `VpcPeeringConnectionId`.
+          _Required_: Conditional. You must specify only one of the following properties: `EgressOnlyInternetGatewayId`, `GatewayId`, `InstanceId`, `NatGatewayId`, `NetworkInterfaceId`, or `VpcPeeringConnectionId`.
 
           _Type_: String
 
@@ -7434,7 +8451,7 @@ resources:
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       AvailabilityZone:
         description: |+
-          Returns the availability zone (for example, `"us-east-1a"`) of this subnet.
+          Returns the availability zone (for example, "`us-east-1a`") of this subnet.
 
           Example:
 
@@ -7645,7 +8662,7 @@ resources:
         update_requires: no_interruption
       KmsKeyId:
         description: |+
-          The Amazon Resource Name (ARN) of the AWS Key Management Service master key that is used to create the encrypted volume, such as `arn:aws:kms:us-east-2:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef`. If you create an encrypted volume and don't specify this property, AWS CloudFormation uses the default master key.
+          The Amazon Resource Name (ARN) of the AWS Key Management Service master key that is used to create the encrypted volume, such as `arn:aws:kms:``us-east-2``:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef`. If you create an encrypted volume and don't specify this property, AWS CloudFormation uses the default master key.
 
           _Required_: No
 
@@ -8158,7 +9175,7 @@ resources:
         type: String
         update_requires: replacement
       CustomerGatewayId:
-        description: |-
+        description: |+
           The ID of the customer gateway. This can either be an embedded JSON object or a reference to a Gateway ID.
 
           _Required_: Yes
@@ -8166,14 +9183,15 @@ resources:
           _Type_: String
 
           _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
         required: 'yes'
         type: String
-        update_requires: 
+        update_requires: replacement
       StaticRoutesOnly:
         description: |+
           Indicates whether the VPN connection requires static routes.
 
-          _Required_: Conditional: If you are creating a VPN connection for a device that does not support Border Gateway Protocol (BGP), you must specify `true`.
+          _Required_: Conditional. If you are creating a VPN connection for a device that does not support Border Gateway Protocol (BGP), you must specify `true`.
 
           _Type_: Boolean
 
@@ -8190,13 +9208,13 @@ resources:
 
           _Type_: [AWS CloudFormation Resource Tags](aws-properties-resource-tags.html).
 
-          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt).
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
         required: 'no'
         type: AWS CloudFormation Resource Tags.
         update_requires: no_interruption
       VpnGatewayId:
-        description: |-
+        description: |+
           The ID of the virtual private gateway. This can either be an embedded JSON object or a reference to a Gateway ID.
 
           _Required_: Yes
@@ -8204,9 +9222,10 @@ resources:
           _Type_: String
 
           _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
         required: 'yes'
         type: String
-        update_requires: 
+        update_requires: replacement
     return_values:
       Ref:
         description: ''
@@ -8473,13 +9492,13 @@ resources:
         description: |+
           The number of simultaneous tasks that you want to run on the cluster. Specify the tasks with the `TaskDefinition` property.
 
-          _Required_: No
+          _Required_: Yes
 
           _Type_: Integer
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
-        required: 'no'
+        required: 'yes'
         type: Number
         update_requires: no_interruption
       LoadBalancers:
@@ -10031,7 +11050,7 @@ resources:
 
           Example:
 
-          awseb-myst-myen-132MQC4KRLAMD-1371280482.us-east-2.elb.amazonaws.com
+          `awseb-myst-myen-132MQC4KRLAMD-1371280482.``us-east-2``.elb.amazonaws.com`
 
     examples: {}
   AWS::ElasticLoadBalancing::LoadBalancer:
@@ -10287,7 +11306,7 @@ resources:
 
           If you specify `internal` for the Elastic Load Balancing scheme, use `DNSName` instead. For an `internal` scheme, the load balancer doesn't have a `CanonicalHostedZoneName` value.
 
-          Example: `mystack-myelb-15HMABG9ZCN57-1013119603.us-east-2.elb.amazonaws.com`
+          Example: `mystack-myelb-15HMABG9ZCN57-1013119603.``us-east-2``.elb.amazonaws.com`
 
       CanonicalHostedZoneNameID:
         description: |+
@@ -10299,7 +11318,7 @@ resources:
         description: |+
           The DNS name for the load balancer.
 
-          Example: `mystack-myelb-15HMABG9ZCN57-1013119603.us-east-2.elb.amazonaws.com`
+          Example: `mystack-myelb-15HMABG9ZCN57-1013119603.``us-east-2``.elb.amazonaws.com`
 
       SourceSecurityGroup.GroupName:
         description: |+
@@ -11677,7 +12696,7 @@ resources:
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
         description: |+
-          The event rule Amazon Resource Name (ARN), such as `arn:aws:events:us-east-2:123456789012:rule/example`.
+          The event rule Amazon Resource Name (ARN), such as `arn:aws:events:``us-east-2``:123456789012:rule/example`.
 
     examples: {}
   AWS::GameLift::Alias:
@@ -12956,8 +13975,170 @@ resources:
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
         description: |+
-          The Amazon resource name (ARN) of the Kinesis stream, such as `arn:aws:kinesis:us-east-2:123456789012:stream/mystream`.
+          The Amazon resource name (ARN) of the Kinesis stream, such as `arn:aws:kinesis:``us-east-2``:123456789012:stream/mystream`.
 
+    examples: {}
+  AWS::KinesisAnalytics::Application:
+    description: The `AWS::KinesisAnalytics::Application` resource creates an Amazon
+      Kinesis Analytics application. For more information, see the [_Amazon Kinesis
+      Analytics Developer Guide_](http://docs.aws.amazon.com/kinesisanalytics/latest/dev/).
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalytics-application.html
+    properties:
+      ApplicationName:
+        description: |+
+          The name of your Amazon Kinesis Analytics application.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: String
+        update_requires: replacement
+      ApplicationDescription:
+        description: |+
+          The summary description of the application.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      ApplicationCode:
+        description: |+
+          One or more SQL statements that read input data, transform it, and generate output.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      Inputs:
+        description: |+
+          Use this parameter to configure the application input.
+
+          _Required_: Yes
+
+          _Type_: List of [Kinesis Analytics Application Input](aws-properties-kinesisanalytics-application-input.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'yes'
+        type: List<Kinesis Analytics>
+        update_requires: no_interruption
+    return_values:
+      Ref:
+        description: ''
+    examples: {}
+  AWS::KinesisAnalytics::ApplicationOutput:
+    description: The `AWS::KinesisAnalytics::ApplicationOutput` resource adds an external
+      destination to your Amazon Kinesis Analytics application. For more information,
+      see [AddApplicationOutput](http://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationOutput.html)
+      in the _Amazon Kinesis Analytics Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalytics-applicationoutput.html
+    properties:
+      ApplicationName:
+        description: |+
+          The name of the application to which you want to add the output configuration.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'yes'
+        type: String
+        update_requires: replacement
+      Output:
+        description: |+
+          An array of objects, each describing one output configuration.
+
+          _Required_: Yes
+
+          _Type_: [Kinesis Analytics ApplicationOutput Output](aws-properties-kinesisanalytics-applicationoutput-output.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'yes'
+        type: |-
+          Kinesis Analytics
+                                              ApplicationOutput Output
+        update_requires: no_interruption
+    return_values:
+      Ref:
+        description: ''
+    examples: {}
+  AWS::KinesisAnalytics::ApplicationReferenceDataSource:
+    description: Use the AWS CloudFormation `AWS::KinesisAnalytics::ApplicationReferenceDataSource`
+      resource to add a reference data source to an existing Amazon Kinesis Analytics
+      application. For more information, see `AddApplicationReferenceDataSource` in
+      the _Amazon Kinesis Analytics Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalytics-applicationreferencedatasource.html
+    properties:
+      ApplicationName:
+        description: |+
+          The name of an existing application.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'yes'
+        type: String
+        update_requires: replacement
+      ReferenceDataSource:
+        description: |+
+          The reference data source, which is an object in your Amazon Simple Storage Service (Amazon S3) bucket.
+
+          _Required_: Yes
+
+          _Type_: [Kinesis Analytics ApplicationReferenceDataSource ReferenceDataSource](aws-properties-kinesisanalytics-applicationreferencedatasource-referencedatasource.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'yes'
+        type: Kinesis Analytics ApplicationReferenceDataSource ReferenceDataSource
+        update_requires: no_interruption
+    return_values:
+      Ref:
+        description: |-
+          The following example creates an `ApplicationReferenceDataSource` resource:
+
+          #### YAML
+
+              CopyApplicationReferenceDataSource:
+                  Type: "AWS::KinesisAnalytics::ApplicationReferenceDataSource"
+                  Properties:
+                    ApplicationName: !Ref BasicApplication
+                    ReferenceDataSource:
+                      TableName: "exampleTable"
+                      ReferenceSchema:
+                        RecordColumns:
+                          - Name: "example"
+                            SqlType: "VARCHAR(16)"
+                            Mapping: "$.example"
+                        RecordFormat:
+                          RecordFormatType: "JSON"
+                          MappingParameters:
+                            JSONMappingParameters:
+                              RecordRowPath: "$"
+                      S3ReferenceDataSource:
+                        BucketARN: !GetAtt S3Bucket.Arn
+                        FileKey: 'fakeKey'
+                        ReferenceRoleARN: !GetAtt KinesisAnalyticsRole.Arn
     examples: {}
   AWS::KinesisFirehose::DeliveryStream:
     description: The `AWS::KinesisFirehose::DeliveryStream` resource creates an Amazon
@@ -13824,7 +15005,7 @@ resources:
     properties:
       FilterPattern:
         description: |+
-          Describes the pattern that CloudWatch Logs follows to interpret each entry in a log. For example, a log entry might contain fields such as timestamps, IP addresses, error codes, bytes transferred, and so on. You use the pattern to specify those fields and to specify what to look for in the log file. For example, if you're interested in error codes that begin with `1234`, your filter pattern might be `[timestamps, ip_addresses, error_codes = 1234*, size, ...]`.
+          Describes the pattern that CloudWatch Logs follows to interpret each entry in a log. A log entry might contain fields such as timestamps, IP addresses, error codes, bytes transferred, and so on. You use the pattern to specify those fields and to specify what to look for in the log file. For example, if you're interested in error codes that begin with `1234`, your filter pattern might be `[timestamps, ip_addresses, error_codes = 1234*, size, ...]`. For more information, see [Filter and Pattern Syntax](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html#extract-log-event-values) in the _Amazon CloudWatch User Guide_.
 
           _Required_: Yes
 
@@ -15456,7 +16637,7 @@ resources:
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Endpoint.Address:
         description: |+
-          The connection endpoint for the DB cluster. For example: `mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`.
+          The connection endpoint for the DB cluster. For example: `mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.``us-east-2``.rds.amazonaws.com`.
 
       Endpoint.Port:
         description: |+
@@ -15464,7 +16645,7 @@ resources:
 
       ReadEndpoint.Address:
         description: |+
-          The reader endpoint for the DB cluster. For example: `mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`.
+          The reader endpoint for the DB cluster. For example: `mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.``us-east-2``.rds.amazonaws.com`.
 
     examples: {}
   AWS::RDS::DBClusterParameterGroup:
@@ -15655,7 +16836,7 @@ resources:
         update_requires: no_interruption
       DBClusterIdentifier:
         description: |+
-          The name of an existing DB cluster that this instance will be associated with. If you specify this property, specify `aurora` for the `Engine` property and do not specify any of the following properties: `AllocatedStorage`, `BackupRetentionPeriod`, `CharacterSetName`, `DBSecurityGroups`, `PreferredBackupWindow`, `PreferredMaintenanceWindow`, `Port`, `SourceDBInstanceIdentifier`, or `StorageType`.
+          The name of an existing DB cluster that this instance will be associated with. If you specify this property, specify `aurora` for the `Engine` property and do not specify any of the following properties: `AllocatedStorage`, `BackupRetentionPeriod`, `CharacterSetName`, `DBSecurityGroups`, `MasterUsername`, `MasterUserPassword`, `OptionGroupName`, `PreferredBackupWindow`, `PreferredMaintenanceWindow`, `Port`, `SourceDBInstanceIdentifier`, `StorageType`, or `VPCSecurityGroups`.
 
           Amazon RDS assigns the first DB instance in the cluster as the primary, and additional DB instances as replicas.
 
@@ -15736,14 +16917,17 @@ resources:
           to [AWS::RDS::DBSecurityGroup](aws-properties-rds-security-group.html) resources
           created in the template.\n\nIf you set `DBSecurityGroups`, you must not
           set [VPCSecurityGroups](aws-properties-rds-database-instance.html#cfn-rds-dbinstance-vpcsecuritygroups),
-          and vice-versa.\n\nImportant\n\nIf you specify this property, AWS CloudFormation
-          sends only the following properties (if specified) to Amazon RDS:\n\n- \n\n`AllocatedStorage`\n\n-
-          \n\n`AutoMinorVersionUpgrade`\n\n- \n\n`AvailabilityZone`\n\n- \n\n`BackupRetentionPeriod`\n\n-
-          \n\n`CharacterSetName`\n\n- \n\n`DbInstanceClass`\n\n- \n\n`DbName`\n\n-
-          \n\n`DbParameterGroupName`\n\n- \n\n`DbSecurityGroups`\n\n- \n\n`DbSubnetGroupName`\n\n-
-          \n\n`Engine`\n\n- \n\n`EngineVersion`\n\n- \n\n`Iops`\n\n- \n\n`LicenseModel`\n\n-
-          \n\n`MasterUsername`\n\n- \n\n`MasterUserPassword`\n\n- \n\n`MultiAZ`\n\n-
-          \n\n`OptionGroupName`\n\n- \n\n`PreferredBackupWindow`\n\n- \n\n`PreferredMaintenanceWindow`\n\nAll
+          and vice-versa. Also, note that the `EC2VpcId` property exists only for
+          backwards compatibility with older regions and is no longer recommended
+          for providing security information to an RDS DB instance. Instead, use `VPCSecurityGroups`.\n\nImportant\n\nIf
+          you specify this property, AWS CloudFormation sends only the following properties
+          (if specified) to Amazon RDS:\n\n- \n\n`AllocatedStorage`\n\n- \n\n`AutoMinorVersionUpgrade`\n\n-
+          \n\n`AvailabilityZone`\n\n- \n\n`BackupRetentionPeriod`\n\n- \n\n`CharacterSetName`\n\n-
+          \n\n`DbInstanceClass`\n\n- \n\n`DbName`\n\n- \n\n`DbParameterGroupName`\n\n-
+          \n\n`DbSecurityGroups`\n\n- \n\n`DbSubnetGroupName`\n\n- \n\n`Engine`\n\n-
+          \n\n`EngineVersion`\n\n- \n\n`Iops`\n\n- \n\n`LicenseModel`\n\n- \n\n`MasterUsername`\n\n-
+          \n\n`MasterUserPassword`\n\n- \n\n`MultiAZ`\n\n- \n\n`OptionGroupName`\n\n-
+          \n\n`PreferredBackupWindow`\n\n- \n\n`PreferredMaintenanceWindow`\n\nAll
           other properties are ignored. Specify a VPC security group if you want to
           submit other properties, such as `StorageType`, `StorageEncrypted`, or `KmsKeyId`.
           If you're already using the `DBSecurityGroups` property, you can't use these
@@ -15958,7 +17142,7 @@ resources:
         update_requires: no_interruption
       MultiAZ:
         description: |+
-          Specifies if the database instance is a multiple Availability Zone deployment. You cannot set the `AvailabilityZone` parameter if the `MultiAZ` parameter is set to true.
+          Specifies if the database instance is a multiple Availability Zone deployment. You cannot set the `AvailabilityZone` parameter if the `MultiAZ` parameter is set to true. Amazon Aurora storage is replicated across all the availability zones and doesn't require the `MultiAZ` option to be set.
 
           _Required_: No
 
@@ -16167,7 +17351,7 @@ resources:
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Endpoint.Address:
         description: "- \n\n**Endpoint.Address**\n\nThe connection endpoint for the
-          database. For example: `mystack-mydb-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`.\n\n"
+          database. For example: `mystack-mydb-1apw1j4phylrk.cg034hpkmmjt.``us-east-2``.rds.amazonaws.com`.\n\n"
       Endpoint.Port:
         description: "- \n\n**Endpoint.Port**\n\nThe port number on which the database
           accepts connections. For example: `3306`.\n\n"
@@ -16268,7 +17452,11 @@ resources:
     properties:
       EC2VpcId:
         description: |+
-          The Id of VPC. Indicates which VPC this DB Security Group should belong to.
+          The Id of the VPC. Indicates which VPC this DB Security Group should belong to.
+
+          Important
+
+          The `EC2VpcId` property exists only for backwards compatibility with older regions and is no longer recommended for providing security information to an RDS DB instance. Instead, use `VPCSecurityGroups`.
 
           _Type_: String
 
@@ -16411,7 +17599,7 @@ resources:
     examples: {}
   AWS::RDS::DBSubnetGroup:
     description: The AWS::RDS::DBSubnetGroup type creates an RDS database subnet group.
-      Subnet groups must contain at least two subnet in two different Availability
+      Subnet groups must contain at least two subnets in two different Availability
       Zones in the same region.
     url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbsubnet-group.html
     properties:
@@ -17429,7 +18617,7 @@ resources:
         update_requires: no_interruption
       GeoLocation:
         description: |+
-          Describes how Amazon Route&nbsp;53 responds to DNS queries based on the geographic origin of the query.
+          Describes how Amazon Route&nbsp;53 responds to DNS queries based on the geographic origin of the query. This property is not compatible with the `Region` property.
 
           _Required_: No
 
@@ -17516,8 +18704,9 @@ resources:
           regions. Amazon Route&nbsp;53 will choose the region with the best latency
           from among the regions for which you create latency resource record sets.\n\n-
           \n\nYou cannot create both weighted and latency resource record sets that
-          have the same values for the Name and Type elements.\n\nTo see a list of
-          regions by service, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html)
+          have the same values for the Name and Type elements.\n\n- \n\nThis property
+          is not compatible with the `GeoLocation` property.\n\nTo see a list of regions
+          by service, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html)
           in the _AWS General Reference_.\n\n"
         required: 
         type: 
@@ -17870,7 +19059,7 @@ resources:
           Returns the IPv6 DNS name of the specified bucket.
 
           Example:`
-                                              mystack-mybucket-kdwwxmddtr2g.s3.dualstack.us-east-2.amazonaws.com/`
+                                              mystack-mybucket-kdwwxmddtr2g.s3.dualstack.``us-east-2``.amazonaws.com/`
 
           For more information about dual-stack endpoints, see [Using Amazon S3 Dual-Stack Endpoints](https://docs.aws.amazon.com/AmazonS3/latest/dev/dual-stack-endpoints.html).
 
@@ -17878,9 +19067,9 @@ resources:
         description: |+
           Returns the Amazon S3 website endpoint for the specified bucket.
 
-          Example (IPv4): `http://mystack-mybucket-kdwwxmddtr2g.s3-website-us-east-2.amazonaws.com/`
+          Example (IPv4): `http://mystack-mybucket-kdwwxmddtr2g.s3-website-``us-east-2``.amazonaws.com/`
 
-          Example (IPv6): `http://mystack-mybucket-kdwwxmddtr2g.s3.dualstack.us-east-2.amazonaws.com/`
+          Example (IPv6): `http://mystack-mybucket-kdwwxmddtr2g.s3.dualstack.``us-east-2``.amazonaws.com/`
 
     examples: {}
   AWS::S3::BucketPolicy:
@@ -17990,26 +19179,26 @@ resources:
         description: |+
           The subscription's protocol. For more information, see the [Subscribe Protocol](http://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html) parameter in the _Amazon Simple Notification Service API Reference_.
 
-          _Required_: No
+          _Required_: Yes
 
           _Type_: String
 
           _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 
-        required: 'no'
+        required: 'yes'
         type: String
         update_requires: replacement
       TopicArn:
         description: |+
           The Amazon Resource Name (ARN) of the topic to subscribe to.
 
-          _Required_: No
+          _Required_: Yes
 
           _Type_: String
 
           _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 
-        required: 'no'
+        required: 'yes'
         type: String
         update_requires: replacement
     return_values:
@@ -18247,12 +19436,12 @@ resources:
     return_values:
       Ref:
         description: |-
-          The `AWS::SQS::Queue` type returns the queue URL, for example: `https://sqs.us-east-2.amazonaws.com/123456789012/aa4-MyQueue-Z5NOSZO2PZE9`.
+          The `AWS::SQS::Queue` type returns the queue URL, for example: `https://sqs.``us-east-2``.amazonaws.com/123456789012/aa4-MyQueue-Z5NOSZO2PZE9`.
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
         description: |+
-          Returns the Amazon Resource Name (ARN) of the queue. For example: `arn:aws:sqs:us-east-2:123456789012:mystack-myqueue-15PG5C2FC1CW8`.
+          Returns the Amazon Resource Name (ARN) of the queue. For example: `arn:aws:sqs:``us-east-2``:123456789012:mystack-myqueue-15PG5C2FC1CW8`.
 
       QueueName:
         description: |+
