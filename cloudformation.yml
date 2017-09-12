@@ -1,5 +1,5 @@
 ---
-timestamp: 2017-08-22 15:18:56.632232000 +02:00
+timestamp: 2017-09-11 10:10:33.023162000 +02:00
 resources:
   AWS::ApiGateway::Account:
     description: |-
@@ -205,13 +205,13 @@ resources:
         description: |+
           The ID of the `RestApi` resource in which API Gateway creates the authorizer.
 
-          _Required_: No
+          _Required_: Yes
 
           _Type_: String
 
           _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 
-        required: 'no'
+        required: 'yes'
         type: String
         update_requires: replacement
       Type:
@@ -1067,9 +1067,7 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       RootResourceId:
-        description: |+
-          The root resource ID for a `RestApi` resource, such as `a0bc123d4e`.
-
+        description: "The root resource ID for a `RestApi` resource, such as `a0bc123d4e`.\n\n"
     examples: {}
   AWS::ApiGateway::Stage:
     description: The `AWS::ApiGateway::Stage` resource creates a stage for an Amazon
@@ -1462,7 +1460,11 @@ resources:
         update_requires: replacement
       PolicyType:
         description: |+
-          An Application Auto Scaling policy type. For valid values, see the `PolicyType` parameter for the [PutScalingPolicy](http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScalingPolicy.html) action in the _Application Auto Scaling API Reference_.
+          An Application Auto Scaling policy type.
+
+          Note
+
+          For DynamoDB, only `TargetTrackingScaling` is supported. For any other service, only `StepScaling` is supported.
 
           _Required_: Yes
 
@@ -2364,15 +2366,15 @@ resources:
         update_requires: replacement
       DesiredCapacity:
         description: |+
-          The number of Amazon EC2 instances that should be running in the Auto Scaling group.
+          The number of Amazon EC2 instances that should be running in the Auto Scaling group. At least one of `MaxSize`, `MinSize`, or `DesiredCapacity` must be specified.
 
-          _Required_: No
+          _Required_: Conditional
 
           _Type_: Integer
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
-        required: 'no'
+        required: conditional
         type: Number
         update_requires: no_interruption
       EndTime:
@@ -2390,28 +2392,28 @@ resources:
         update_requires: no_interruption
       MaxSize:
         description: |+
-          The maximum number of Amazon EC2 instances in the Auto Scaling group.
+          The maximum number of Amazon EC2 instances in the Auto Scaling group. At least one of `MaxSize`, `MinSize`, or `DesiredCapacity` must be specified.
 
-          _Required_: No
+          _Required_: Conditional
 
           _Type_: Integer
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
-        required: 'no'
+        required: conditional
         type: Number
         update_requires: no_interruption
       MinSize:
         description: |+
-          The minimum number of Amazon EC2 instances in the Auto Scaling group.
+          The minimum number of Amazon EC2 instances in the Auto Scaling group. At least one of `MaxSize`, `MinSize`, or `DesiredCapacity` must be specified.
 
-          _Required_: No
+          _Required_: Conditional
 
           _Type_: Integer
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
-        required: 'no'
+        required: conditional
         type: Number
         update_requires: no_interruption
       Recurrence:
@@ -3047,9 +3049,8 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Outputs.NestedStackOutputName:
-        description: |+
-          _Returns_: The output value from the specified nested stack where _`NestedStackOutputName`_ is the name of the output value.
-
+        description: "_Returns_: The output value from the specified nested stack
+          where _`NestedStackOutputName`_ is the name of the output value.\n\n"
     examples: {}
   AWS::CloudFormation::WaitCondition:
     description: "Important\n\nFor Amazon EC2 and Auto Scaling resources, we recommend
@@ -3181,9 +3182,7 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       DomainName:
-        description: |+
-          _Returns_: The domain name of the resource. For example: `d2fadu0nynjpfn.cloudfront.net`.
-
+        description: "_Returns_: The domain name of the resource. For example: `d2fadu0nynjpfn.cloudfront.net`.\n\n"
     examples: {}
   AWS::CloudTrail::Trail:
     description: Use the `AWS::CloudTrail::Trail` resource to create a trail and specify
@@ -3369,13 +3368,10 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
-        description: |+
-          The ARN of the CloudTrail trail, such as `arn:aws:cloudtrail:us-east-2:123456789012:trail/myCloudTrail`.
-
+        description: "The ARN of the CloudTrail trail, such as `arn:aws:cloudtrail:us-east-2:123456789012:trail/myCloudTrail`.\n\n"
       SnsTopicArn:
-        description: |+
-          The ARN of the Amazon SNS topic that's associated with the CloudTrail trail, such as `arn:aws:sns:us-east-2:123456789012:mySNSTopic`.
-
+        description: "The ARN of the Amazon SNS topic that's associated with the CloudTrail
+          trail, such as `arn:aws:sns:us-east-2:123456789012:mySNSTopic`.\n\n"
     examples: {}
   AWS::CloudWatch::Alarm:
     description: |-
@@ -3641,9 +3637,8 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
-        description: |+
-          The Amazon Resource Name (ARN) of the CloudWatch alarm, such as `arn:aws:cloudwatch:us-east-2:123456789012:alarm:myCloudWatchAlarm-CPUAlarm-UXMMZK36R55Z`.
-
+        description: "The Amazon Resource Name (ARN) of the CloudWatch alarm, such
+          as `arn:aws:cloudwatch:us-east-2:123456789012:alarm:myCloudWatchAlarm-CPUAlarm-UXMMZK36R55Z`.\n\n"
     examples: {}
   AWS::CloudWatch::Dashboard:
     description: |-
@@ -3815,9 +3810,7 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
-        description: |+
-          The ARN of the AWS CodeBuild project, such as `arn:aws:codebuild:us-west-2:123456789012:project/myProjectName`.
-
+        description: "The ARN of the AWS CodeBuild project, such as `arn:aws:codebuild:us-west-2:123456789012:project/myProjectName`.\n\n"
     examples: {}
   AWS::CodeCommit::Repository:
     description: The `AWS::CodeCommit::Repository` resource creates an AWS CodeCommit
@@ -3872,21 +3865,15 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
-        description: |+
-          The Amazon Resource Name (ARN) of the repository, such as `arn:aws:codecommit:us-east-1:123456789012:MyDemoRepo`.
-
+        description: "The Amazon Resource Name (ARN) of the repository, such as `arn:aws:codecommit:us-east-1:123456789012:MyDemoRepo`.\n\n"
       CloneUrlHttp:
-        description: |+
-          The URL to use for cloning the repository over HTTPS, such as `https://codecommit.us-east-1.amazonaws.com/v1/repos/MyDemoRepo`.
-
+        description: "The URL to use for cloning the repository over HTTPS, such as
+          `https://codecommit.us-east-1.amazonaws.com/v1/repos/MyDemoRepo`.\n\n"
       CloneUrlSsh:
-        description: |+
-          The URL to use for cloning the repository over SSH, such as `ssh://git-codecommit.us-east-1.amazonaws.com/v1/repos//v1/repos/MyDemoRepo`.
-
+        description: "The URL to use for cloning the repository over SSH, such as
+          `ssh://git-codecommit.us-east-1.amazonaws.com/v1/repos//v1/repos/MyDemoRepo`.\n\n"
       Name:
-        description: |+
-          The name of the repository, such `MyDemoRepo`.
-
+        description: "The name of the repository, such `MyDemoRepo`.\n\n"
     examples: {}
   AWS::CodeDeploy::Application:
     description: The `AWS::CodeDeploy::Application` resource creates an AWS CodeDeploy
@@ -4526,9 +4513,8 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Name:
-        description: |+
-          The name of the Amazon Cognito identity pool, returned as a string.
-
+        description: "The name of the Amazon Cognito identity pool, returned as a
+          string.\n\n"
     examples: {}
   AWS::Cognito::IdentityPoolRoleAttachment:
     description: The `AWS::Cognito::IdentityPoolRoleAttachment` resource manages the
@@ -4808,17 +4794,14 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       ProviderName:
-        description: |+
-          The provider name of the Amazon Cognito user pool, specified as a `String`.
-
+        description: "The provider name of the Amazon Cognito user pool, specified
+          as a `String`.\n\n"
       ProviderURL:
-        description: |+
-          The URL of the provider of the Amazon Cognito user pool, specified as a `String`.
-
+        description: "The URL of the provider of the Amazon Cognito user pool, specified
+          as a `String`.\n\n"
       Arn:
-        description: |+
-          The Amazon Resource Name (ARN) of the user pool, such as `arn:aws:cognito-idp:``us-east-2``:123412341234:userpool/us-east-1 _123412341`.
-
+        description: "The Amazon Resource Name (ARN) of the user pool, such as `arn:aws:cognito-idp:``us-east-2``:123412341234:userpool/us-east-1
+          _123412341`.\n\n"
     examples: {}
   AWS::Cognito::UserPoolClient:
     description: The `AWS::Cognito::UserPoolClient` resource creates an Amazon Cognito
@@ -4927,13 +4910,9 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       ClientSecret:
-        description: |+
-          The client secret, as a `String`.
-
+        description: "The client secret, as a `String`.\n\n"
       Name:
-        description: |+
-          The name of the user pool client, as a `String`.
-
+        description: "The name of the user pool client, as a `String`.\n\n"
     examples: {}
   AWS::Cognito::UserPoolGroup:
     description: The `AWS::Cognito::UserPoolGroup` resource creates a user group in
@@ -5277,17 +5256,13 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
-        description: |+
-          The Amazon Resource Name (ARN) of the AWS Config rule, such as `arn:aws:config:us-east-1:123456789012:config-rule/config-rule-a1bzhi`.
-
+        description: "The Amazon Resource Name (ARN) of the AWS Config rule, such
+          as `arn:aws:config:us-east-1:123456789012:config-rule/config-rule-a1bzhi`.\n\n"
       ConfigRuleId:
-        description: |+
-          The ID of the AWS Config rule, such as `config-rule-a1bzhi`.
-
+        description: "The ID of the AWS Config rule, such as `config-rule-a1bzhi`.\n\n"
       Compliance.Type:
-        description: |+
-          The compliance status of an AWS Config rule, such as `COMPLIANT` or `NON_COMPLIANT`.
-
+        description: "The compliance status of an AWS Config rule, such as `COMPLIANT`
+          or `NON_COMPLIANT`.\n\n"
     examples: {}
   AWS::Config::ConfigurationRecorder:
     description: |-
@@ -5564,6 +5539,356 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
     examples: {}
+  AWS::DAX::Cluster:
+    description: |-
+      Use the `AWS::DAX::Cluster` resource to create a DAX cluster for use with Amazon DynamoDB.
+
+      For information about creating a DAX cluster, see [Creating a DAX Cluster](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.create-cluster.html) in the _Amazon DynamoDB Developer Guide_ and [`CreateCluster`](http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_CreateCluster.html) in the _Amazon DynamoDB Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dax-cluster.html
+    properties:
+      AvailabilityZones:
+        description: |+
+          The Availability Zones (AZs) in which the cluster nodes will be created. All nodes belonging to the cluster are placed in these Availability Zones. Use this parameter if you want to distribute the nodes across multiple AZs.
+
+          You must specify one AZ per DAX node in the cluster.
+
+          _Required_: No
+
+          _Type_: List of strings
+
+          _Update requires_: [Some interruptions](using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt)
+
+        required: 'no'
+        type: List<String>
+        update_requires: some_interruptions
+      ClusterName:
+        description: |+
+          The cluster identifier. This parameter is stored as a lowercase string.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: Updates are not supported.
+
+        required: 'no'
+        type: String
+        update_requires: 
+      Description:
+        description: |+
+          A description of the cluster.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      IAMRoleARN:
+        description: |+
+          A valid Amazon Resource Name (ARN) that identifies an IAM role. At runtime, DAX will assume this role and use the role's permissions to access DynamoDB on your behalf.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: Updates are not supported.
+
+        required: 'yes'
+        type: String
+        update_requires: 
+      NodeType:
+        description: |+
+          The compute and memory capacity of the nodes in the cluster.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: Updates are not supported.
+
+        required: 'yes'
+        type: String
+        update_requires: 
+      NotificationTopicARN:
+        description: |+
+          The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications will be sent.
+
+          Note
+
+          The Amazon SNS topic owner must be same as the DAX cluster owner.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      ParameterGroupName:
+        description: |+
+          The parameter group to be associated with the DAX cluster.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Some interruptions](using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: some_interruptions
+      PreferredMaintenanceWindow:
+        description: "Specifies the weekly time range during which maintenance on
+          the DAX cluster is performed. It is specified as a range in the format `ddd:hh24:mi-ddd:hh24:mi`
+          (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid
+          values for `ddd` are:\n\n- \n\n`sun`\n\n- \n\n`mon`\n\n- \n\n`tue`\n\n-
+          \n\n`wed`\n\n- \n\n`thu`\n\n- \n\n`fri`\n\n- \n\n`sat`\n\nExample: `sun:05:00-sun:09:00`\n\nNote\n\nIf
+          you don't specify a preferred maintenance window when you create or modify
+          a cache cluster, DAX assigns a 60-minute maintenance window on a randomly
+          selected day of the week.\n\n_Required_: No\n\n_Type_: String\n\n_Update
+          requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)\n\n"
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      ReplicationFactor:
+        description: |+
+          The number of nodes in the DAX cluster. A replication factor of 1 will create a single-node cluster, without any read replicas. For additional fault tolerance, you can create a multiple node cluster with one or more read replicas. To do this, set _ReplicationFactor_ to 2 or more.
+
+          Note
+
+          AWS recommends that you have at least two read replicas per cluster.
+
+          _Required_: Yes
+
+          _Type_: Integer
+
+          _Update requires_: [Some interruptions](using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt)
+
+        required: 'yes'
+        type: Number
+        update_requires: some_interruptions
+      SecurityGroupIds:
+        description: |+
+          A list of security group IDs to be assigned to each node in the DAX cluster. (Each of the security group ID is system-generated.)
+
+          If this parameter is not specified, DAX assigns the default VPC security group to each node.
+
+          _Required_: No
+
+          _Type_: List of strings
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: List<String>
+        update_requires: no_interruption
+      SubnetGroupName:
+        description: |+
+          The name of the subnet group to be used for the replication group.
+
+          Important
+
+          DAX clusters can only run in an Amazon VPC environment. All of the subnets that you specify in a subnet group must exist in the same VPC.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: Updates are not supported.
+
+        required: 'yes'
+        type: String
+        update_requires: 
+      Tags:
+        description: |+
+          A map of tags to associate with the DAX cluster.
+
+          _Required_: No
+
+          _Type_: String to string map
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String to string map
+        update_requires: no_interruption
+    return_values:
+      Ref:
+        description: |-
+          When you provide the logical ID of this resource to the `Ref` intrinsic function, `Ref` returns the ARN of the created DAX cluster. For example:
+
+          Copy{ "Ref": "MyDAXCluster" }
+
+          Returns a value similar to the following:
+
+          CopyMyDAXCluster
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+      Name:
+        description: |+
+          Returns the name of the DAX cluster. For example:
+
+              Copy{ "Fn::GetAtt": ["MyDAXCluster", "Arn"] }
+
+          Returns a value similar to the following:
+
+              Copyarn:aws:dax:us-east-1:111122223333:cache/MyDAXCluster
+
+      ClusterDiscoveryEndpoint:
+        description: |+
+          Returns the configuation endpoint of the DAX cluster. For example:
+
+              Copy{ "Fn::GetAtt": ["MyDAXCluster", "ClusterDiscoveryEndpoint"] }
+
+          Returns a value similar to the following:
+
+              Copymydaxcluster.0h3d6x.clustercfg.dax.use1.cache.amazonaws.com:8111
+
+    examples: {}
+  AWS::DAX::ParameterGroup:
+    description: |-
+      Use the AWS CloudFormation `AWS::DAX::ParameterGroup` resource to create a parameter group for use with Amazon DynamoDB.
+
+      For more information, see [`ParameterGroup`](http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_ParameterGroup.html) in the _Amazon DynamoDB Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dax-parametergroup.html
+    properties:
+      ParameterGroupName:
+        description: |+
+          The name of the parameter group.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: Updates are not supported.
+
+        required: 'no'
+        type: String
+        update_requires: 
+      Description:
+        description: |+
+          A description of the parameter group.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt);
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      ParameterNameValues:
+        description: |+
+          A map of DAX parameter names and values.
+
+          _Required_: No
+
+          _Type_: String to string map
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String to string map
+        update_requires: no_interruption
+    return_values:
+      Ref:
+        description: |-
+          When you provide the logical ID of this resource to the `Ref` intrinsic function, `Ref` returns the ARN of the created parameter group. For example:
+
+          Copy{ "Ref": "MyDAXParameterGroup" }
+
+          Returns a value similar to the following:
+
+          Copymy-dax-parameter-group
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+      ParameterGroupName:
+        description: |+
+          Returns the name of the parameter group. For example:
+
+              Copy{ "Fn::GetAtt": ["MyDAXParameterGroup", "ParameterGroupName"] }
+
+          Returns a value similar to the following:
+
+              Copymydaxparametergroup
+
+    examples: {}
+  AWS::DAX::SubnetGroup:
+    description: |-
+      Use the AWS CloudFormation `AWS::DAX::SubnetGroup` resource to create a subnet group for use with DAX (DynamoDB Accelerator).
+
+      For more information, see [`SubnetGroup`](http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_SubnetGroup.html) in the _Amazon DynamoDB Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dax-subnetgroup.html
+    properties:
+      SubnetGroupName:
+        description: |+
+          The name of the subnet group.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: Updates are not supported.
+
+        required: 'no'
+        type: String
+        update_requires: 
+      Description:
+        description: |+
+          The description of the subnet group.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      SubnetIds:
+        description: |+
+          A list of subnets associated with the subnet group.
+
+          _Required_: No
+
+          _Type_: List of strings;
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: List<strings;>
+        update_requires: no_interruption
+    return_values:
+      Ref:
+        description: |-
+          When you provide the logical ID of this resource to the `Ref` intrinsic function, `Ref` returns the ARN of the created activity. For example:
+
+          Copy{ "Ref": "MyDAXSubnetGroup" }
+
+          Returns a value similar to the following:
+
+          Copymy-dax-subnet-group
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+      SubnetGroupName:
+        description: |+
+          Returns the name of the subnet group. For example:
+
+              Copy{ "Fn::GetAtt": ["MyDAXSubnetGroup", "SubnetGroupName"] }
+
+          Returns a value similar to the following:
+
+              Copymy-dax-subnet-group
+
+    examples: {}
   AWS::DirectoryService::MicrosoftAD:
     description: The `AWS::DirectoryService::MicrosoftAD` resource creates a Microsoft
       Active Directory in AWS so that your directory users and groups can access the
@@ -5663,9 +5988,8 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Alias:
-        description: |+
-          The alias for a directory. For example: `d-12373a053a` or `alias4-mydirectory-12345abcgmzsk` (if you have the `CreateAlias` property set to true).
-
+        description: "The alias for a directory. For example: `d-12373a053a` or `alias4-mydirectory-12345abcgmzsk`
+          (if you have the `CreateAlias` property set to true).\n\n"
       DnsIpAddresses:
         description: |+
           The IP addresses of the DNS servers for the directory, such as `[
@@ -5798,9 +6122,8 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Alias:
-        description: |+
-          The alias for a directory. For example: `d-12373a053a` or `alias4-mydirectory-12345abcgmzsk` (if you have the `CreateAlias` property set to true).
-
+        description: "The alias for a directory. For example: `d-12373a053a` or `alias4-mydirectory-12345abcgmzsk`
+          (if you have the `CreateAlias` property set to true).\n\n"
       DnsIpAddresses:
         description: |+
           The IP addresses of the DNS servers for the directory, such as `[
@@ -6599,12 +6922,12 @@ resources:
 
           _Required_: Yes
 
-          _Type_: List of [DynamoDB Attribute Definitions](aws-properties-dynamodb-attributedef.html)
+          _Type_: List of [DynamoDB Table AttributeDefinitions](aws-properties-dynamodb-attributedef.html)
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
         required: 'yes'
-        type: List<DynamoDB Attribute Definitions>
+        type: List<DynamoDB Table AttributeDefinitions>
         update_requires: no_interruption
       GlobalSecondaryIndexes:
         description: "Global secondary indexes to be created on the table. You can
@@ -6618,7 +6941,7 @@ resources:
           command.\n\nIf you add or delete an index during an update, we recommend
           that you don't update any other resources. If your stack fails to update
           and is rolled back while adding a new index, you must manually delete the
-          index.\n\n_Required_: No\n\n_Type_: List of [DynamoDB Global Secondary Indexes](aws-properties-dynamodb-gsi.html)\n\n_Update
+          index.\n\n_Required_: No\n\n_Type_: List of [DynamoDB Table GlobalSecondaryIndexes](aws-properties-dynamodb-gsi.html)\n\n_Update
           requires_: Updates are not supported. The following are exceptions:\n\n-
           \n\nIf you update only the provisioned throughput values of global secondary
           indexes, you can update the table [without interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt).\n\n-
@@ -6626,7 +6949,7 @@ resources:
           If you do both in the same update (for example, by changing the index's
           logical ID), the update fails.\n\n"
         required: 'no'
-        type: List<DynamoDB Global Secondary Indexes>
+        type: List<DynamoDB Table GlobalSecondaryIndexes>
         update_requires: 
       KeySchema:
         description: |+
@@ -6634,12 +6957,12 @@ resources:
 
           _Required_: Yes
 
-          _Type_: List of [DynamoDB Key Schema](aws-properties-dynamodb-keyschema.html)
+          _Type_: List of [DynamoDB Table KeySchema](aws-properties-dynamodb-keyschema.html)
 
           _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 
         required: 'yes'
-        type: List<DynamoDB Key Schema>
+        type: List<DynamoDB Table KeySchema>
         update_requires: replacement
       LocalSecondaryIndexes:
         description: |+
@@ -6647,27 +6970,25 @@ resources:
 
           _Required_: No
 
-          _Type_: List of [DynamoDB Local Secondary Indexes](aws-properties-dynamodb-lsi.html)
+          _Type_: List of [DynamoDB Table LocalSecondaryIndexes](aws-properties-dynamodb-lsi.html)
 
           _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 
         required: 'no'
-        type: List<DynamoDB Local Secondary Indexes>
+        type: List<DynamoDB Table LocalSecondaryIndexes>
         update_requires: replacement
       ProvisionedThroughput:
         description: |+
-          Throughput for the specified table, which consists of values for `ReadCapacityUnits` and `WriteCapacityUnits`. For more information about the contents of a provisioned throughput structure, see [DynamoDB Provisioned Throughput](aws-properties-dynamodb-provisionedthroughput.html).
+          Throughput for the specified table, which consists of values for `ReadCapacityUnits` and `WriteCapacityUnits`. For more information about the contents of a provisioned throughput structure, see [Amazon DynamoDB Table ProvisionedThroughput](aws-properties-dynamodb-provisionedthroughput.html).
 
           _Required_: Yes
 
-          _Type_: [DynamoDB Provisioned Throughput](aws-properties-dynamodb-provisionedthroughput.html)
+          _Type_: [DynamoDB Table ProvisionedThroughput](aws-properties-dynamodb-provisionedthroughput.html)
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
         required: 'yes'
-        type: |-
-          DynamoDB Provisioned
-                                              Throughput
+        type: DynamoDB Table ProvisionedThroughput
         update_requires: no_interruption
       StreamSpecification:
         description: |+
@@ -6680,9 +7001,7 @@ resources:
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt) to the table. However, the stream is replaced.
 
         required: 'no'
-        type: |-
-          DynamoDB Table
-                                              StreamSpecification
+        type: DynamoDB Table StreamSpecification
         update_requires: no_interruption
       TableName:
         description: |+
@@ -6738,9 +7057,8 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
-        description: |+
-          The Amazon Resource Name (ARN) of the DynamoDB table, such as `arn:aws:dynamodb:us-east-2:123456789012:table/myDynamoDBTable`.
-
+        description: "The Amazon Resource Name (ARN) of the DynamoDB table, such as
+          `arn:aws:dynamodb:us-east-2:123456789012:table/myDynamoDBTable`.\n\n"
       StreamArn:
         description: |+
           The ARN of the DynamoDB stream, such as `arn:aws:dynamodb:us-east-1:123456789012:table/testddbstack-myDynamoDBTable-012A1SL7SMP5Q/stream/2015-11-30T20:10:00.000`.
@@ -6992,9 +7310,9 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       AllocationId:
-        description: |+
-          The ID that AWS assigns to represent the allocation of the address for use with Amazon VPC. This is returned only for VPC elastic IP addresses. Example return value: `eipalloc-5723d13e`
-
+        description: "The ID that AWS assigns to represent the allocation of the address
+          for use with Amazon VPC. This is returned only for VPC elastic IP addresses.
+          Example return value: `eipalloc-5723d13e`\n\n"
     examples: {}
   AWS::EC2::EIPAssociation:
     description: |-
@@ -7627,21 +7945,17 @@ resources:
           You can retrieve a list of all Availability Zones for a region by using the [`Fn::GetAZs`](intrinsic-function-reference-getavailabilityzones.html) intrinsic function.
 
       PrivateDnsName:
-        description: |+
-          The private DNS name of the specified instance. For example: `ip-10-24-34-0.ec2.internal`.
-
+        description: "The private DNS name of the specified instance. For example:
+          `ip-10-24-34-0.ec2.internal`.\n\n"
       PublicDnsName:
-        description: |+
-          The public DNS name of the specified instance. For example: `ec2-107-20-50-45.compute-1.amazonaws.com`.
-
+        description: "The public DNS name of the specified instance. For example:
+          `ec2-107-20-50-45.compute-1.amazonaws.com`.\n\n"
       PrivateIp:
-        description: |+
-          The private IP address of the specified instance. For example: `10.24.34.0`.
-
+        description: "The private IP address of the specified instance. For example:
+          `10.24.34.0`.\n\n"
       PublicIp:
-        description: |+
-          The public IP address of the specified instance. For example: `192.0.2.0`.
-
+        description: "The public IP address of the specified instance. For example:
+          `192.0.2.0`.\n\n"
     examples: {}
   AWS::EC2::InternetGateway:
     description: Creates a new Internet gateway in your AWS account. After creating
@@ -8032,13 +8346,11 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       PrimaryPrivateIpAddress:
-        description: |+
-          Returns the primary private IP address of the network interface. For example, `10.0.0.192`.
-
+        description: "Returns the primary private IP address of the network interface.
+          For example, `10.0.0.192`.\n\n"
       SecondaryPrivateIpAddresses:
-        description: |+
-          Returns the secondary private IP addresses of the network interface. For example, `["10.0.0.161", "10.0.0.162", "10.0.0.163"]`.
-
+        description: "Returns the secondary private IP addresses of the network interface.
+          For example, `[\"10.0.0.161\", \"10.0.0.162\", \"10.0.0.163\"]`.\n\n"
     examples: {}
   AWS::EC2::NetworkInterfaceAttachment:
     description: Attaches an elastic network interface (ENI) to an Amazon EC2 instance.
@@ -8468,9 +8780,7 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       GroupId:
-        description: |+
-          The group ID of the specified security group, such as `sg-94b3a1f6`.
-
+        description: "The group ID of the specified security group, such as `sg-94b3a1f6`.\n\n"
     examples: {}
   AWS::EC2::SecurityGroupEgress:
     description: |-
@@ -8893,17 +9203,13 @@ resources:
               { "Fn::GetAtt" : ["mySubnet", "AvailabilityZone"] }
 
       Ipv6CidrBlocks:
-        description: |+
-          A list of IPv6 CIDR blocks that are associated with the subnet, such as `[2001:db8:1234:1a00::/64]`.
-
+        description: "A list of IPv6 CIDR blocks that are associated with the subnet,
+          such as `[2001:db8:1234:1a00::/64]`.\n\n"
       NetworkAclAssociationId:
-        description: |+
-          The ID of the network ACL that is associated with the subnet's VPC, such as `acl-5fb85d36`.
-
+        description: "The ID of the network ACL that is associated with the subnet's
+          VPC, such as `acl-5fb85d36`.\n\n"
       VpcId:
-        description: |+
-          The ID of the subnet's VPC, such as `vpc-11ad4878`.
-
+        description: "The ID of the subnet's VPC, such as `vpc-11ad4878`.\n\n"
     examples: {}
   AWS::EC2::SubnetCidrBlock:
     description: The `AWS::EC2::SubnetCidrBlock` resource associates a single IPv6
@@ -8984,9 +9290,8 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       AssociationId:
-        description: |+
-          Returns the value of this object's [SubnetId](aws-resource-ec2-subnet-network-acl-assoc.html#cfn-ec2-subnetnetworkaclassociation-associationid) property.
-
+        description: "Returns the value of this object's [SubnetId](aws-resource-ec2-subnet-network-acl-assoc.html#cfn-ec2-subnetnetworkaclassociation-associationid)
+          property.\n\n"
     examples: {}
   AWS::EC2::SubnetRouteTableAssociation:
     description: Associates a subnet with a route table.
@@ -9307,17 +9612,16 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       CidrBlock:
-        description: |+
-          The set of IP addresses for the VPC. For example, `10.0.0.0/16`.
-
+        description: "The set of IP addresses for the VPC. For example, `10.0.0.0/16`.\n\n"
+      CidrBlockAssociations:
+        description: "A list of IPv4 CIDR block association IDs for the VPC. For example,
+          `[vpc-cidr-assoc-0280ab6b]`.\n\n"
       DefaultNetworkAcl:
-        description: |+
-          The default network ACL ID that is associated with the VPC. For example, `acl-814dafe3`.
-
+        description: "The default network ACL ID that is associated with the VPC.
+          For example, `acl-814dafe3`.\n\n"
       DefaultSecurityGroup:
-        description: |+
-          The default security group ID that is associated with the VPC. For example, `sg-b178e0d3`.
-
+        description: "The default security group ID that is associated with the VPC.
+          For example, `sg-b178e0d3`.\n\n"
       Ipv6CidrBlocks:
         description: |+
           A list of IPv6 CIDR blocks that are associated with the VPC, such as `[
@@ -9326,7 +9630,8 @@ resources:
     examples: {}
   AWS::EC2::VPCCidrBlock:
     description: The `AWS::EC2::VPCCidrBlock` resource associates a single Amazon-provided
-      IPv6 CIDR block with an Amazon VPC VPC.
+      IPv6 CIDR block or a single user-specified IPv4 CIDR block with a Virtual Private
+      Cloud (VPC).
     url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpccidrblock.html
     properties:
       AmazonProvidedIpv6CidrBlock:
@@ -9341,6 +9646,19 @@ resources:
 
         required: 'no'
         type: Boolean
+        update_requires: replacement
+      CidrBlock:
+        description: |+
+          An IPv4 CIDR block to associate with the VPC.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: String
         update_requires: replacement
       VpcId:
         description: |+
@@ -9866,9 +10184,8 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
-        description: |+
-          The Amazon Resource Name (ARN) of the Amazon ECS cluster, such as `arn:aws:ecs:us-east-2:123456789012:cluster/MyECSCluster`.
-
+        description: "The Amazon Resource Name (ARN) of the Amazon ECS cluster, such
+          as `arn:aws:ecs:us-east-2:123456789012:cluster/MyECSCluster`.\n\n"
     examples: {}
   AWS::ECS::Service:
     description: The `AWS::ECS::Service` resource creates an Amazon EC2 Container
@@ -9949,15 +10266,15 @@ resources:
         update_requires: no_interruption
       LoadBalancers:
         description: |+
-          A list of load balancer objects to associate with the cluster. For information about the number of load balancers that you can specify per service, see [Service Load Balancing](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html) in the _Amazon EC2 Container Service Developer Guide_.
+          A list of load balancer objects to associate with the cluster. If you specify the `Role` property, `LoadBalancers` must be specified as well. For information about the number of load balancers that you can specify per service, see [Service Load Balancing](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html) in the _Amazon EC2 Container Service Developer Guide_.
 
-          _Required_: No
+          _Required_: Conditional
 
           _Type_: List of [Amazon EC2 Container Service Service LoadBalancers](aws-properties-ecs-service-loadbalancers.html)
 
           _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 
-        required: 'no'
+        required: conditional
         type: List<Amazon EC2 Container Service Service>
         update_requires: replacement
       Role:
@@ -10014,9 +10331,7 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Name:
-        description: |+
-          The name of the Amazon ECS service, such as `sample-webapp`.
-
+        description: "The name of the Amazon ECS service, such as `sample-webapp`.\n\n"
     examples: {}
   AWS::ECS::TaskDefinition:
     description: The `AWS::ECS::TaskDefinition` resource describes the container and
@@ -10575,21 +10890,17 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       ConfigurationEndpoint.Address:
-        description: |+
-          The DNS address of the configuration endpoint for the Memcached cache cluster.
-
+        description: "The DNS address of the configuration endpoint for the Memcached
+          cache cluster.\n\n"
       ConfigurationEndpoint.Port:
-        description: |+
-          The port number of the configuration endpoint for the Memcached cache cluster.
-
+        description: "The port number of the configuration endpoint for the Memcached
+          cache cluster.\n\n"
       RedisEndpoint.Address:
-        description: |+
-          The DNS address of the configuration endpoint for the Redis cache cluster.
-
+        description: "The DNS address of the configuration endpoint for the Redis
+          cache cluster.\n\n"
       RedisEndpoint.Port:
-        description: |+
-          The port number of the configuration endpoint for the Redis cache cluster.
-
+        description: "The port number of the configuration endpoint for the Redis
+          cache cluster.\n\n"
     examples: {}
   AWS::ElastiCache::ParameterGroup:
     description: The AWS::ElastiCache::ParameterGroup type creates a new cache parameter
@@ -10667,12 +10978,14 @@ resources:
           information about Multi-AZ constraints, see [Replication with Multi-AZ and
           Automatic Failover (Redis)](http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/AutoFailover.html)
           in the _Amazon ElastiCache User Guide_.\n\nNote\n\nYou cannot enable automatic
-          failover for Redis versions earlier than 2.8.6 or for T1 and T2 cache node
-          types.\n\nImportant\n\nIf you specify the `PrimaryClusterId`, you can use
-          only the following additional parameters:\n\n- \n\n`AutomaticFailoverEnabled`\n\n-
-          \n\n`NodeGroupConfiguration`\n\n- \n\n`NumCacheClusters`\n\n- \n\n`NumNodeGroups`\n\n-
-          \n\n`PreferredCacheClusterAZs`\n\n- \n\n`ReplicationGroupDescription`\n\n_Required_:
-          No\n\n_Type_: Boolean\n\n_Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)\n\n"
+          failover for Redis versions earlier than 2.8.6 or for T1 cache node types.
+          Automatic failover is supported on T2 node types only if you are running
+          Redis version 3.2.4 or later with cluster mode enabled.\n\nImportant\n\nIf
+          you specify the `PrimaryClusterId`, you can use only the following additional
+          parameters:\n\n- \n\n`AutomaticFailoverEnabled`\n\n- \n\n`NodeGroupConfiguration`\n\n-
+          \n\n`NumCacheClusters`\n\n- \n\n`NumNodeGroups`\n\n- \n\n`PreferredCacheClusterAZs`\n\n-
+          \n\n`ReplicationGroupDescription`\n\n_Required_: No\n\n_Type_: Boolean\n\n_Update
+          requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)\n\n"
         required: 'no'
         type: Boolean
         update_requires: no_interruption
@@ -11014,37 +11327,30 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       ConfigurationEndPoint.Address:
-        description: |+
-          The DNS hostname of the cache node.
-
+        description: "The DNS hostname of the cache node.\n\n"
       ConfigurationEndPoint.Port:
-        description: |+
-          The port number that the cache engine is listening on.
-
+        description: "The port number that the cache engine is listening on.\n\n"
       PrimaryEndPoint.Address:
-        description: |+
-          The DNS address of the primary read-write cache node.
-
+        description: "The DNS address of the primary read-write cache node.\n\n"
       PrimaryEndPoint.Port:
-        description: |+
-          The number of the port that the primary read-write cache engine is listening on.
-
+        description: "The number of the port that the primary read-write cache engine
+          is listening on.\n\n"
       ReadEndPoint.Addresses:
-        description: |+
-          A string with a list of endpoints for the read-only replicas. The order of the addresses maps to the order of the ports from the `ReadEndPoint.Ports` attribute.
-
+        description: "A string with a list of endpoints for the read-only replicas.
+          The order of the addresses maps to the order of the ports from the `ReadEndPoint.Ports`
+          attribute.\n\n"
       ReadEndPoint.Ports:
-        description: |+
-          A string with a list of ports for the read-only replicas. The order of the ports maps to the order of the addresses from the `ReadEndPoint.Addresses` attribute.
-
+        description: "A string with a list of ports for the read-only replicas. The
+          order of the ports maps to the order of the addresses from the `ReadEndPoint.Addresses`
+          attribute.\n\n"
       ReadEndPoint.Addresses.List:
-        description: |+
-          A list of endpoints for the read-only replicas. The order of the addresses maps to the order of the ports from the `ReadEndPoint.Ports.List` attribute.
-
+        description: "A list of endpoints for the read-only replicas. The order of
+          the addresses maps to the order of the ports from the `ReadEndPoint.Ports.List`
+          attribute.\n\n"
       ReadEndPoint.Ports.List:
-        description: |+
-          A list of ports for the read-only replicas. The order of the ports maps to the order of the addresses from the `ReadEndPoint.Addresses.List` attribute.
-
+        description: "A list of ports for the read-only replicas. The order of the
+          ports maps to the order of the addresses from the `ReadEndPoint.Addresses.List`
+          attribute.\n\n"
     examples: {}
   AWS::ElastiCache::SecurityGroup:
     description: |-
@@ -11624,12 +11930,12 @@ resources:
 
           _Required_: No
 
-          _Type_: [ElasticLoadBalancing HealthCheck Type](aws-properties-ec2-elb-health-check.html).
+          _Type_: [ElasticLoadBalancing LoadBalancer HealthCheck](aws-properties-ec2-elb-health-check.html).
 
           _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement) if you did not have a health check specified and you are adding one or if you are removing a health check. Otherwise, update requires [no interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt).
 
         required: 'no'
-        type: ElasticLoadBalancing HealthCheck Type.
+        type: ElasticLoadBalancing LoadBalancer HealthCheck.
         update_requires: replacement
       Instances:
         description: |+
@@ -11807,10 +12113,10 @@ resources:
     examples: {}
   AWS::ElasticLoadBalancingV2::Listener:
     description: The `AWS::ElasticLoadBalancingV2::Listener` resource creates a listener
-      for an Elastic Load Balancing Application load balancer. The listener checks
-      for connection requests and forwards them to one or more target groups. For
-      more information, see the [Listeners for Your Application Load Balancers](http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html)
-      in the _Application Load Balancers Guide_.
+      for an Elastic Load Balancing Application or Network load balancer. The listener
+      checks for connection requests and forwards them to one or more target groups.
+      For more information, see [Getting Started](http://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/load-balancer-getting-started.html)
+      in the _Elastic Load Balancing User Guide_.
     url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html
     properties:
       Certificates:
@@ -11905,9 +12211,8 @@ resources:
   AWS::ElasticLoadBalancingV2::ListenerRule:
     description: The `AWS::ElasticLoadBalancingV2::ListenerRule` resource defines
       which requests an Elastic Load Balancing listener takes action on and the action
-      that it takes. For more information, see the [Listeners for Your Application
-      Load Balancers](http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html)
-      in the _Application Load Balancers Guide_.
+      that it takes. For more information, see [Getting Started](http://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/load-balancer-getting-started.html)
+      in the _Elastic Load Balancing User Guide_.
     url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenerrule.html
     properties:
       Actions:
@@ -11977,13 +12282,11 @@ resources:
     examples: {}
   AWS::ElasticLoadBalancingV2::LoadBalancer:
     description: |-
-      The `AWS::ElasticLoadBalancingV2::LoadBalancer` resource creates an Elastic Load Balancing Application load balancer that distributes incoming application traffic across multiple targets (such as EC2 instances) in multiple Availability Zones. For more information, see the [_Application Load Balancers Guide_](http://docs.aws.amazon.com/elasticloadbalancing/latest/application/).
+      The `AWS::ElasticLoadBalancingV2::LoadBalancer` resource creates an Elastic Load Balancing Application or Network Load Balancer. For more information, see the see [Getting Started](http://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/load-balancer-getting-started.html) in the _Elastic Load Balancing User Guide_.
 
       Note
 
-      AWS CloudFormation does not automatically create tags (key–value pairs) for an Elastic Load Balancing Application load balancer. You must use the [`Tags`](aws-resource-elasticloadbalancingv2-loadbalancer.html#cfn-elasticloadbalancingv2-loadbalancer-tags) property to create tags to associate with the load balancer.
-
-      [Elastic Load Balancing API Reference version 2015-12-01](http://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/)
+      AWS CloudFormation does not automatically create tags (key–value pairs) for an Elastic Load Balancing load balancer. You must use the [`Tags`](aws-resource-elasticloadbalancingv2-loadbalancer.html#cfn-elasticloadbalancingv2-loadbalancer-tags) property to create tags to associate with the load balancer.
     url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html
     properties:
       LoadBalancerAttributes:
@@ -12014,9 +12317,11 @@ resources:
         update_requires: replacement
       Scheme:
         description: |+
-          Specifies whether the load balancer is internal or Internet-facing. An internal load balancer routes requests to targets using private IP addresses. An Internet-facing load balancer routes requests from clients over the Internet to targets in your public subnets.
+          Specifies whether the load balancer is internal or Internet-facing. Valid values are `internet-facing` and `internal`. The default is `internet-facing`.
 
-          For valid and default values, see the `Scheme` parameter for the `CreateLoadBalancer` action in the _Elastic Load Balancing API Reference version 2015-12-01_.
+          The nodes of an Internet-facing load balancer have public IP addresses. The DNS name of an Internet-facing load balancer is publicly resolvable to the public IP addresses of the nodes. Therefore, Internet-facing load balancers can route requests from clients over the Internet.
+
+          The nodes of an internal load balancer have only private IP addresses. The DNS name of an internal load balancer is publicly resolvable to the private IP addresses of the nodes. Therefore, internal load balancers can only route requests from clients with access to the VPC for the load balancer.
 
           _Required_: No
 
@@ -12029,7 +12334,7 @@ resources:
         update_requires: replacement
       SecurityGroups:
         description: |+
-          Specifies a list of the IDs of the security groups to assign to the load balancer.
+          [Application Load Balancers] Specifies a list of the IDs of the security groups to assign to the load balancer.
 
           _Required_: No
 
@@ -12042,17 +12347,36 @@ resources:
         update_requires: no_interruption
       Subnets:
         description: |+
-          Specifies a list of at least two IDs of the subnets to associate with the load balancer. The subnets must be in different Availability Zones.
+          The IDs of the subnets to attach to the load balancer. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.
 
-          _Required_: Yes
+          [Application Load Balancers] You must specify subnets from at least two Availability Zones.
+
+          _Required_: No
 
           _Type_: List of strings
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
-        required: 'yes'
+        required: 'no'
         type: List<String>
         update_requires: no_interruption
+      SubnetMappings:
+        description: |+
+          The IDs of the subnets to attach to the load balancer. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.
+
+          [Application Load Balancers] The load balancer is allocated one static IP address per subnet. You cannot specify your own Elastic IP addresses.
+
+          [Network Load Balancers] You can specify one Elastic IP address per subnet.
+
+          _Required_: No
+
+          _Type_: A list of [Elastic Load Balancing LoadBalancer SubnetMapping](aws-properties-elasticloadbalancingv2-loadbalancer-subnetmapping.html)
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: A list of Elastic Load Balancing LoadBalancer SubnetMapping
+        update_requires: replacement
       Tags:
         description: |+
           Specifies an arbitrary set of tags (key–value pairs) to associate with this load balancer. Use tags to manage your resources.
@@ -12066,9 +12390,22 @@ resources:
         required: 'no'
         type: AWS CloudFormation Resource Tags
         update_requires: no_interruption
+      Type:
+        description: |+
+          Specifies the type of load balancer to create. Valid values are `application` and `network`.The default is `application`.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: String
+        update_requires: replacement
       IpAddressType:
         description: |+
-          The type of IP addresses that are used by the load balancer's subnets, such as `ipv4` (for IPv4 addresses) or `dualstack` (for IPv4 and IPv6 addresses). For valid values, see the `IpAddressType` parameter for the `CreateLoadBalancer` action in the _Elastic Load Balancing API Reference version 2015-12-01_.
+          [Application Load Balancers] The type of IP addresses that are used by the load balancer's subnets, such as `ipv4` (for IPv4 addresses) or `dualstack` (for IPv4 and IPv6 addresses). For valid values, see the `IpAddressType` parameter for the `CreateLoadBalancer` action in the _Elastic Load Balancing API Reference version 2015-12-01_.
 
           _Required_: No
 
@@ -12088,32 +12425,23 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       DNSName:
-        description: |+
-          The DNS name for the Application load balancer, for example `my-load-balancer-424835706.us-west-2.elb.amazonaws.com`.
-
+        description: "The DNS name for the load balancer, for example `my-load-balancer-424835706.us-west-2.elb.amazonaws.com`.\n\n"
       CanonicalHostedZoneID:
-        description: |+
-          The ID of the Amazon Route&nbsp;53 hosted zone associated with the load balancer, for example `Z2P70J7EXAMPLE`.
-
+        description: "The ID of the Amazon Route&nbsp;53 hosted zone associated with
+          the load balancer, for example `Z2P70J7EXAMPLE`.\n\n"
       LoadBalancerFullName:
-        description: |+
-          The full name of the Application load balancer, for example `app/my-load-balancer/50dc6c495c0c9188`.
-
+        description: "The full name of the load balancer, for example `app/my-load-balancer/50dc6c495c0c9188`.\n\n"
       LoadBalancerName:
-        description: |+
-          The name of the Application load balancer, for example `my-load-balancer`.
-
+        description: "The name of the load balancer, for example `my-load-balancer`.\n\n"
       SecurityGroups:
-        description: |+
-          The IDs of the security groups for the Application load balancer, for example `sg-123456a`.
-
+        description: "The IDs of the security groups for the load balancer, for example
+          `sg-123456a`.\n\n"
     examples: {}
   AWS::ElasticLoadBalancingV2::TargetGroup:
     description: The `AWS::ElasticLoadBalancingV2::TargetGroup` resource creates an
       Elastic Load Balancing target group that routes requests to one or more registered
-      targets, such as EC2 instances. For more information, see the [Target Groups
-      for Your Application Load Balancers](http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html)
-      in the _Application Load Balancers Guide_.
+      targets, such as EC2 instances. For more information, see [Getting Started](http://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/load-balancer-getting-started.html)
+      in the _Elastic Load Balancing User Guide_.
     url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html
     properties:
       HealthCheckIntervalSeconds:
@@ -12295,6 +12623,19 @@ resources:
         required: 'no'
         type: List<Elastic Load Balancing TargetGroup TargetDescription>
         update_requires: no_interruption
+      TargetType:
+        description: |+
+          The registration type of the targets in this target group. Valid values are `instance` and `ip`. The default is `instance`.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: String
+        update_requires: replacement
       UnhealthyThresholdCount:
         description: |+
           The number of consecutive failed health checks that are required before a target is considered unhealthy.
@@ -12334,9 +12675,7 @@ resources:
                                               ]`.
 
       TargetGroupFullName:
-        description: |+
-          The full name of the target group, such as `targetgroup/my-target-group/cbf133c568e0d028`.
-
+        description: "The full name of the target group, such as `targetgroup/my-target-group/cbf133c568e0d028`.\n\n"
     examples: {}
   AWS::Elasticsearch::Domain:
     description: The `AWS::Elasticsearch::Domain` resource creates an Amazon Elasticsearch
@@ -12474,13 +12813,10 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       DomainArn:
-        description: |+
-          The Amazon Resource Name (ARN) of the domain, such as `arn:aws:es:us-west-2:123456789012:domain/mystack-elasti-1ab2cdefghij`.
-
+        description: "The Amazon Resource Name (ARN) of the domain, such as `arn:aws:es:us-west-2:123456789012:domain/mystack-elasti-1ab2cdefghij`.\n\n"
       DomainEndpoint:
-        description: |+
-          The domain-specific endpoint that is used to submit index, search, and data upload requests to an Amazon ES domain, such as `search-mystack-elasti-1ab2cdefghij-ab1c2deckoyb3hofw7wpqa3cm.us-west-2.es.amazonaws.com`.
-
+        description: "The domain-specific endpoint that is used to submit index, search,
+          and data upload requests to an Amazon ES domain, such as `search-mystack-elasti-1ab2cdefghij-ab1c2deckoyb3hofw7wpqa3cm.us-west-2.es.amazonaws.com`.\n\n"
     examples: {}
   AWS::EMR::Cluster:
     description: The `AWS::EMR::Cluster` resource creates an Amazon EMR cluster, which
@@ -12696,9 +13032,7 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       MasterPublicDNS:
-        description: |+
-          The public DNS name of the master node (instance), such as `ec2-12-123-123-123.us-west-2.compute.amazonaws.com`.
-
+        description: "The public DNS name of the master node (instance), such as `ec2-12-123-123-123.us-west-2.compute.amazonaws.com`.\n\n"
     examples: {}
   AWS::EMR::InstanceFleetConfig:
     description: |-
@@ -12960,13 +13294,13 @@ resources:
     description: The `AWS::EMR::SecurityConfiguration` resource creates a security
       configuration that is stored in the Amazon EMR web service. You can specify
       the security configuration when creating a cluster. For more information, see
-      [Configure Security Groups](http://docs.aws.amazon.com//emr/latest/ManagementGuide/emr-security-groups.html)
-      in the _Amazon EMR Management Guide_.
+      [Specifying Amazon EMR Encryption Options Using a Security Configuration](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-encryption-enable-security-configuration.html)
+      in the _Amazon EMR Release Guide_.
     url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-securityconfiguration.html
     properties:
       Name:
         description: |+
-          The name of the security configuration.
+          The name of the security configuration. For a list of valid parameters for encryption settings, see [AWS CLI Security Configuration JSON Reference](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-encryption-enable-security-configuration.html#emr-encryption-cli-parameters) in the _Amazon EMR Release Guide_.
 
           _Required_: No
 
@@ -13167,9 +13501,7 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
-        description: |+
-          The event rule Amazon Resource Name (ARN), such as `arn:aws:events:``us-east-2``:123456789012:rule/example`.
-
+        description: "The event rule Amazon Resource Name (ARN), such as `arn:aws:events:``us-east-2``:123456789012:rule/example`.\n\n"
     examples: {}
   AWS::GameLift::Alias:
     description: The `AWS::GameLift::Alias` resource creates an alias for an Amazon
@@ -13494,9 +13826,8 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       SecretAccessKey:
-        description: |+
-          Returns the secret access key for the specified `AWS::IAM::AccessKey` resource. For example: `wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY`.
-
+        description: "Returns the secret access key for the specified `AWS::IAM::AccessKey`
+          resource. For example: `wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY`.\n\n"
     examples: {}
   AWS::IAM::Group:
     description: |-
@@ -13574,9 +13905,8 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
-        description: |+
-          Returns the Amazon Resource Name (ARN) for the `AWS::IAM::Group` resource. For example: `arn:aws:iam::123456789012:group/mystack-mygroup-1DZETITOWEKVO`.
-
+        description: "Returns the Amazon Resource Name (ARN) for the `AWS::IAM::Group`
+          resource. For example: `arn:aws:iam::123456789012:group/mystack-mygroup-1DZETITOWEKVO`.\n\n"
     examples: {}
   AWS::IAM::InstanceProfile:
     description: |-
@@ -14073,9 +14403,8 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
-        description: |+
-          Returns the Amazon Resource Name (ARN) for the specified AWS::IAM::User resource. For example: `arn:aws:iam::123456789012:user/mystack-myuser-1CCXAFG2H2U4D`.
-
+        description: "Returns the Amazon Resource Name (ARN) for the specified AWS::IAM::User
+          resource. For example: `arn:aws:iam::123456789012:user/mystack-myuser-1CCXAFG2H2U4D`.\n\n"
     examples: {}
   AWS::IAM::UserToGroupAddition:
     description: |-
@@ -14210,9 +14539,8 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
-        description: |+
-          The Amazon Resource Name (ARN) of the AWS IoT policy, such as `arn:aws:iot:us-east-2:123456789012:policy/MyPolicy`.
-
+        description: "The Amazon Resource Name (ARN) of the AWS IoT policy, such as
+          `arn:aws:iot:us-east-2:123456789012:policy/MyPolicy`.\n\n"
     examples: {}
   AWS::IoT::PolicyPrincipalAttachment:
     description: |-
@@ -14360,7 +14688,7 @@ resources:
 
           _Required_: Yes
 
-          _Type_: [`TopicRulePayload`](aws-properties-iot-topicrulepayload.html) object
+          _Type_: [`TopicRulePayload`](aws-properties-iot-topicrule-topicrulepayload.html) object
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
@@ -14380,9 +14708,8 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
-        description: |+
-          The Amazon Resource Name (ARN) of the AWS IoT rule, such as `arn:aws:iot:us-east-2:123456789012:rule/MyIoTRule`.
-
+        description: "The Amazon Resource Name (ARN) of the AWS IoT rule, such as
+          `arn:aws:iot:us-east-2:123456789012:rule/MyIoTRule`.\n\n"
     examples: {}
   AWS::Kinesis::Stream:
     description: Creates an Kinesis stream that captures and transports data records
@@ -14454,9 +14781,8 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
-        description: |+
-          The Amazon resource name (ARN) of the Kinesis stream, such as `arn:aws:kinesis:``us-east-2``:123456789012:stream/mystream`.
-
+        description: "The Amazon resource name (ARN) of the Kinesis stream, such as
+          `arn:aws:kinesis:``us-east-2``:123456789012:stream/mystream`.\n\n"
     examples: {}
   AWS::KinesisAnalytics::Application:
     description: The `AWS::KinesisAnalytics::Application` resource creates an Amazon
@@ -14811,9 +15137,7 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
-        description: |+
-          The ARN of the AWS KMS key, such as `arn:aws:kms:us-west-2:123456789012:key/12a34567-8c90-1defg-af84-0bf06c1747f3`.
-
+        description: "The ARN of the AWS KMS key, such as `arn:aws:kms:us-west-2:123456789012:key/12a34567-8c90-1defg-af84-0bf06c1747f3`.\n\n"
     examples: {}
   AWS::Lambda::EventSourceMapping:
     description: The `AWS::Lambda::EventSourceMapping` resource specifies a stream
@@ -15185,9 +15509,7 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
-        description: |+
-          The ARN of the Lambda function, such as `arn:aws:lambda:us-west-2:123456789012:MyStack-AMILookUp-NT5EUXTNTXXD`.
-
+        description: "The ARN of the Lambda function, such as `arn:aws:lambda:us-west-2:123456789012:MyStack-AMILookUp-NT5EUXTNTXXD`.\n\n"
     examples: {}
   AWS::Lambda::Permission:
     description: The `AWS::Lambda::Permission` resource associates a policy statement
@@ -15208,6 +15530,19 @@ resources:
           _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 
         required: 'yes'
+        type: String
+        update_requires: replacement
+      EventSourceToken:
+        description: |+
+          A unique token that must be supplied by the principal invoking the function.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
         type: String
         update_requires: replacement
       FunctionName:
@@ -15328,9 +15663,7 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Version:
-        description: |+
-          The published version of a Lambda version, such as `1`.
-
+        description: "The published version of a Lambda version, such as `1`.\n\n"
     examples: {}
   AWS::Logs::Destination:
     description: The `AWS::Logs::Destination` resource creates an Amazon CloudWatch
@@ -15400,9 +15733,7 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
-        description: |+
-          The ARN of the CloudWatch Logs destination, such as `arn:aws:logs:us-east-2:123456789012:destination:MyDestination`.
-
+        description: "The ARN of the CloudWatch Logs destination, such as `arn:aws:logs:us-east-2:123456789012:destination:MyDestination`.\n\n"
     examples: {}
   AWS::Logs::LogGroup:
     description: The `AWS::Logs::LogGroup` resource creates an Amazon CloudWatch Logs
@@ -15447,9 +15778,8 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
-        description: |+
-          The Amazon resource name (ARN) of the CloudWatch Logs log group, such as `arn:aws:logs:us-east-1:123456789012:log-group:/mystack-testgroup-12ABC1AB12A1:*`.
-
+        description: "The Amazon resource name (ARN) of the CloudWatch Logs log group,
+          such as `arn:aws:logs:us-east-1:123456789012:log-group:/mystack-testgroup-12ABC1AB12A1:*`.\n\n"
     examples: {}
   AWS::Logs::LogStream:
     description: The `AWS::Logs::LogStream` resource creates an Amazon CloudWatch
@@ -17135,17 +17465,12 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Endpoint.Address:
-        description: |+
-          The connection endpoint for the DB cluster. For example: `mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.``us-east-2``.rds.amazonaws.com`.
-
+        description: "The connection endpoint for the DB cluster. For example: `mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.``us-east-2``.rds.amazonaws.com`.\n\n"
       Endpoint.Port:
-        description: |+
-          The port number on which the Amazon Redshift cluster accepts connections. For example: `5439`.
-
+        description: "The port number on which the Amazon Redshift cluster accepts
+          connections. For example: `5439`.\n\n"
       ReadEndpoint.Address:
-        description: |+
-          The reader endpoint for the DB cluster. For example: `mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.``us-east-2``.rds.amazonaws.com`.
-
+        description: "The reader endpoint for the DB cluster. For example: `mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.``us-east-2``.rds.amazonaws.com`.\n\n"
     examples: {}
   AWS::RDS::DBClusterParameterGroup:
     description: |-
@@ -17461,7 +17786,7 @@ resources:
         update_requires: replacement
       DBSubnetGroupName:
         description: |+
-          A DB subnet group to associate with the DB instance.
+          A DB subnet group to associate with the DB instance. If you update this value, the new subnet group must be a subnet group in a new VPC.
 
           If there is no DB subnet group, then the instance is not a VPC DB instance.
 
@@ -18367,7 +18692,7 @@ resources:
         update_requires: some_interruptions
       ClusterSecurityGroups:
         description: |+
-          A list of security groups that you want to associate with this cluster.
+          A list of security groups that you want to associate with this cluster. Applies to EC2-Classic.
 
           _Required_: No
 
@@ -18692,13 +19017,12 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Endpoint.Address:
-        description: |+
-          The connection endpoint for the Amazon Redshift cluster. For example: `examplecluster.cg034hpkmmjt.us-east-1.redshift.amazonaws.com` .
-
+        description: "The connection endpoint for the Amazon Redshift cluster. For
+          example: `examplecluster.cg034hpkmmjt.us-east-1.redshift.amazonaws.com`
+          .\n\n"
       Endpoint.Port:
-        description: |+
-          The port number on which the Amazon Redshift cluster accepts connections. For example: `5439`.
-
+        description: "The port number on which the Amazon Redshift cluster accepts
+          connections. For example: `5439`.\n\n"
     examples: {}
   AWS::Redshift::ClusterParameterGroup:
     description: Creates an Amazon Redshift parameter group that you can associate
@@ -19047,9 +19371,8 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       NameServers:
-        description: |+
-          Returns the set of name servers for the specific hosted zone. For example: `ns1.example.com`.
-
+        description: "Returns the set of name servers for the specific hosted zone.
+          For example: `ns1.example.com`.\n\n"
     examples: {}
   AWS::Route53::RecordSet:
     description: |-
@@ -19449,6 +19772,21 @@ resources:
         required: 'no'
         type: Amazon S3 Logging Configuration
         update_requires: no_interruption
+      MetricsConfigurations:
+        description: |+
+          Settings that define a metrics configuration for the CloudWatch request metrics from the bucket.
+
+          _Required_: No
+
+          _Type_: List of [Amazon S3 Bucket MetricsConfiguration](aws-properties-s3-bucket-metricsconfiguration.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+          Duplicates not allowed.
+
+        required: 'no'
+        type: List<Amazon S3 Bucket MetricsConfiguration>
+        update_requires: no_interruption
       NotificationConfiguration:
         description: |+
           Configuration that defines how Amazon S3 handles bucket notifications.
@@ -19752,9 +20090,7 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       TopicName:
-        description: |+
-          Returns the name for an Amazon SNS topic.
-
+        description: "Returns the name for an Amazon SNS topic.\n\n"
     examples: {}
   AWS::SNS::TopicPolicy:
     description: The `AWS::SNS::TopicPolicy` resource associates Amazon SNS topics
@@ -19962,9 +20298,8 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Arn:
-        description: |+
-          Returns the Amazon Resource Name (ARN) of the queue. For example: `arn:aws:sqs:``us-east-2``:123456789012:mystack-myqueue-15PG5C2FC1CW8`.
-
+        description: "Returns the Amazon Resource Name (ARN) of the queue. For example:
+          `arn:aws:sqs:``us-east-2``:123456789012:mystack-myqueue-15PG5C2FC1CW8`.\n\n"
       QueueName:
         description: |+
           Returns the queue name. For example:
@@ -20208,13 +20543,10 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       Type:
-        description: |+
-          Returns the type of the parameter. Valid values are `String` or `StringList`.
-
+        description: "Returns the type of the parameter. Valid values are `String`
+          or `StringList`.\n\n"
       Value:
-        description: |+
-          Returns the value of the parameter.
-
+        description: "Returns the value of the parameter.\n\n"
     examples: {}
   AWS::StepFunctions::Activity:
     description: |-
@@ -20388,9 +20720,8 @@ resources:
         type: List<AWS WAF IPSet IPSetDescriptors>
         update_requires: no_interruption
       Name:
-        description: |+
-          If the viewer did not use an HTTP proxy or a load balancer to send the request
-
+        description: "If the viewer did not use an HTTP proxy or a load balancer to
+          send the request\n\n"
         required: 
         type: 
         update_requires: 
@@ -20711,9 +21042,8 @@ resources:
         type: List<AWS WAF Regional IPSet IPSetDescriptors>
         update_requires: no_interruption
       Name:
-        description: |+
-          If the viewer did not use an HTTP proxy or a load balancer to send the request
-
+        description: "If the viewer did not use an HTTP proxy or a load balancer to
+          send the request\n\n"
         required: 
         type: 
         update_requires: 
