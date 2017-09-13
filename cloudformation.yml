@@ -1,5 +1,5 @@
 ---
-timestamp: 2017-09-13 10:04:55.233148000 +02:00
+timestamp: 2017-09-13 10:50:05.827622000 +02:00
 resources:
   AWS::ApiGateway::Account:
     description: |-
@@ -18275,6 +18275,12 @@ resources:
     return_values:
       Ref:
         description: ''
+      Endpoint.Address:
+        description: "- \n\n**Endpoint.Address**\n\nThe connection endpoint for the
+          database. For example: `mystack-mydb-1apw1j4phylrk.cg034hpkmmjt.``us-east-2``.rds.amazonaws.com`.\n\n"
+      Endpoint.Port:
+        description: "- \n\n**Endpoint.Port**\n\nThe port number on which the database
+          accepts connections. For example: `3306`.\n\n"
     examples: {}
   AWS::RDS::DBParameterGroup:
     description: |-
