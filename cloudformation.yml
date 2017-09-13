@@ -1,5 +1,5 @@
 ---
-timestamp: 2017-08-22 15:18:56.632232000 +02:00
+timestamp: 2017-09-13 10:04:55.233148000 +02:00
 resources:
   AWS::ApiGateway::Account:
     description: |-
@@ -205,13 +205,13 @@ resources:
         description: |+
           The ID of the `RestApi` resource in which API Gateway creates the authorizer.
 
-          _Required_: No
+          _Required_: Yes
 
           _Type_: String
 
           _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 
-        required: 'no'
+        required: 'yes'
         type: String
         update_requires: replacement
       Type:
@@ -1462,7 +1462,11 @@ resources:
         update_requires: replacement
       PolicyType:
         description: |+
-          An Application Auto Scaling policy type. For valid values, see the `PolicyType` parameter for the [PutScalingPolicy](http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/API_PutScalingPolicy.html) action in the _Application Auto Scaling API Reference_.
+          An Application Auto Scaling policy type.
+
+          Note
+
+          For DynamoDB, only `TargetTrackingScaling` is supported. For any other service, only `StepScaling` is supported.
 
           _Required_: Yes
 
@@ -2364,15 +2368,15 @@ resources:
         update_requires: replacement
       DesiredCapacity:
         description: |+
-          The number of Amazon EC2 instances that should be running in the Auto Scaling group.
+          The number of Amazon EC2 instances that should be running in the Auto Scaling group. At least one of `MaxSize`, `MinSize`, or `DesiredCapacity` must be specified.
 
-          _Required_: No
+          _Required_: Conditional
 
           _Type_: Integer
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
-        required: 'no'
+        required: conditional
         type: Number
         update_requires: no_interruption
       EndTime:
@@ -2390,28 +2394,28 @@ resources:
         update_requires: no_interruption
       MaxSize:
         description: |+
-          The maximum number of Amazon EC2 instances in the Auto Scaling group.
+          The maximum number of Amazon EC2 instances in the Auto Scaling group. At least one of `MaxSize`, `MinSize`, or `DesiredCapacity` must be specified.
 
-          _Required_: No
+          _Required_: Conditional
 
           _Type_: Integer
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
-        required: 'no'
+        required: conditional
         type: Number
         update_requires: no_interruption
       MinSize:
         description: |+
-          The minimum number of Amazon EC2 instances in the Auto Scaling group.
+          The minimum number of Amazon EC2 instances in the Auto Scaling group. At least one of `MaxSize`, `MinSize`, or `DesiredCapacity` must be specified.
 
-          _Required_: No
+          _Required_: Conditional
 
           _Type_: Integer
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
-        required: 'no'
+        required: conditional
         type: Number
         update_requires: no_interruption
       Recurrence:
@@ -5564,6 +5568,356 @@ resources:
 
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
     examples: {}
+  AWS::DAX::Cluster:
+    description: |-
+      Use the `AWS::DAX::Cluster` resource to create a DAX cluster for use with Amazon DynamoDB.
+
+      For information about creating a DAX cluster, see [Creating a DAX Cluster](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.create-cluster.html) in the _Amazon DynamoDB Developer Guide_ and [`CreateCluster`](http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_CreateCluster.html) in the _Amazon DynamoDB Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dax-cluster.html
+    properties:
+      AvailabilityZones:
+        description: |+
+          The Availability Zones (AZs) in which the cluster nodes will be created. All nodes belonging to the cluster are placed in these Availability Zones. Use this parameter if you want to distribute the nodes across multiple AZs.
+
+          You must specify one AZ per DAX node in the cluster.
+
+          _Required_: No
+
+          _Type_: List of strings
+
+          _Update requires_: [Some interruptions](using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt)
+
+        required: 'no'
+        type: List<String>
+        update_requires: some_interruptions
+      ClusterName:
+        description: |+
+          The cluster identifier. This parameter is stored as a lowercase string.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: Updates are not supported.
+
+        required: 'no'
+        type: String
+        update_requires: 
+      Description:
+        description: |+
+          A description of the cluster.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      IAMRoleARN:
+        description: |+
+          A valid Amazon Resource Name (ARN) that identifies an IAM role. At runtime, DAX will assume this role and use the role's permissions to access DynamoDB on your behalf.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: Updates are not supported.
+
+        required: 'yes'
+        type: String
+        update_requires: 
+      NodeType:
+        description: |+
+          The compute and memory capacity of the nodes in the cluster.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: Updates are not supported.
+
+        required: 'yes'
+        type: String
+        update_requires: 
+      NotificationTopicARN:
+        description: |+
+          The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications will be sent.
+
+          Note
+
+          The Amazon SNS topic owner must be same as the DAX cluster owner.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      ParameterGroupName:
+        description: |+
+          The parameter group to be associated with the DAX cluster.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Some interruptions](using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: some_interruptions
+      PreferredMaintenanceWindow:
+        description: "Specifies the weekly time range during which maintenance on
+          the DAX cluster is performed. It is specified as a range in the format `ddd:hh24:mi-ddd:hh24:mi`
+          (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid
+          values for `ddd` are:\n\n- \n\n`sun`\n\n- \n\n`mon`\n\n- \n\n`tue`\n\n-
+          \n\n`wed`\n\n- \n\n`thu`\n\n- \n\n`fri`\n\n- \n\n`sat`\n\nExample: `sun:05:00-sun:09:00`\n\nNote\n\nIf
+          you don't specify a preferred maintenance window when you create or modify
+          a cache cluster, DAX assigns a 60-minute maintenance window on a randomly
+          selected day of the week.\n\n_Required_: No\n\n_Type_: String\n\n_Update
+          requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)\n\n"
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      ReplicationFactor:
+        description: |+
+          The number of nodes in the DAX cluster. A replication factor of 1 will create a single-node cluster, without any read replicas. For additional fault tolerance, you can create a multiple node cluster with one or more read replicas. To do this, set _ReplicationFactor_ to 2 or more.
+
+          Note
+
+          AWS recommends that you have at least two read replicas per cluster.
+
+          _Required_: Yes
+
+          _Type_: Integer
+
+          _Update requires_: [Some interruptions](using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt)
+
+        required: 'yes'
+        type: Number
+        update_requires: some_interruptions
+      SecurityGroupIds:
+        description: |+
+          A list of security group IDs to be assigned to each node in the DAX cluster. (Each of the security group ID is system-generated.)
+
+          If this parameter is not specified, DAX assigns the default VPC security group to each node.
+
+          _Required_: No
+
+          _Type_: List of strings
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: List<String>
+        update_requires: no_interruption
+      SubnetGroupName:
+        description: |+
+          The name of the subnet group to be used for the replication group.
+
+          Important
+
+          DAX clusters can only run in an Amazon VPC environment. All of the subnets that you specify in a subnet group must exist in the same VPC.
+
+          _Required_: Yes
+
+          _Type_: String
+
+          _Update requires_: Updates are not supported.
+
+        required: 'yes'
+        type: String
+        update_requires: 
+      Tags:
+        description: |+
+          A map of tags to associate with the DAX cluster.
+
+          _Required_: No
+
+          _Type_: String to string map
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String to string map
+        update_requires: no_interruption
+    return_values:
+      Ref:
+        description: |-
+          When you provide the logical ID of this resource to the `Ref` intrinsic function, `Ref` returns the ARN of the created DAX cluster. For example:
+
+          Copy{ "Ref": "MyDAXCluster" }
+
+          Returns a value similar to the following:
+
+          CopyMyDAXCluster
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+      Name:
+        description: |+
+          Returns the name of the DAX cluster. For example:
+
+              Copy{ "Fn::GetAtt": ["MyDAXCluster", "Arn"] }
+
+          Returns a value similar to the following:
+
+              Copyarn:aws:dax:us-east-1:111122223333:cache/MyDAXCluster
+
+      ClusterDiscoveryEndpoint:
+        description: |+
+          Returns the configuation endpoint of the DAX cluster. For example:
+
+              Copy{ "Fn::GetAtt": ["MyDAXCluster", "ClusterDiscoveryEndpoint"] }
+
+          Returns a value similar to the following:
+
+              Copymydaxcluster.0h3d6x.clustercfg.dax.use1.cache.amazonaws.com:8111
+
+    examples: {}
+  AWS::DAX::ParameterGroup:
+    description: |-
+      Use the AWS CloudFormation `AWS::DAX::ParameterGroup` resource to create a parameter group for use with Amazon DynamoDB.
+
+      For more information, see [`ParameterGroup`](http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_ParameterGroup.html) in the _Amazon DynamoDB Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dax-parametergroup.html
+    properties:
+      ParameterGroupName:
+        description: |+
+          The name of the parameter group.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: Updates are not supported.
+
+        required: 'no'
+        type: String
+        update_requires: 
+      Description:
+        description: |+
+          A description of the parameter group.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt);
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      ParameterNameValues:
+        description: |+
+          A map of DAX parameter names and values.
+
+          _Required_: No
+
+          _Type_: String to string map
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String to string map
+        update_requires: no_interruption
+    return_values:
+      Ref:
+        description: |-
+          When you provide the logical ID of this resource to the `Ref` intrinsic function, `Ref` returns the ARN of the created parameter group. For example:
+
+          Copy{ "Ref": "MyDAXParameterGroup" }
+
+          Returns a value similar to the following:
+
+          Copymy-dax-parameter-group
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+      ParameterGroupName:
+        description: |+
+          Returns the name of the parameter group. For example:
+
+              Copy{ "Fn::GetAtt": ["MyDAXParameterGroup", "ParameterGroupName"] }
+
+          Returns a value similar to the following:
+
+              Copymydaxparametergroup
+
+    examples: {}
+  AWS::DAX::SubnetGroup:
+    description: |-
+      Use the AWS CloudFormation `AWS::DAX::SubnetGroup` resource to create a subnet group for use with DAX (DynamoDB Accelerator).
+
+      For more information, see [`SubnetGroup`](http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_dax_SubnetGroup.html) in the _Amazon DynamoDB Developer Guide_.
+    url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dax-subnetgroup.html
+    properties:
+      SubnetGroupName:
+        description: |+
+          The name of the subnet group.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: Updates are not supported.
+
+        required: 'no'
+        type: String
+        update_requires: 
+      Description:
+        description: |+
+          The description of the subnet group.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: String
+        update_requires: no_interruption
+      SubnetIds:
+        description: |+
+          A list of subnets associated with the subnet group.
+
+          _Required_: No
+
+          _Type_: List of strings;
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+        required: 'no'
+        type: List<strings;>
+        update_requires: no_interruption
+    return_values:
+      Ref:
+        description: |-
+          When you provide the logical ID of this resource to the `Ref` intrinsic function, `Ref` returns the ARN of the created activity. For example:
+
+          Copy{ "Ref": "MyDAXSubnetGroup" }
+
+          Returns a value similar to the following:
+
+          Copymy-dax-subnet-group
+
+          For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
+      SubnetGroupName:
+        description: |+
+          Returns the name of the subnet group. For example:
+
+              Copy{ "Fn::GetAtt": ["MyDAXSubnetGroup", "SubnetGroupName"] }
+
+          Returns a value similar to the following:
+
+              Copymy-dax-subnet-group
+
+    examples: {}
   AWS::DirectoryService::MicrosoftAD:
     description: The `AWS::DirectoryService::MicrosoftAD` resource creates a Microsoft
       Active Directory in AWS so that your directory users and groups can access the
@@ -6597,14 +6951,14 @@ resources:
         description: |+
           A list of `AttributeName` and `AttributeType` objects that describe the key schema for the table and indexes.
 
-          _Required_: Yes
+          _Required_: No
 
-          _Type_: List of [DynamoDB Attribute Definitions](aws-properties-dynamodb-attributedef.html)
+          _Type_: List of [DynamoDB Table AttributeDefinitions](aws-properties-dynamodb-attributedef.html)
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
-        required: 'yes'
-        type: List<DynamoDB Attribute Definitions>
+        required: 'no'
+        type: List<DynamoDB Table AttributeDefinitions>
         update_requires: no_interruption
       GlobalSecondaryIndexes:
         description: "Global secondary indexes to be created on the table. You can
@@ -6618,7 +6972,7 @@ resources:
           command.\n\nIf you add or delete an index during an update, we recommend
           that you don't update any other resources. If your stack fails to update
           and is rolled back while adding a new index, you must manually delete the
-          index.\n\n_Required_: No\n\n_Type_: List of [DynamoDB Global Secondary Indexes](aws-properties-dynamodb-gsi.html)\n\n_Update
+          index.\n\n_Required_: No\n\n_Type_: List of [DynamoDB Table GlobalSecondaryIndexes](aws-properties-dynamodb-gsi.html)\n\n_Update
           requires_: Updates are not supported. The following are exceptions:\n\n-
           \n\nIf you update only the provisioned throughput values of global secondary
           indexes, you can update the table [without interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt).\n\n-
@@ -6626,7 +6980,7 @@ resources:
           If you do both in the same update (for example, by changing the index's
           logical ID), the update fails.\n\n"
         required: 'no'
-        type: List<DynamoDB Global Secondary Indexes>
+        type: List<DynamoDB Table GlobalSecondaryIndexes>
         update_requires: 
       KeySchema:
         description: |+
@@ -6634,12 +6988,12 @@ resources:
 
           _Required_: Yes
 
-          _Type_: List of [DynamoDB Key Schema](aws-properties-dynamodb-keyschema.html)
+          _Type_: List of [DynamoDB Table KeySchema](aws-properties-dynamodb-keyschema.html)
 
           _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 
         required: 'yes'
-        type: List<DynamoDB Key Schema>
+        type: List<DynamoDB Table KeySchema>
         update_requires: replacement
       LocalSecondaryIndexes:
         description: |+
@@ -6647,27 +7001,25 @@ resources:
 
           _Required_: No
 
-          _Type_: List of [DynamoDB Local Secondary Indexes](aws-properties-dynamodb-lsi.html)
+          _Type_: List of [DynamoDB Table LocalSecondaryIndexes](aws-properties-dynamodb-lsi.html)
 
           _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 
         required: 'no'
-        type: List<DynamoDB Local Secondary Indexes>
+        type: List<DynamoDB Table LocalSecondaryIndexes>
         update_requires: replacement
       ProvisionedThroughput:
         description: |+
-          Throughput for the specified table, which consists of values for `ReadCapacityUnits` and `WriteCapacityUnits`. For more information about the contents of a provisioned throughput structure, see [DynamoDB Provisioned Throughput](aws-properties-dynamodb-provisionedthroughput.html).
+          Throughput for the specified table, which consists of values for `ReadCapacityUnits` and `WriteCapacityUnits`. For more information about the contents of a provisioned throughput structure, see [Amazon DynamoDB Table ProvisionedThroughput](aws-properties-dynamodb-provisionedthroughput.html).
 
           _Required_: Yes
 
-          _Type_: [DynamoDB Provisioned Throughput](aws-properties-dynamodb-provisionedthroughput.html)
+          _Type_: [DynamoDB Table ProvisionedThroughput](aws-properties-dynamodb-provisionedthroughput.html)
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
         required: 'yes'
-        type: |-
-          DynamoDB Provisioned
-                                              Throughput
+        type: DynamoDB Table ProvisionedThroughput
         update_requires: no_interruption
       StreamSpecification:
         description: |+
@@ -6680,9 +7032,7 @@ resources:
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt) to the table. However, the stream is replaced.
 
         required: 'no'
-        type: |-
-          DynamoDB Table
-                                              StreamSpecification
+        type: DynamoDB Table StreamSpecification
         update_requires: no_interruption
       TableName:
         description: |+
@@ -8771,11 +9121,11 @@ resources:
     description: Creates a subnet in an existing VPC.
     url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-subnet.html
     properties:
-      AssignIpv6AddressOnCreation:
+      AssignIPv6AddressOnCreation:
         description: |+
           Indicates whether a network interface created in this subnet receives an IPv6 address.
 
-          _Required_: Conditional. If `Ipv6CidrBlock` is specified, `AssignIpv6AddressOnCreation` must be `true`.
+          _Required_: Conditional. If `Ipv6CidrBlock` is specified, `AssignIPv6AddressOnCreation` must be `true`.
 
           _Type_: Boolean
 
@@ -8822,7 +9172,7 @@ resources:
         description: |+
           The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a `/64` prefix length.
 
-          If `Ipv6CidrBlock` is specified, `AssignIpv6AddressOnCreation` must be `true`.
+          If `Ipv6CidrBlock` is specified, `AssignIPv6AddressOnCreation` must be `true`.
 
           _Required_: No
 
@@ -9047,7 +9397,9 @@ resources:
       you set a deletion policy that creates a snapshot, all tags on the volume are
       included in the snapshot.\n\nImportant\n\nAmazon EBS does not support sizing
       down an Amazon EBS volume. AWS CloudFormation will not attempt to modify an
-      Amazon EBS volume to a smaller size on rollback."
+      Amazon EBS volume to a smaller size on rollback.\n\nNote\n\nAmazon EBS does
+      not support modifying a Magnetic volume. For more information, see [Considerations
+      for Modifying EBS Volumes](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/considerations.html)."
     url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volume.html
     properties:
       AutoEnableIO:
@@ -9310,6 +9662,10 @@ resources:
         description: |+
           The set of IP addresses for the VPC. For example, `10.0.0.0/16`.
 
+      CidrBlockAssociations:
+        description: |+
+          A list of IPv4 CIDR block association IDs for the VPC. For example, `[vpc-cidr-assoc-0280ab6b]`.
+
       DefaultNetworkAcl:
         description: |+
           The default network ACL ID that is associated with the VPC. For example, `acl-814dafe3`.
@@ -9326,7 +9682,8 @@ resources:
     examples: {}
   AWS::EC2::VPCCidrBlock:
     description: The `AWS::EC2::VPCCidrBlock` resource associates a single Amazon-provided
-      IPv6 CIDR block with an Amazon VPC VPC.
+      IPv6 CIDR block or a single user-specified IPv4 CIDR block with a Virtual Private
+      Cloud (VPC).
     url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpccidrblock.html
     properties:
       AmazonProvidedIpv6CidrBlock:
@@ -9341,6 +9698,19 @@ resources:
 
         required: 'no'
         type: Boolean
+        update_requires: replacement
+      CidrBlock:
+        description: |+
+          An IPv4 CIDR block to associate with the VPC.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: String
         update_requires: replacement
       VpcId:
         description: |+
@@ -9949,15 +10319,15 @@ resources:
         update_requires: no_interruption
       LoadBalancers:
         description: |+
-          A list of load balancer objects to associate with the cluster. For information about the number of load balancers that you can specify per service, see [Service Load Balancing](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html) in the _Amazon EC2 Container Service Developer Guide_.
+          A list of load balancer objects to associate with the cluster. If you specify the `Role` property, `LoadBalancers` must be specified as well. For information about the number of load balancers that you can specify per service, see [Service Load Balancing](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html) in the _Amazon EC2 Container Service Developer Guide_.
 
-          _Required_: No
+          _Required_: Conditional
 
           _Type_: List of [Amazon EC2 Container Service Service LoadBalancers](aws-properties-ecs-service-loadbalancers.html)
 
           _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 
-        required: 'no'
+        required: conditional
         type: List<Amazon EC2 Container Service Service>
         update_requires: replacement
       Role:
@@ -10667,12 +11037,14 @@ resources:
           information about Multi-AZ constraints, see [Replication with Multi-AZ and
           Automatic Failover (Redis)](http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/AutoFailover.html)
           in the _Amazon ElastiCache User Guide_.\n\nNote\n\nYou cannot enable automatic
-          failover for Redis versions earlier than 2.8.6 or for T1 and T2 cache node
-          types.\n\nImportant\n\nIf you specify the `PrimaryClusterId`, you can use
-          only the following additional parameters:\n\n- \n\n`AutomaticFailoverEnabled`\n\n-
-          \n\n`NodeGroupConfiguration`\n\n- \n\n`NumCacheClusters`\n\n- \n\n`NumNodeGroups`\n\n-
-          \n\n`PreferredCacheClusterAZs`\n\n- \n\n`ReplicationGroupDescription`\n\n_Required_:
-          No\n\n_Type_: Boolean\n\n_Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)\n\n"
+          failover for Redis versions earlier than 2.8.6 or for T1 cache node types.
+          Automatic failover is supported on T2 node types only if you are running
+          Redis version 3.2.4 or later with cluster mode enabled.\n\nImportant\n\nIf
+          you specify the `PrimaryClusterId`, you can use only the following additional
+          parameters:\n\n- \n\n`AutomaticFailoverEnabled`\n\n- \n\n`NodeGroupConfiguration`\n\n-
+          \n\n`NumCacheClusters`\n\n- \n\n`NumNodeGroups`\n\n- \n\n`PreferredCacheClusterAZs`\n\n-
+          \n\n`ReplicationGroupDescription`\n\n_Required_: No\n\n_Type_: Boolean\n\n_Update
+          requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)\n\n"
         required: 'no'
         type: Boolean
         update_requires: no_interruption
@@ -11624,12 +11996,12 @@ resources:
 
           _Required_: No
 
-          _Type_: [ElasticLoadBalancing HealthCheck Type](aws-properties-ec2-elb-health-check.html).
+          _Type_: [ElasticLoadBalancing LoadBalancer HealthCheck](aws-properties-ec2-elb-health-check.html).
 
           _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement) if you did not have a health check specified and you are adding one or if you are removing a health check. Otherwise, update requires [no interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt).
 
         required: 'no'
-        type: ElasticLoadBalancing HealthCheck Type.
+        type: ElasticLoadBalancing LoadBalancer HealthCheck.
         update_requires: replacement
       Instances:
         description: |+
@@ -11807,10 +12179,10 @@ resources:
     examples: {}
   AWS::ElasticLoadBalancingV2::Listener:
     description: The `AWS::ElasticLoadBalancingV2::Listener` resource creates a listener
-      for an Elastic Load Balancing Application load balancer. The listener checks
-      for connection requests and forwards them to one or more target groups. For
-      more information, see the [Listeners for Your Application Load Balancers](http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html)
-      in the _Application Load Balancers Guide_.
+      for an Elastic Load Balancing Application or Network load balancer. The listener
+      checks for connection requests and forwards them to one or more target groups.
+      For more information, see [Getting Started](http://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/load-balancer-getting-started.html)
+      in the _Elastic Load Balancing User Guide_.
     url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html
     properties:
       Certificates:
@@ -11905,9 +12277,8 @@ resources:
   AWS::ElasticLoadBalancingV2::ListenerRule:
     description: The `AWS::ElasticLoadBalancingV2::ListenerRule` resource defines
       which requests an Elastic Load Balancing listener takes action on and the action
-      that it takes. For more information, see the [Listeners for Your Application
-      Load Balancers](http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html)
-      in the _Application Load Balancers Guide_.
+      that it takes. For more information, see [Getting Started](http://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/load-balancer-getting-started.html)
+      in the _Elastic Load Balancing User Guide_.
     url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenerrule.html
     properties:
       Actions:
@@ -11977,13 +12348,11 @@ resources:
     examples: {}
   AWS::ElasticLoadBalancingV2::LoadBalancer:
     description: |-
-      The `AWS::ElasticLoadBalancingV2::LoadBalancer` resource creates an Elastic Load Balancing Application load balancer that distributes incoming application traffic across multiple targets (such as EC2 instances) in multiple Availability Zones. For more information, see the [_Application Load Balancers Guide_](http://docs.aws.amazon.com/elasticloadbalancing/latest/application/).
+      The `AWS::ElasticLoadBalancingV2::LoadBalancer` resource creates an Elastic Load Balancing Application or Network Load Balancer. For more information, see the see [Getting Started](http://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/load-balancer-getting-started.html) in the _Elastic Load Balancing User Guide_.
 
       Note
 
-      AWS CloudFormation does not automatically create tags (key–value pairs) for an Elastic Load Balancing Application load balancer. You must use the [`Tags`](aws-resource-elasticloadbalancingv2-loadbalancer.html#cfn-elasticloadbalancingv2-loadbalancer-tags) property to create tags to associate with the load balancer.
-
-      [Elastic Load Balancing API Reference version 2015-12-01](http://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/)
+      AWS CloudFormation does not automatically create tags (key–value pairs) for an Elastic Load Balancing load balancer. You must use the [`Tags`](aws-resource-elasticloadbalancingv2-loadbalancer.html#cfn-elasticloadbalancingv2-loadbalancer-tags) property to create tags to associate with the load balancer.
     url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html
     properties:
       LoadBalancerAttributes:
@@ -12014,9 +12383,11 @@ resources:
         update_requires: replacement
       Scheme:
         description: |+
-          Specifies whether the load balancer is internal or Internet-facing. An internal load balancer routes requests to targets using private IP addresses. An Internet-facing load balancer routes requests from clients over the Internet to targets in your public subnets.
+          Specifies whether the load balancer is internal or Internet-facing. Valid values are `internet-facing` and `internal`. The default is `internet-facing`.
 
-          For valid and default values, see the `Scheme` parameter for the `CreateLoadBalancer` action in the _Elastic Load Balancing API Reference version 2015-12-01_.
+          The nodes of an Internet-facing load balancer have public IP addresses. The DNS name of an Internet-facing load balancer is publicly resolvable to the public IP addresses of the nodes. Therefore, Internet-facing load balancers can route requests from clients over the Internet.
+
+          The nodes of an internal load balancer have only private IP addresses. The DNS name of an internal load balancer is publicly resolvable to the private IP addresses of the nodes. Therefore, internal load balancers can only route requests from clients with access to the VPC for the load balancer.
 
           _Required_: No
 
@@ -12029,7 +12400,7 @@ resources:
         update_requires: replacement
       SecurityGroups:
         description: |+
-          Specifies a list of the IDs of the security groups to assign to the load balancer.
+          [Application Load Balancers] Specifies a list of the IDs of the security groups to assign to the load balancer.
 
           _Required_: No
 
@@ -12042,17 +12413,36 @@ resources:
         update_requires: no_interruption
       Subnets:
         description: |+
-          Specifies a list of at least two IDs of the subnets to associate with the load balancer. The subnets must be in different Availability Zones.
+          The IDs of the subnets to attach to the load balancer. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.
 
-          _Required_: Yes
+          [Application Load Balancers] You must specify subnets from at least two Availability Zones.
+
+          _Required_: No
 
           _Type_: List of strings
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
-        required: 'yes'
+        required: 'no'
         type: List<String>
         update_requires: no_interruption
+      SubnetMappings:
+        description: |+
+          The IDs of the subnets to attach to the load balancer. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.
+
+          [Application Load Balancers] The load balancer is allocated one static IP address per subnet. You cannot specify your own Elastic IP addresses.
+
+          [Network Load Balancers] You can specify one Elastic IP address per subnet.
+
+          _Required_: No
+
+          _Type_: A list of [Elastic Load Balancing LoadBalancer SubnetMapping](aws-properties-elasticloadbalancingv2-loadbalancer-subnetmapping.html)
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: A list of Elastic Load Balancing LoadBalancer SubnetMapping
+        update_requires: replacement
       Tags:
         description: |+
           Specifies an arbitrary set of tags (key–value pairs) to associate with this load balancer. Use tags to manage your resources.
@@ -12066,9 +12456,22 @@ resources:
         required: 'no'
         type: AWS CloudFormation Resource Tags
         update_requires: no_interruption
+      Type:
+        description: |+
+          Specifies the type of load balancer to create. Valid values are `application` and `network`.The default is `application`.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: String
+        update_requires: replacement
       IpAddressType:
         description: |+
-          The type of IP addresses that are used by the load balancer's subnets, such as `ipv4` (for IPv4 addresses) or `dualstack` (for IPv4 and IPv6 addresses). For valid values, see the `IpAddressType` parameter for the `CreateLoadBalancer` action in the _Elastic Load Balancing API Reference version 2015-12-01_.
+          [Application Load Balancers] The type of IP addresses that are used by the load balancer's subnets, such as `ipv4` (for IPv4 addresses) or `dualstack` (for IPv4 and IPv6 addresses). For valid values, see the `IpAddressType` parameter for the `CreateLoadBalancer` action in the _Elastic Load Balancing API Reference version 2015-12-01_.
 
           _Required_: No
 
@@ -12089,7 +12492,7 @@ resources:
           For more information about using the `Ref` function, see [Ref](intrinsic-function-reference-ref.html).
       DNSName:
         description: |+
-          The DNS name for the Application load balancer, for example `my-load-balancer-424835706.us-west-2.elb.amazonaws.com`.
+          The DNS name for the load balancer, for example `my-load-balancer-424835706.us-west-2.elb.amazonaws.com`.
 
       CanonicalHostedZoneID:
         description: |+
@@ -12097,23 +12500,22 @@ resources:
 
       LoadBalancerFullName:
         description: |+
-          The full name of the Application load balancer, for example `app/my-load-balancer/50dc6c495c0c9188`.
+          The full name of the load balancer, for example `app/my-load-balancer/50dc6c495c0c9188`.
 
       LoadBalancerName:
         description: |+
-          The name of the Application load balancer, for example `my-load-balancer`.
+          The name of the load balancer, for example `my-load-balancer`.
 
       SecurityGroups:
         description: |+
-          The IDs of the security groups for the Application load balancer, for example `sg-123456a`.
+          The IDs of the security groups for the load balancer, for example `sg-123456a`.
 
     examples: {}
   AWS::ElasticLoadBalancingV2::TargetGroup:
     description: The `AWS::ElasticLoadBalancingV2::TargetGroup` resource creates an
       Elastic Load Balancing target group that routes requests to one or more registered
-      targets, such as EC2 instances. For more information, see the [Target Groups
-      for Your Application Load Balancers](http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html)
-      in the _Application Load Balancers Guide_.
+      targets, such as EC2 instances. For more information, see [Getting Started](http://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/load-balancer-getting-started.html)
+      in the _Elastic Load Balancing User Guide_.
     url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html
     properties:
       HealthCheckIntervalSeconds:
@@ -12295,6 +12697,19 @@ resources:
         required: 'no'
         type: List<Elastic Load Balancing TargetGroup TargetDescription>
         update_requires: no_interruption
+      TargetType:
+        description: |+
+          The registration type of the targets in this target group. Valid values are `instance` and `ip`. The default is `instance`.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
+        type: String
+        update_requires: replacement
       UnhealthyThresholdCount:
         description: |+
           The number of consecutive failed health checks that are required before a target is considered unhealthy.
@@ -12960,13 +13375,13 @@ resources:
     description: The `AWS::EMR::SecurityConfiguration` resource creates a security
       configuration that is stored in the Amazon EMR web service. You can specify
       the security configuration when creating a cluster. For more information, see
-      [Configure Security Groups](http://docs.aws.amazon.com//emr/latest/ManagementGuide/emr-security-groups.html)
-      in the _Amazon EMR Management Guide_.
+      [Specifying Amazon EMR Encryption Options Using a Security Configuration](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-encryption-enable-security-configuration.html)
+      in the _Amazon EMR Release Guide_.
     url: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-securityconfiguration.html
     properties:
       Name:
         description: |+
-          The name of the security configuration.
+          The name of the security configuration. For a list of valid parameters for encryption settings, see [AWS CLI Security Configuration JSON Reference](http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-encryption-enable-security-configuration.html#emr-encryption-cli-parameters) in the _Amazon EMR Release Guide_.
 
           _Required_: No
 
@@ -14360,7 +14775,7 @@ resources:
 
           _Required_: Yes
 
-          _Type_: [`TopicRulePayload`](aws-properties-iot-topicrulepayload.html) object
+          _Type_: [`TopicRulePayload`](aws-properties-iot-topicrule-topicrulepayload.html) object
 
           _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
@@ -15208,6 +15623,19 @@ resources:
           _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 
         required: 'yes'
+        type: String
+        update_requires: replacement
+      EventSourceToken:
+        description: |+
+          A unique token that must be supplied by the principal invoking the function.
+
+          _Required_: No
+
+          _Type_: String
+
+          _Update requires_: [Replacement](using-cfn-updating-stacks-update-behaviors.html#update-replacement)
+
+        required: 'no'
         type: String
         update_requires: replacement
       FunctionName:
@@ -17240,7 +17668,7 @@ resources:
 
           If any value is set in the `Iops` parameter, `AllocatedStorage` must be at least 100 GB, which corresponds to the minimum `Iops` value of 1,000. If you increase the `Iops` value (in 1,000 IOPS increments), then you must also increase the `AllocatedStorage` value (in 100 GB increments).
 
-          _Required_: Conditional. This property is required unless you specify the `DBClusterIdentifier` property. In that case, do not specify this property.
+          _Required_: Conditional. This property is required unless you specify the `DBClusterIdentifier` property or when creating a read replica from AWS CloudFormation using the `AWS::RDS::DBInstance` resource. In these cases, do not specify this property.
 
           _Type_: String
 
@@ -17461,7 +17889,7 @@ resources:
         update_requires: replacement
       DBSubnetGroupName:
         description: |+
-          A DB subnet group to associate with the DB instance.
+          A DB subnet group to associate with the DB instance. If you update this value, the new subnet group must be a subnet group in a new VPC.
 
           If there is no DB subnet group, then the instance is not a VPC DB instance.
 
@@ -18367,7 +18795,7 @@ resources:
         update_requires: some_interruptions
       ClusterSecurityGroups:
         description: |+
-          A list of security groups that you want to associate with this cluster.
+          A list of security groups that you want to associate with this cluster. Applies to EC2-Classic.
 
           _Required_: No
 
@@ -19448,6 +19876,21 @@ resources:
 
         required: 'no'
         type: Amazon S3 Logging Configuration
+        update_requires: no_interruption
+      MetricsConfigurations:
+        description: |+
+          Settings that define a metrics configuration for the CloudWatch request metrics from the bucket.
+
+          _Required_: No
+
+          _Type_: List of [Amazon S3 Bucket MetricsConfiguration](aws-properties-s3-bucket-metricsconfiguration.html)
+
+          _Update requires_: [No interruption](using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+          Duplicates not allowed.
+
+        required: 'no'
+        type: List<Amazon S3 Bucket MetricsConfiguration>
         update_requires: no_interruption
       NotificationConfiguration:
         description: |+
