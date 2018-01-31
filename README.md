@@ -1,3 +1,7 @@
+# Deprecated
+
+Please see the [AWS CloudFormation Resource Specification](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-resource-specification.html) for an AWS maintained
+
 # CloudFormation Resource Reference YAML
 
 When you are developing a object model or a validator for CloudFormation
